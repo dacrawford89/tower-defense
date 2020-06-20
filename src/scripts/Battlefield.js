@@ -51,7 +51,7 @@ class Battlefield {
         for (let i = 0; i < this.numEnemies; i++){
             let coords;
             let maxX = Math.random() * this.canvas.width;
-            let maxY = Math.random() * this.canvas.height;
+            let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
             let enemySize = 20;
             if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
                 maxX -= enemySize;

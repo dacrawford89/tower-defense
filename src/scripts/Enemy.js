@@ -7,18 +7,13 @@ class Enemy {
     }
 
     draw(){
-        debugger
-       // draw enemy
-
+        // draw enemy
+        
         this.ctx.beginPath();
         let radius = 20;
-
-        // // pick random x coords
-        // let x = Math.random() * this.coords[0];
+        
+        debugger
         let x = this.coords[0];
-        // check if the coord is in bounds
-
-
         let y = this.coords[1];
         let startAngle = 0;
         let endAngle = Math.PI * 2;
