@@ -29,17 +29,20 @@ const main = () => {
   bf.drawEnemies();
   let animating = true;
 
-  const timer = new Timer(10);
+  const timer = new Timer(3);
   timer.create();
   const animation = () => {
-    if (timer.remaining == 0) timer.clear();
-    bf.clearEnemies();
-    if (animating) bf.updateEnemies();
-    bf.drawBattlefield();
-    bf.drawTowerContainer();
-    bf.drawCastle();
-    bf.drawEnemies();
-    window.requestAnimationFrame(animation);
+      if (timer.remaining == 0) {
+        timer.clear();
+        bf.clearEnemies();
+        if (animating) bf.updateEnemies();
+        bf.drawBattlefield();
+        bf.drawTowerContainer();
+        bf.drawCastle();
+        bf.drawEnemies();
+      }
+      window.requestAnimationFrame(animation);
+    
     // if (canvas.coords[0] + canvas.coords[2] > canvas.canvas.width)
       // canvas.reverseAnimation();
     // if (canvas.coords[0] < 0) canvas.reverseAnimation();

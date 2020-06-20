@@ -9,8 +9,6 @@ class Timer {
         document.body.append(this.timer);
     }
     tick(){
-        debugger
-        console.log('hi');
         this.remaining -= 1;
         this.timer.innerText = this.remaining;
     }
