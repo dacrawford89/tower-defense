@@ -22,6 +22,9 @@ const main = () => {
   const bf = new Battlefield();
   bf.createCanvas();
   bf.drawBattlefield();
+  bf.drawTowerContainer();
+  bf.drawCastle();
+  bf.drawEnemies();
   // debugger
 }
 
