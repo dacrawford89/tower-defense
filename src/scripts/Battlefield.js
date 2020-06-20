@@ -53,10 +53,16 @@ class Battlefield {
             let maxX = Math.random() * this.canvas.width;
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
             let enemySize = 20;
+
+            // set x value on enmies to spawn within the canvas
             if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
                 maxX -= enemySize;
             } else if ( maxX <= enemySize){ // < max length
                 maxX += enemySize;
+            }
+            // set y value on enmies to spawn within the canvas
+            if ((this.canvas.height + maxY >= 0)){ // have enemies spawn offscreen from the top
+                maxY -= enemySize;
             }
             let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize);
             this.enemies.push(enemy);
