@@ -20,7 +20,7 @@ import Timer from "./scripts/Timer";
 // });
 
 const main = () => {
-  const bf = new Battlefield();
+  const bf = new Battlefield(20);
   bf.createCanvas();
   bf.drawBattlefield();
   bf.drawTowerContainer();
@@ -29,7 +29,7 @@ const main = () => {
   bf.drawEnemies();
   let animating = true;
 
-  const timer = new Timer(3);
+  const timer = new Timer(0);
   timer.create();
   const animation = () => {
       if (timer.remaining < 0) {

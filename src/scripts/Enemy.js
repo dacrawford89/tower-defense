@@ -11,8 +11,6 @@ class Enemy {
         
         this.ctx.beginPath();
         let radius = 20;
-        
-       
         let x = this.coords[0];
         let y = this.coords[1];
         let startAngle = 0;
@@ -22,11 +20,10 @@ class Enemy {
         this.ctx.fill();
     }
     update() {
-        this.coords[1] += 1;
+        this.coords[1] += 5;
     }
     clear(){
-     
-        this.ctx.clearRect(0, 0, this.maxX, this.maxY);
+        this.ctx.clearRect(this.coords[0],this.coords[1], this.maxX, this.maxY);
     }
 }
 

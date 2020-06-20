@@ -1,7 +1,8 @@
 import Enemy from './Enemy'
 
 class Battlefield {
-    constructor(props){
+    constructor(numEnemies){
+        debugger
         this.canvas = document.createElement('canvas');
         this.canvas.width = window.innerWidth * .33;
         this.canvas.height = window.innerHeight * .9;
@@ -14,8 +15,8 @@ class Battlefield {
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07]
         this.numTowers = 6;
 
-        this.enemies = [];
-        this.numEnemies = 10;
+        this.numEnemies = numEnemies;
+        this.enemies = {};
      }
      createCanvas(){
          document.body.append(this.canvas);
@@ -65,28 +66,35 @@ class Battlefield {
                 maxY -= enemySize;
             }
             let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize);
-            this.enemies.push(enemy);
+            this.enemies[i] = enemy;
         }
+    }
+    destroyEnemy(enemy){
+        delete this.enemies[enemy]
     }
     drawEnemies(){
       
         // draw enemy
-        for (let i = 0; i < this.enemies.length; i++){
+        for (let i = 0; i < Object.keys(this.enemies).length; i++){
             let enemy = this.enemies[i];
-            enemy.draw();
+            debugger
+            if (enemy.coords[1] <= this.castleCoords[1]) enemy.draw();
         }
     }
     clearEnemies(){
        
-        for (let i = 0; i < this.enemies.length; i++){
+        for (let i = 0; i < Object.keys(this.enemies).length; i++){
             const enemy = this.enemies[i];
             enemy.clear();
         }
     }
     updateEnemies(){
-        for (let i = 0; i < this.enemies.length; i++){
+        // debugger
+        for (let i = 0; i < Object.keys(this.enemies).length; i++){
             const enemy = this.enemies[i];
-            enemy.update();
+            if (enemy.coords[1] <= this.castleCoords[1]){
+                enemy.update(); 
+            }
         }
     }
 }
