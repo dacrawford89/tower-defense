@@ -11,9 +11,19 @@ class Enemy {
        // draw enemy
 
         this.ctx.beginPath();
-        let x = Math.random() * this.maxX;
-        let y = Math.random() * this.maxY;
         let radius = 20;
+
+        // pick random x coords
+        let x = Math.random() * this.maxX;
+
+        // check if the coord is in bounds
+        if ((this.maxX - x >= 0) && this.maxX - x <= radius){ // > max length
+            x -= radius;
+        } else if ( x <= radius){ // < max length
+            x += radius;
+        }
+
+        let y = Math.random() * this.maxY;
         let startAngle = 0;
         let endAngle = Math.PI * 2;
         this.ctx.arc(x, y, radius, startAngle, endAngle);
