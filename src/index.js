@@ -32,7 +32,7 @@ const main = () => {
   const timer = new Timer(3);
   timer.create();
   const animation = () => {
-      if (timer.remaining == 0) {
+      if (timer.remaining < 0) {
         timer.clear();
         bf.clearEnemies();
         if (animating) bf.updateEnemies();
