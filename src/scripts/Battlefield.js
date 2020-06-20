@@ -50,7 +50,15 @@ class Battlefield {
     createEnemies(){
         for (let i = 0; i < this.numEnemies; i++){
             let coords;
-            let enemy = new Enemy(this.ctx, [Math.random() * this.canvas.width, Math.random() * this.canvas.height]);
+            let maxX = Math.random() * this.canvas.width;
+            let maxY = Math.random() * this.canvas.height;
+            let enemySize = 20;
+            if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
+                maxX -= enemySize;
+            } else if ( maxX <= enemySize){ // < max length
+                maxX += enemySize;
+            }
+            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize);
             this.enemies.push(enemy);
         }
     }
