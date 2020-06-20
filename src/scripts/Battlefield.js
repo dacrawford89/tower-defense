@@ -63,7 +63,7 @@ class Battlefield {
         }
     }
     drawEnemies(){
-        debugger
+      
         // draw enemy
         for (let i = 0; i < this.enemies.length; i++){
             let enemy = this.enemies[i];
@@ -71,7 +71,7 @@ class Battlefield {
         }
     }
     clearEnemies(){
-        debugger
+       
         for (let i = 0; i < this.enemies.length; i++){
             const enemy = this.enemies[i];
             enemy.clear();

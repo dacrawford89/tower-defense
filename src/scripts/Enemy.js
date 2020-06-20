@@ -12,7 +12,7 @@ class Enemy {
         this.ctx.beginPath();
         let radius = 20;
         
-        debugger
+       
         let x = this.coords[0];
         let y = this.coords[1];
         let startAngle = 0;
@@ -25,7 +25,7 @@ class Enemy {
         this.coords[1] += 1;
     }
     clear(){
-        debugger
+     
         this.ctx.clearRect(0, 0, this.maxX, this.maxY);
     }
 }

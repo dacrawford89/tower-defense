@@ -13,7 +13,7 @@ class canvasExample {
     document.body.append(this.canvas);
   }
   drawSquare() {
-    debugger
+ 
     this.ctx.fillStyle = this.fillColor;
     this.ctx.fillRect(...this.coords);
   }

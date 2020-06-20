@@ -1,4 +1,5 @@
 import Battlefield from "./scripts/Battlefield";
+import Timer from "./scripts/Timer";
 // const testObj = {
 //   key1: "hi",
 //   key2: {
@@ -28,7 +29,10 @@ const main = () => {
   bf.drawEnemies();
   let animating = true;
 
+  const timer = new Timer(10);
+  timer.create();
   const animation = () => {
+    if (timer.remaining == 0) timer.clear();
     bf.clearEnemies();
     if (animating) bf.updateEnemies();
     bf.drawBattlefield();
@@ -40,6 +44,9 @@ const main = () => {
       // canvas.reverseAnimation();
     // if (canvas.coords[0] < 0) canvas.reverseAnimation();
   };
+  
+
+  
 
   window.requestAnimationFrame(animation);
 
