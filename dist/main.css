@@ -2,7 +2,9 @@ body {
   background-color: #ccccff;
   color: blue;
   display: flex;
-  flex-direction: column; }
+  justify-content: center;
+  /* flex-direction: column;  */
+}
 
 .center {
   display: flex;

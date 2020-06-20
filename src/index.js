@@ -1,11 +1,10 @@
-import "./styles/index.scss";
-import canvasExample from "./scripts/canvas";
-const testObj = {
-  key1: "hi",
-  key2: {
-    key3: "Hello",
-  },
-};
+import Battlefield from "./scripts/Battlefield";
+// const testObj = {
+//   key1: "hi",
+//   key2: {
+//     key3: "Hello",
+//   },
+// };
 
 // const greeting = testObj?.key2?.key3 || testObj.key1;
 // window.addEventListener("DOMContentLoaded", () => {
@@ -19,40 +18,12 @@ const testObj = {
 //   document.body.appendChild(imgCard);
 // });
 
+const main = () => {
+  const bf = new Battlefield();
+  bf.createCanvas();
+  bf.drawBattlefield();
+  // debugger
+}
+
 window.addEventListener("DOMContentLoaded", main);
 
-function main() {
-  const canvas = new canvasExample();
-  canvas.createCanvas();
-  // debugger
-  let animating = true;
-
-  const animation = () => {
-    canvas.clearSquare();
-    if (animating) canvas.updateSquare();
-    canvas.drawSquare();
-    window.requestAnimationFrame(animation);
-    if (canvas.coords[0] + canvas.coords[2] > canvas.canvas.width)
-      canvas.reverseAnimation();
-    if (canvas.coords[0] < 0) canvas.reverseAnimation();
-  };
-
-  window.requestAnimationFrame(animation);
-
-  window.addEventListener("keydown", (event) => {
-    if (event.which === 32) {
-      event.preventDefault();
-      canvas.reverseAnimation();
-      canvas.setColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
-    }
-  });
-
-  window.addEventListener("mousedown", (event) => {
-    event.preventDefault();
-    canvas.coords = [event.offsetX, event.offsetY, canvas.canvas.width, canvas.canvas.height];
-    canvas.drawSquare();
-    console.log(event);
-    console.log(canvas.coords);
-    // animating = !animating;
-  });
-}
