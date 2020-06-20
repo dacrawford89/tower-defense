@@ -11,6 +11,9 @@ In addition, this project will include:
 - Random invader types
 - Friendly interface
 # Wireframes 
+
+![image](https://user-images.githubusercontent.com/59629330/85209080-11047500-b303-11ea-899e-f9751774024a.png)
+
 # Architecture and Technology 
 # Implementation Timeline 
 # (Bonus Features) 
