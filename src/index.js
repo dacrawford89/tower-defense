@@ -24,7 +24,25 @@ const main = () => {
   bf.drawBattlefield();
   bf.drawTowerContainer();
   bf.drawCastle();
+  bf.createEnemies();
   bf.drawEnemies();
+  let animating = true;
+
+  const animation = () => {
+    bf.clearEnemies();
+    if (animating) bf.updateEnemies();
+    bf.drawBattlefield();
+    bf.drawTowerContainer();
+    bf.drawCastle();
+    bf.drawEnemies();
+    window.requestAnimationFrame(animation);
+    // if (canvas.coords[0] + canvas.coords[2] > canvas.canvas.width)
+      // canvas.reverseAnimation();
+    // if (canvas.coords[0] < 0) canvas.reverseAnimation();
+  };
+
+  window.requestAnimationFrame(animation);
+
   // debugger
 }
 

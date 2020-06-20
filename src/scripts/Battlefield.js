@@ -14,7 +14,7 @@ class Battlefield {
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07]
         this.numTowers = 6;
 
-
+        this.enemies = [];
         this.numEnemies = 10;
      }
      createCanvas(){
@@ -47,16 +47,33 @@ class Battlefield {
             towerCoords[0] += towerCoords[2] + (this.canvas.width * .02);
         }
      }
-    drawEnemies(){
-        // draw enemy
+    createEnemies(){
         for (let i = 0; i < this.numEnemies; i++){
-            let enemy = new Enemy(this.ctx, this.canvas.width, this.canvas.height);
+            let coords;
+            let enemy = new Enemy(this.ctx, [Math.random() * this.canvas.width, Math.random() * this.canvas.height]);
+            this.enemies.push(enemy);
+        }
+    }
+    drawEnemies(){
+        debugger
+        // draw enemy
+        for (let i = 0; i < this.enemies.length; i++){
+            let enemy = this.enemies[i];
             enemy.draw();
         }
     }
-    
-    updateEnemies() {
-        // this.coords = this.coords.map((coord) => (coord += 1 * this.animationDir));
+    clearEnemies(){
+        debugger
+        for (let i = 0; i < this.enemies.length; i++){
+            const enemy = this.enemies[i];
+            enemy.clear();
+        }
+    }
+    updateEnemies(){
+        for (let i = 0; i < this.enemies.length; i++){
+            const enemy = this.enemies[i];
+            enemy.update();
+        }
     }
 }
 export default Battlefield;
