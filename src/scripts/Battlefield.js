@@ -1,3 +1,5 @@
+import Enemy from './Enemy'
+
 class Battlefield {
     constructor(props){
         this.canvas = document.createElement('canvas');
@@ -12,7 +14,7 @@ class Battlefield {
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07]
         this.numTowers = 6;
 
-        this.enemyColors = ["#9be5e8","#e80c1e","#7f53a3","#ff871f","#ffff0f"];
+
         this.numEnemies = 10;
      }
      createCanvas(){
@@ -45,22 +47,16 @@ class Battlefield {
             towerCoords[0] += towerCoords[2] + (this.canvas.width * .02);
         }
      }
-
-     drawEnemies(){
-         let x = 10;
-         let y = 10;
+    drawEnemies(){
         // draw enemy
         for (let i = 0; i < this.numEnemies; i++){
-            this.ctx.beginPath();
-            let radius = 20;
-            let startAngle = 0;
-            let endAngle = Math.PI * 2;
-            this.ctx.arc(x, y, radius, startAngle, endAngle);
-            this.ctx.fillStyle = this.enemyColors[0];
-            this.ctx.fill();
-            // x += 10;
-            // y += 10;
+            let enemy = new Enemy(this.ctx, this.canvas.width, this.canvas.height);
+            enemy.draw();
         }
-     }
+    }
+    
+    updateEnemies() {
+        // this.coords = this.coords.map((coord) => (coord += 1 * this.animationDir));
+    }
 }
 export default Battlefield;
