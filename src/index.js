@@ -25,7 +25,7 @@ const main = () => {
   bf.drawBattlefield();
   bf.drawCastle();
   bf.createTowers();
-  
+  debugger
   bf.drawTowers();
   bf.createEnemies();
   bf.drawEnemies();

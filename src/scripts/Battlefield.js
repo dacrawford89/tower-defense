@@ -31,7 +31,7 @@ class Battlefield {
      }
      createTowers(){
         for (let i = 0; i < this.numTowers; i++){
-            
+            debugger
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
             let width = this.firstTowerCoords[2];
@@ -43,7 +43,7 @@ class Battlefield {
         }
      }
      drawTowers(key){
-         
+         debugger
         const tower = this.towers[key];
         if (!!tower) tower.draw();
      }
