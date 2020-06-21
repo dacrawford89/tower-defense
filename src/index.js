@@ -1,5 +1,6 @@
 import Battlefield from "./scripts/Battlefield";
 import Timer from "./scripts/Timer";
+import './styles/index.scss'
 // const testObj = {
 //   key1: "hi",
 //   key2: {
