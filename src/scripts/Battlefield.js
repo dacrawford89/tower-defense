@@ -69,33 +69,20 @@ class Battlefield {
             this.enemies[i] = enemy;
         }
     }
-    destroyEnemy(enemy){
-        delete this.enemies[enemy]
+
+    drawEnemies(key){
+        let enemy = this.enemies[key];
+        if (!!enemy && (enemy.coords[1] <= this.castleCoords[1])) enemy.draw();
     }
-    drawEnemies(){
-      
-        // draw enemy
-        for (let i = 0; i < Object.keys(this.enemies).length; i++){
-            let enemy = this.enemies[i];
-            debugger
-            if (enemy.coords[1] <= this.castleCoords[1]) enemy.draw();
-        }
+    clearEnemies(key){
+        let enemy = this.enemies[key];
+        enemy.clear();
+        if ((enemy.coords[1] >= this.castleCoords[1])) delete this.enemies[key];
+
     }
-    clearEnemies(){
-       
-        for (let i = 0; i < Object.keys(this.enemies).length; i++){
-            const enemy = this.enemies[i];
-            enemy.clear();
-        }
-    }
-    updateEnemies(){
-        // debugger
-        for (let i = 0; i < Object.keys(this.enemies).length; i++){
-            const enemy = this.enemies[i];
-            if (enemy.coords[1] <= this.castleCoords[1]){
-                enemy.update(); 
-            }
-        }
+    updateEnemies(key){
+        let enemy = this.enemies[key];
+        if (enemy.coords[1] <= this.castleCoords[1]) enemy.update(); 
     }
 }
 export default Battlefield;

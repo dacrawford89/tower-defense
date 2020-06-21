@@ -34,12 +34,17 @@ const main = () => {
   const animation = () => {
       if (timer.remaining < 0) {
         timer.clear();
-        bf.clearEnemies();
-        if (animating) bf.updateEnemies();
         bf.drawBattlefield();
         bf.drawTowerContainer();
         bf.drawCastle();
-        bf.drawEnemies();
+        Object.keys(bf.enemies).forEach(key => {
+          debugger
+
+          if (animating) bf.updateEnemies(key);
+          
+          bf.clearEnemies(key);
+          bf.drawEnemies(key);
+        })
       }
       window.requestAnimationFrame(animation);
     
