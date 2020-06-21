@@ -37,7 +37,6 @@ const main = () => {
     bf.drawBattlefield();
     bf.drawCastle();
     Object.keys(bf.towers).forEach(key => {
-      
       bf.drawTowers(key);
     })
       if (timer.remaining < 0 && Object.keys(bf.enemies).length) {

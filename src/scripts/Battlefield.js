@@ -19,11 +19,21 @@ class Battlefield {
         this.towers = {};
      }
      attackEnemies(){
+         debugger
          const remainingEnemies = Object.keys(this.enemies).length;
-         Object.keys(this.towers).forEach(tower => {
-             let enemy = this.enemies[Object.keys(this.enemies)[0]];
-             this.towers[tower].attack(enemy);
-         })
+         const enemiesArr = Object.keys(this.enemies).map(key => this.enemies[key]);
+         Object.keys(this.towers).forEach(towerKey => {
+            if (!this.towers[towerKey].target){
+                debugger
+                const enemyKey = Math.floor(Math.random() * enemiesArr.length);
+                const enemy = enemiesArr[enemyKey];
+                if ((enemy.coords[1] < this.canvas.height) && (enemy.coords[1] > 0)) this.towers[towerKey].attack(enemy);
+            }
+        })
+        Object.keys(this.enemies).forEach(key => {
+            debugger
+            if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
+        })
      }
      createCanvas(){
         document.body.append(this.canvas);

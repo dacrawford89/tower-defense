@@ -15,8 +15,8 @@ class Tower {
     }
     attack(enemy){
         debugger
-        enemy.health -= this.damage;
-        this.intervalId = setInterval(() => this.attack(enemy), this.speed)
+        console.log('hi');
+        enemy.currentHealth -= this.damage;
     }
 }
 export default Tower
