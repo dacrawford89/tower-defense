@@ -13,12 +13,20 @@ class Battlefield {
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07];
         this.firstTowerCoords = [this.castleCoords[0] + (this.canvas.width * .02), this.castleCoords[1] + this.castleCoords[3], this.canvas.width * .133, this.canvas.height * -.09];
         this.numTowers = 6;
+        this.currentLevel = 1;
         this.numEnemies = numEnemies;
         this.enemies = {};
         this.towers = {};
      }
+     attackEnemies(){
+         const remainingEnemies = Object.keys(this.enemies).length;
+         Object.keys(this.towers).forEach(tower => {
+             let enemy = this.enemies[Object.keys(this.enemies)[0]];
+             this.towers[tower].attack(enemy);
+         })
+     }
      createCanvas(){
-         document.body.append(this.canvas);
+        document.body.append(this.canvas);
      }
      drawBattlefield(){
         
@@ -31,7 +39,7 @@ class Battlefield {
      }
      createTowers(){
         for (let i = 0; i < this.numTowers; i++){
-            debugger
+            
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
             let width = this.firstTowerCoords[2];
@@ -43,7 +51,7 @@ class Battlefield {
         }
      }
      drawTowers(key){
-         debugger
+         
         const tower = this.towers[key];
         if (!!tower) tower.draw();
      }
@@ -53,6 +61,7 @@ class Battlefield {
             let maxX = Math.random() * this.canvas.width;
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
             let enemySize = 20;
+            let health = this.currentLevel * 10;
 
             // set x value on enmies to spawn within the canvas
             if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
@@ -64,7 +73,7 @@ class Battlefield {
             if ((this.canvas.height + maxY >= 0)){ // have enemies spawn offscreen from the top
                 maxY -= enemySize;
             }
-            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize);
+            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize, health);
             this.enemies[i] = enemy;
         }
     }

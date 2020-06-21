@@ -25,7 +25,7 @@ const main = () => {
   bf.drawBattlefield();
   bf.drawCastle();
   bf.createTowers();
-  debugger
+  
   bf.drawTowers();
   bf.createEnemies();
   bf.drawEnemies();
@@ -40,9 +40,9 @@ const main = () => {
       
       bf.drawTowers(key);
     })
-      if (timer.remaining < 0) {
+      if (timer.remaining < 0 && Object.keys(bf.enemies).length) {
         timer.clear();
-
+        bf.attackEnemies();
         Object.keys(bf.enemies).forEach(key => {
 
           if (animating) bf.updateEnemies(key);
