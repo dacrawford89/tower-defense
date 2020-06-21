@@ -9,10 +9,15 @@
     "maintained node versions",
     "not dead"
   ],
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.14.5"
+  },
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
     "webpack:watch": "webpack --watch --config webpack.dev.js",
-    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
+    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize",
+    "postinstall": "webpack"
   },
   "author": "Douglas Crawford",
   "license": "ISC",
