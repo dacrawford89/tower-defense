@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", main);
 function main() {
   const canvas = new canvasExample();
   canvas.createCanvas();
-  // debugger
+  
   let animating = true;
 
   const animation = () => {

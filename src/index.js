@@ -23,8 +23,10 @@ const main = () => {
   const bf = new Battlefield(20);
   bf.createCanvas();
   bf.drawBattlefield();
-  bf.drawTowerContainer();
   bf.drawCastle();
+  bf.createTowers();
+  
+  bf.drawTowers();
   bf.createEnemies();
   bf.drawEnemies();
   let animating = true;
@@ -32,13 +34,16 @@ const main = () => {
   const timer = new Timer(0);
   timer.create();
   const animation = () => {
+    bf.drawBattlefield();
+    bf.drawCastle();
+    Object.keys(bf.towers).forEach(key => {
+      
+      bf.drawTowers(key);
+    })
       if (timer.remaining < 0) {
         timer.clear();
-        bf.drawBattlefield();
-        bf.drawTowerContainer();
-        bf.drawCastle();
+
         Object.keys(bf.enemies).forEach(key => {
-          debugger
 
           if (animating) bf.updateEnemies(key);
           
@@ -58,7 +63,7 @@ const main = () => {
 
   window.requestAnimationFrame(animation);
 
-  // debugger
+  
 }
 
 window.addEventListener("DOMContentLoaded", main);
