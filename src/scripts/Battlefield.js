@@ -63,7 +63,7 @@ class Battlefield {
      }
      createTower({type, cost}){
          debugger
-        if (Object.keys(this.towers).length < 6 ){
+
             let tower;
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
@@ -85,7 +85,7 @@ class Battlefield {
             }
             this.towers[Object.keys(this.towers).length + 1] = tower;
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
-        }
+
      }
      createTowers(){
         for (let i = 0; i < this.numTowers; i++){

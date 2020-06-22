@@ -37,7 +37,7 @@ class Game {
             debugger
             document.querySelector(`.${this.towerTypes[i].type}`)
                 .addEventListener('click', () => {
-                    if (this.resources >= this.towerTypes[i].cost){
+                    if (this.resources >= this.towerTypes[i].cost && Object.keys(this.battlefield.towers).length < 6){
                         this.resources -= this.towerTypes[i].cost;
                         this.battlefield.createTower(this.towerTypes[i]);
                     } 
