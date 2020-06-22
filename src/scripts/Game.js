@@ -12,9 +12,10 @@ class Game {
         this.score = 0;
         this.resources = 0;
         this.health = 100;
+        this.towerTypes = ["Basic", "Power", "Splash"];
         this.spawn = false;
         this.battlefield = new Battlefield();
-        this.leftBar = new LeftBar();
+        this.leftBar = new LeftBar(this.towerTypes);
         this.rightBar = new RightBar();
     }
     initialize(){
@@ -22,7 +23,9 @@ class Game {
         this.battlefield.initialize();
         this.battlefield.render();
         this.leftBar.render();
-        document.querySelector('.add-tower').addEventListener('click', () => this.battlefield.createTower('basic'))
+        for (let i = 0; i < this.towerTypes.length; i++){
+            document.querySelector(`.${this.towerTypes[i]}`).addEventListener('click', () => this.battlefield.createTower(this.towerTypes[i]))
+        }
         this.rightBar.render();
     }
     

@@ -1,6 +1,8 @@
 import Enemy from './Enemy'
 import Castle from './Castle'
-import Tower from './Tower'
+import TowerBasic from './TowerBasic'
+import TowerPower from './TowerPower'
+import TowerSplash from './TowerSplash'
 
 class Battlefield {
     constructor(){
@@ -61,12 +63,25 @@ class Battlefield {
      }
      createTower(type){
         if (Object.keys(this.towers).length < 6){
+            let tower;
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
             let width = this.firstTowerCoords[2];
             let height = this.firstTowerCoords[3];
             let coords = this.firstTowerCoords;
-            let tower = new Tower(this.ctx, [x,y,width,height], type);
+            switch (type) {
+                case 'Basic':
+                    tower = new TowerBasic(this.ctx, [x,y,width,height], type);
+                    break;
+                case 'Power':
+                    tower = new TowerPower(this.ctx, [x,y,width,height], type);
+                    break
+                case 'Splash':
+                    tower = new TowerSplash(this.ctx, [x,y,width,height], type);
+                    break
+                default:
+                    break;
+            }
             this.towers[Object.keys(this.towers).length + 1] = tower;
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
         }
@@ -113,7 +128,6 @@ class Battlefield {
         }
     }
     animateField(){
-        debugger
         this.drawBattlefield();
         this.drawCastle();
         Object.keys(this.towers).forEach(towerKey => {

@@ -1,21 +1,24 @@
 class LeftBar {
-    constructor(){
+    constructor(towerTypes){
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add('left-bar');
+        this.towerTypes = towerTypes;
     }
     render(){
         this.generateButtons();
         document.body.prepend(this.wrapper);
     }
     generateButtons(){
-        this.addTowers();
+        this.addBasicTower();
     }
-    addTowers(){
+    addBasicTower(){
         let button;
-        button = document.createElement('div');
-        button.innerText = "Add Tower";
-        button.classList.add('add-tower');
-        this.wrapper.append(button);
+        for (let i = 0; i < this.towerTypes.length; i++){
+            button = document.createElement('div');
+            button.innerText = this.towerTypes[i];
+            button.classList.add(this.towerTypes[i]);
+            this.wrapper.append(button);
+        }
     }
 }
 

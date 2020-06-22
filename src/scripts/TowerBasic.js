@@ -1,19 +1,21 @@
-class Tower {
+import Tower from './Tower'
+
+class TowerBasic extends Tower {
     constructor(ctx, coords, type){
-        this.ctx = ctx;
-        this.coords = coords;
+        super(ctx, coords, type);
         this.damage = 1;
         this.speed = 100;
-        this.type = type;
     }
     draw(){
-        
+        debugger
         this.ctx.strokeStyle = "#d4d9d2";
         this.ctx.fillStyle = "#bdbfbb";
         this.ctx.fillRect(...this.coords);
+        this.ctx.font = "16px Arial";
+        this.ctx.fillStyle = "#ff871f"
     }
     attack(enemy){
-        enemy.currentHealth -= this.damage;
+        super.attack(enemy);
     }
 }
-export default Tower
+export default TowerBasic
