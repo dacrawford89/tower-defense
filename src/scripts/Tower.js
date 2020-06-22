@@ -1,10 +1,11 @@
 class Tower {
-    constructor(ctx, coords){
+    constructor(ctx, coords, type){
         
         this.ctx = ctx;
         this.coords = coords;
         this.damage = 1;
         this.speed = 100;
+        this.type = type;
 
     }
     draw(){
@@ -14,8 +15,6 @@ class Tower {
         this.ctx.fillRect(...this.coords);
     }
     attack(enemy){
-        debugger
-        console.log('hi');
         enemy.currentHealth -= this.damage;
     }
 }

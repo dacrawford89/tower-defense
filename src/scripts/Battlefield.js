@@ -3,7 +3,7 @@ import Castle from './Castle'
 import Tower from './Tower'
 
 class Battlefield {
-    constructor(numEnemies){
+    constructor(){
         this.canvas = document.createElement('canvas');
         this.canvas.width = window.innerWidth * .33;
         this.canvas.height = window.innerHeight * .9;
@@ -13,39 +13,62 @@ class Battlefield {
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07];
         this.firstTowerCoords = [this.castleCoords[0] + (this.canvas.width * .02), this.castleCoords[1] + this.castleCoords[3], this.canvas.width * .133, this.canvas.height * -.09];
         this.numTowers = 6;
+        this.castle = "";
         this.currentLevel = 1;
-        this.numEnemies = numEnemies;
+        this.numEnemies = 20;
+        this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
      }
+     initialize(){
+        this.createCanvas();
+        this.createCastle()
+     }
+     render(){
+        this.drawBattlefield();
+        this.drawCastle();
+        this.drawTowers();
+     }
+     clear(){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+     }
      attackEnemies(){
-         debugger
          const remainingEnemies = Object.keys(this.enemies).length;
          const enemiesArr = Object.keys(this.enemies).map(key => this.enemies[key]);
          Object.keys(this.towers).forEach(towerKey => {
             if (!this.towers[towerKey].target){
-                debugger
                 const enemyKey = Math.floor(Math.random() * enemiesArr.length);
                 const enemy = enemiesArr[enemyKey];
                 if ((enemy.coords[1] < this.canvas.height) && (enemy.coords[1] > 0)) this.towers[towerKey].attack(enemy);
             }
         })
         Object.keys(this.enemies).forEach(key => {
-            debugger
             if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
         })
      }
      createCanvas(){
-        document.body.append(this.canvas);
+        if (!document.querySelector('canvas')) document.body.append(this.canvas);
      }
      drawBattlefield(){
-        
         this.ctx.fillStyle = this.battlefieldColor;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
      }
+     createCastle(){
+        this.castle = new Castle(this.ctx, this.castleCoords, 100);
+     }
      drawCastle(){
-        const castle = new Castle(this.ctx, this.castleCoords);
-        castle.draw();
+        this.castle.draw();
+     }
+     createTower(type){
+         console.log('hi');
+        let x = this.firstTowerCoords[0];
+        let y = this.firstTowerCoords[1];
+        let width = this.firstTowerCoords[2];
+        let height = this.firstTowerCoords[3];
+        let coords = this.firstTowerCoords;
+        let tower = new Tower(this.ctx, [x,y,width,height], type);
+        this.towers[Object.keys(this.towers).length + 1] = tower;
+        coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
      }
      createTowers(){
         for (let i = 0; i < this.numTowers; i++){
@@ -66,6 +89,7 @@ class Battlefield {
         if (!!tower) tower.draw();
      }
     createEnemies(){
+        // debugger
         for (let i = 0; i < this.numEnemies; i++){
             let coords;
             let maxX = Math.random() * this.canvas.width;
@@ -87,8 +111,19 @@ class Battlefield {
             this.enemies[i] = enemy;
         }
     }
+    animateField(){
+        debugger
+        this.drawBattlefield();
+        this.drawCastle();
+        Object.keys(this.enemies).forEach(key => {
+            this.clearEnemies(key);
+            this.drawEnemies(key);
+            this.updateEnemies(key);
+        })
+    }
 
     drawEnemies(key){
+        // debugger
         let enemy = this.enemies[key];
         if (!!enemy && (enemy.coords[1] <= this.castleCoords[1])) enemy.draw();
     }
@@ -100,7 +135,7 @@ class Battlefield {
     }
     updateEnemies(key){
         let enemy = this.enemies[key];
-        if (enemy.coords[1] <= this.castleCoords[1]) enemy.update(); 
+        if (!!enemy && enemy.coords[1] <= this.castleCoords[1]) enemy.update(); 
     }
 }
 export default Battlefield;

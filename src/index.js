@@ -1,4 +1,6 @@
+import Game from './scripts/Game'
 import Battlefield from "./scripts/Battlefield";
+import LeftBar from './scripts/LeftBar'
 import Timer from "./scripts/Timer";
 import './styles/index.scss'
 // const testObj = {
@@ -21,49 +23,61 @@ import './styles/index.scss'
 // });
 
 const main = () => {
-  const bf = new Battlefield(20);
-  bf.createCanvas();
-  bf.drawBattlefield();
-  bf.drawCastle();
-  bf.createTowers();
-  
-  bf.drawTowers();
-  bf.createEnemies();
-  bf.drawEnemies();
-  let animating = true;
+  // initial load
+  const game = new Game();
+  game.initialize();
 
-  const timer = new Timer(0);
-  timer.create();
-  const animation = () => {
-    bf.drawBattlefield();
-    bf.drawCastle();
-    Object.keys(bf.towers).forEach(key => {
-      bf.drawTowers(key);
-    })
-      if (timer.remaining < 0 && Object.keys(bf.enemies).length) {
+  const bf = game.battlefield;
+    // debugger
+    let animating = true;
+    const animation = () => {
+      // debugger
+      const timer = game.timer;
+      if (!timer){
+        game.startTimer(0);
+      } else if (timer.remaining < 0) {
+        // debugger
         timer.clear();
-        bf.attackEnemies();
-        Object.keys(bf.enemies).forEach(key => {
-
-          if (animating) bf.updateEnemies(key);
-          
-          bf.clearEnemies(key);
-          bf.drawEnemies(key);
-        })
+        if (!Object.keys(bf.enemies).length) bf.createEnemies();
+        bf.animateField();
+        if (Object.keys(bf.enemies).length <= 0) game.startTimer(0);
       }
       window.requestAnimationFrame(animation);
-    
-    // if (canvas.coords[0] + canvas.coords[2] > canvas.canvas.width)
-      // canvas.reverseAnimation();
-    // if (canvas.coords[0] < 0) canvas.reverseAnimation();
-  };
-  
+    }
+    window.requestAnimationFrame(animation);
+ 
 
-  
 
-  window.requestAnimationFrame(animation);
+    // let animating = true;
 
-  
+    //   let timer = new Timer(0);
+    //   timer.create();
+    //   bf.createEnemies();
+    //   bf.drawEnemies();
+    //   const animation = () => {
+    //     bf.render();
+    //     Object.keys(bf.towers).forEach(key => {
+    //       bf.drawTowers(key);
+    //     })
+    //     // debugger
+    //     if (timer.remaining < 0 && Object.keys(bf.enemies).length) {
+    //       // debugger
+    //       timer.clear();
+    //       bf.attackEnemies();
+    //       Object.keys(bf.enemies).forEach(key => {
+    //       if (animating) bf.updateEnemies(key);
+    //         bf.clearEnemies(key);
+    //         bf.drawEnemies(key);
+    //       })
+    //     }
+    //     if (Object.keys(bf.enemies).length === 0){
+    //       main();
+    //     } else {
+    //       window.requestAnimationFrame(animation);
+    //     }
+    //   };
+    //   window.requestAnimationFrame(animation);
+
 }
 
 window.addEventListener("DOMContentLoaded", main);

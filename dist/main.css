@@ -1,2 +1,10 @@
-body{background-color:#ccccff;color:blue;display:flex;justify-content:center}.timer{position:absolute}
+body {
+  background-color: #ccccff;
+  color: blue;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column;  */ }
+
+.timer {
+  position: absolute; }
 
