@@ -1,11 +1,14 @@
-import "./styles/index.scss";
-import canvasExample from "./scripts/canvas";
-const testObj = {
-  key1: "hi",
-  key2: {
-    key3: "Hello",
-  },
-};
+import Game from './scripts/Game'
+import Battlefield from "./scripts/Battlefield";
+import LeftBar from './scripts/LeftBar'
+import Timer from "./scripts/Timer";
+import './styles/index.scss'
+// const testObj = {
+//   key1: "hi",
+//   key2: {
+//     key3: "Hello",
+//   },
+// };
 
 // const greeting = testObj?.key2?.key3 || testObj.key1;
 // window.addEventListener("DOMContentLoaded", () => {
@@ -19,40 +22,69 @@ const testObj = {
 //   document.body.appendChild(imgCard);
 // });
 
+const main = () => {
+  // initial load
+  const game = new Game();
+  game.initialize();
+
+  const bf = game.battlefield;
+    // debugger
+    let animating = true;
+    const animation = () => {
+      // debugger
+      const towers = bf.towers;
+      if (Object.keys(towers).length){
+        Object.keys(towers).forEach(towerKey => {
+          bf.drawTowers(towerKey);
+        })
+      }
+      const timer = game.timer;
+      if (!timer){
+        game.startTimer(0);
+      } else if (timer.remaining < 0) {
+        // debugger
+        timer.clear();
+        if (!Object.keys(bf.enemies).length) bf.createEnemies();
+        bf.animateField();
+        if (Object.keys(bf.enemies).length <= 0) game.startTimer(0);
+      }
+      window.requestAnimationFrame(animation);
+    }
+    window.requestAnimationFrame(animation);
+ 
+
+
+    // let animating = true;
+
+    //   let timer = new Timer(0);
+    //   timer.create();
+    //   bf.createEnemies();
+    //   bf.drawEnemies();
+    //   const animation = () => {
+    //     bf.render();
+    //     Object.keys(bf.towers).forEach(key => {
+    //       bf.drawTowers(key);
+    //     })
+    //     // debugger
+    //     if (timer.remaining < 0 && Object.keys(bf.enemies).length) {
+    //       // debugger
+    //       timer.clear();
+    //       bf.attackEnemies();
+    //       Object.keys(bf.enemies).forEach(key => {
+    //       if (animating) bf.updateEnemies(key);
+    //         bf.clearEnemies(key);
+    //         bf.drawEnemies(key);
+    //       })
+    //     }
+    //     if (Object.keys(bf.enemies).length === 0){
+    //       main();
+    //     } else {
+    //       window.requestAnimationFrame(animation);
+    //     }
+    //   };
+    //   window.requestAnimationFrame(animation);
+
+}
+
 window.addEventListener("DOMContentLoaded", main);
 
-function main() {
-  const canvas = new canvasExample();
-  canvas.createCanvas();
-  // debugger
-  let animating = true;
-
-  const animation = () => {
-    canvas.clearSquare();
-    if (animating) canvas.updateSquare();
-    canvas.drawSquare();
-    window.requestAnimationFrame(animation);
-    if (canvas.coords[0] + canvas.coords[2] > canvas.canvas.width)
-      canvas.reverseAnimation();
-    if (canvas.coords[0] < 0) canvas.reverseAnimation();
-  };
-
-  window.requestAnimationFrame(animation);
-
-  window.addEventListener("keydown", (event) => {
-    if (event.which === 32) {
-      event.preventDefault();
-      canvas.reverseAnimation();
-      canvas.setColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
-    }
-  });
-
-  window.addEventListener("mousedown", (event) => {
-    event.preventDefault();
-    canvas.coords = [event.offsetX, event.offsetY, canvas.canvas.width, canvas.canvas.height];
-    canvas.drawSquare();
-    console.log(event);
-    console.log(canvas.coords);
-    // animating = !animating;
-  });
-}

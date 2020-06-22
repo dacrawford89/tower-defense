@@ -1,41 +1,43 @@
 {
-  "name": "tower-defense",
+  "name": "tower_defense-master",
   "version": "1.0.0",
-  "description": "Stop all targets from reaching your base!",
-  "main": "index.js",
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "maintained node versions",
-    "not dead"
-  ],
-  "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
-    "webpack:watch": "webpack --watch --config webpack.dev.js",
-    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
-  },
-  "author": "Douglas Crawford",
-  "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
+  "description": "Defend your base against enemy invaders!",
+  "main": "postcss.config.js",
+  "dependencies": {
     "@babel/core": "^7.10.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/preset-env": "^7.10.3",
-    "autoprefixer": "^9.8.1",
+    "autoprefixer": "^9.8.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
-    "fibers": "^4.0.3",
-    "file-loader": "^5.1.0",
-    "mini-css-extract-plugin": "^0.8.2",
+    "express": "^4.17.1",
+    "fibers": "^5.0.0",
+    "file-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
-    "url-loader": "^3.0.0",
+    "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.2.2"
-  }
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "webpack": "webpack --watch --mode=development",
+    "heroku-postbuild": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dacrawford89/tower-defense.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dacrawford89/tower-defense/issues"
+  },
+  "homepage": "https://github.com/dacrawford89/tower-defense#readme"
 }
