@@ -15,7 +15,7 @@ class Game {
         this.towerTypes = ["Basic", "Power", "Splash"];
         this.spawn = false;
         this.battlefield = new Battlefield();
-        this.leftBar = new LeftBar(this.towerTypes);
+        this.leftBar = new LeftBar(this.towerTypes, this.resources);
         this.rightBar = new RightBar();
     }
     initialize(){
@@ -26,7 +26,17 @@ class Game {
         for (let i = 0; i < this.towerTypes.length; i++){
             document.querySelector(`.${this.towerTypes[i]}`).addEventListener('click', () => this.battlefield.createTower(this.towerTypes[i]))
         }
+
+        // debugger
+        const resourceTick = setInterval(this.generateResources.bind(this), 10)
+        
         this.rightBar.render();
+    }
+    generateResources(){
+        debugger
+        this.resources += 1;
+        const resources = document.querySelector('.current-resources');
+        resources.innerText = this.resources;
     }
     
     startTimer(remaining){
