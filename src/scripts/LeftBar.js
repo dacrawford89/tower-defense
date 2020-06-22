@@ -2,13 +2,20 @@ class LeftBar {
     constructor(){
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add('left-bar');
-        this.wrapper.style.height = "25px";
-        this.wrapper.style.width = "25px";
-        this.wrapper.style.backgroundColor = "red";
     }
     render(){
-        document.body.append(this.wrapper);
-        
+        this.generateButtons();
+        document.body.prepend(this.wrapper);
+    }
+    generateButtons(){
+        this.addTowers();
+    }
+    addTowers(){
+        let button;
+        button = document.createElement('div');
+        button.innerText = "Add Tower";
+        button.classList.add('add-tower');
+        this.wrapper.append(button);
     }
 }
 

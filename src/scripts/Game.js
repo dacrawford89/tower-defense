@@ -2,6 +2,7 @@ import Castle from './Castle'
 import Tower from './Tower'
 import Enemy from './Enemy'
 import LeftBar from './LeftBar'
+import RightBar from './RightBar'
 import Timer from './Timer'
 import Battlefield from './Battlefield'
 
@@ -12,15 +13,17 @@ class Game {
         this.resources = 0;
         this.health = 100;
         this.spawn = false;
-    }
-    initialize(){
         this.battlefield = new Battlefield();
         this.leftBar = new LeftBar();
+        this.rightBar = new RightBar();
+    }
+    initialize(){
         
         this.battlefield.initialize();
         this.battlefield.render();
         this.leftBar.render();
-        document.querySelector('.left-bar').addEventListener('click', () => this.battlefield.createTower('basic'))
+        document.querySelector('.add-tower').addEventListener('click', () => this.battlefield.createTower('basic'))
+        this.rightBar.render();
     }
     
     startTimer(remaining){

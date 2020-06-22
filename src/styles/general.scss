@@ -1,0 +1,33 @@
+body {
+    background-color: #ccccff;
+    color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column;  */
+  }
+  
+  .timer {
+    position: absolute;
+  }
+
+  .left-bar, .right-bar {
+    height: 50vh;
+    width: 10vw;
+    background-color: $lightblue;
+    border-radius: 25px;
+  }
+
+  .left-bar {
+    margin-right: 1vw;
+  }
+  .right-bar {
+    margin-left: 1vw;
+  }
+
+  .add-tower {
+      height: 10%;
+      width: 100%;
+      background-color: red;
+  }
+

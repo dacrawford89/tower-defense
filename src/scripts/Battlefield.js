@@ -60,15 +60,16 @@ class Battlefield {
         this.castle.draw();
      }
      createTower(type){
-         console.log('hi');
-        let x = this.firstTowerCoords[0];
-        let y = this.firstTowerCoords[1];
-        let width = this.firstTowerCoords[2];
-        let height = this.firstTowerCoords[3];
-        let coords = this.firstTowerCoords;
-        let tower = new Tower(this.ctx, [x,y,width,height], type);
-        this.towers[Object.keys(this.towers).length + 1] = tower;
-        coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
+        if (Object.keys(this.towers).length < 6){
+            let x = this.firstTowerCoords[0];
+            let y = this.firstTowerCoords[1];
+            let width = this.firstTowerCoords[2];
+            let height = this.firstTowerCoords[3];
+            let coords = this.firstTowerCoords;
+            let tower = new Tower(this.ctx, [x,y,width,height], type);
+            this.towers[Object.keys(this.towers).length + 1] = tower;
+            coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
+        }
      }
      createTowers(){
         for (let i = 0; i < this.numTowers; i++){
@@ -115,11 +116,15 @@ class Battlefield {
         debugger
         this.drawBattlefield();
         this.drawCastle();
+        Object.keys(this.towers).forEach(towerKey => {
+            this.drawTowers(towerKey);
+        });
+        this.attackEnemies();
         Object.keys(this.enemies).forEach(key => {
             this.clearEnemies(key);
             this.drawEnemies(key);
             this.updateEnemies(key);
-        })
+        });
     }
 
     drawEnemies(key){

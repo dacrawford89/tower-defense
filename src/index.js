@@ -32,6 +32,12 @@ const main = () => {
     let animating = true;
     const animation = () => {
       // debugger
+      const towers = bf.towers;
+      if (Object.keys(towers).length){
+        Object.keys(towers).forEach(towerKey => {
+          bf.drawTowers(towerKey);
+        })
+      }
       const timer = game.timer;
       if (!timer){
         game.startTimer(0);
