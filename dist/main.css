@@ -21,6 +21,11 @@ body {
 .right-bar {
   margin-left: 1vw; }
 
+.upgrade-income {
+  height: 40%;
+  width: 100%;
+  background-color: green; }
+
 .add-tower {
   height: 10%;
   width: 100%;

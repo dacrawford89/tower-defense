@@ -15,8 +15,14 @@ class Game {
         this.towerTypes = ["Basic", "Power", "Splash"];
         this.spawn = false;
         this.battlefield = new Battlefield();
-        this.leftBar = new LeftBar(this.towerTypes, this.resources);
+
+        this.resourceRate = 100;
+        this.updateResourceCost = 100;
+
+        this.leftBar = new LeftBar(this.towerTypes, this.resources, this.updateResourceCost);
+
         this.rightBar = new RightBar();
+
     }
     initialize(){
         
@@ -28,13 +34,24 @@ class Game {
         }
 
         // debugger
-        const resourceTick = setInterval(this.generateResources.bind(this), 10)
-        
+        this.resourceInterval = setInterval(this.generateResources.bind(this), this.resourceRate);
+        document.querySelector('.upgrade-income').addEventListener('click', () => this.upgradeIncome());
         this.rightBar.render();
+    }
+    upgradeIncome(){
+        if (this.resources >= this.updateResourceCost){
+            this.resources -= this.updateResourceCost;
+            this.updateResourceCost += 100;
+            const resources = document.querySelector('.income-upgrade-cost');
+            resources.innerText = this.updateResourceCost;
+            clearInterval(this.resourcesInterval);
+            this.resourceRate += 100;
+            this.resourceInterval = setInterval(this.generateResources.bind(this), this.resourceRate);
+        }
     }
     generateResources(){
         debugger
-        this.resources += 1;
+        this.resources += 10;
         const resources = document.querySelector('.current-resources');
         resources.innerText = this.resources;
     }

@@ -1,17 +1,30 @@
 class LeftBar {
-    constructor(towerTypes, resources){
+    constructor(towerTypes, resources, upgradeCost){
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add('left-bar');
         this.resources = resources;
         this.towerTypes = towerTypes;
+        this.updateResourceCost = upgradeCost;
     }
     render(){
         this.initialize();
         document.body.prepend(this.wrapper);
     }
     initialize(){
+        this.addUpgradeIncome();
         this.addResourcesDisplay();
         this.addTowerButtons();
+    }
+    
+    addUpgradeIncome(){
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('upgrade-income');
+        wrapper.innerText = "Upgrade Income";
+        const upgradeCost = document.createElement('div');
+        upgradeCost.classList.add('income-upgrade-cost');
+        upgradeCost.innerText = this.updateResourceCost;
+        wrapper.append(upgradeCost);
+        this.wrapper.append(wrapper);
     }
     addResourcesDisplay(){
         const wrapper = document.createElement('div');
