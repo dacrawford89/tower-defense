@@ -5,6 +5,7 @@ class TowerPower extends Tower {
         super(ctx, coords, type);
         this.damage = 10;
         this.speed = 10;
+        this.cost = 200;
     }
     draw(){
         this.ctx.strokeStyle = "#d4d9d2";

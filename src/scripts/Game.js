@@ -12,7 +12,11 @@ class Game {
         this.score = 0;
         this.resources = 0;
         this.health = 100;
-        this.towerTypes = ["Basic", "Power", "Splash"];
+        this.towerTypes = [
+            {type: "Basic", cost: 100},
+            {type: "Power", cost: 200},
+            {type: "Splash", cost: 300},
+        ];
         this.spawn = false;
         this.battlefield = new Battlefield();
 
@@ -30,7 +34,14 @@ class Game {
         this.battlefield.render();
         this.leftBar.render();
         for (let i = 0; i < this.towerTypes.length; i++){
-            document.querySelector(`.${this.towerTypes[i]}`).addEventListener('click', () => this.battlefield.createTower(this.towerTypes[i]))
+            debugger
+            document.querySelector(`.${this.towerTypes[i].type}`)
+                .addEventListener('click', () => {
+                    if (this.resources >= this.towerTypes[i].cost){
+                        this.resources -= this.towerTypes[i].cost;
+                        this.battlefield.createTower(this.towerTypes[i]);
+                    } 
+                });
         }
 
         // debugger
@@ -50,7 +61,6 @@ class Game {
         }
     }
     generateResources(){
-        debugger
         this.resources += 10;
         const resources = document.querySelector('.current-resources');
         resources.innerText = this.resources;

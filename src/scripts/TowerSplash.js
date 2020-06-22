@@ -5,6 +5,7 @@ class TowerSplash extends Tower {
         super(ctx, coords, type);
         this.damage = 5;
         this.speed = 10;
+        this.cost = 300;
     }
     draw(){
         this.ctx.strokeStyle = "#d4d9d2";

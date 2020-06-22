@@ -61,8 +61,9 @@ class Battlefield {
      drawCastle(){
         this.castle.draw();
      }
-     createTower(type){
-        if (Object.keys(this.towers).length < 6){
+     createTower({type, cost}){
+         debugger
+        if (Object.keys(this.towers).length < 6 ){
             let tower;
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];

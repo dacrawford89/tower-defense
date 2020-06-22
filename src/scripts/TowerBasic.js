@@ -5,9 +5,9 @@ class TowerBasic extends Tower {
         super(ctx, coords, type);
         this.damage = 1;
         this.speed = 100;
+        this.cost = 100;
     }
     draw(){
-        debugger
         this.ctx.strokeStyle = "#d4d9d2";
         this.ctx.fillStyle = "#bdbfbb";
         this.ctx.fillRect(...this.coords);

@@ -33,17 +33,24 @@ class LeftBar {
         currentResources.classList.add('current-resources');
         currentResources.innerText = this.resources;
         wrapper.innerText = `Resources:`;
-        wrapper.append(currentResources)
+        wrapper.append(currentResources);
         this.wrapper.append(wrapper);
 
     }
     addTowerButtons(){
-        let button;
+        let wrapper;
         for (let i = 0; i < this.towerTypes.length; i++){
-            button = document.createElement('div');
-            button.innerText = this.towerTypes[i];
-            button.classList.add(this.towerTypes[i]);
-            this.wrapper.append(button);
+            wrapper = document.createElement('div');
+            wrapper.classList.add(this.towerTypes[i].type);
+            const towerType = document.createElement('div');
+            towerType.classList.add('tower-type');
+            towerType.innerText = this.towerTypes[i].type;
+            wrapper.append(towerType);
+            const towerCost = document.createElement('div');
+            towerCost.classList.add('tower-cost');
+            towerCost.innerText = this.towerTypes[i].cost
+            wrapper.append(towerCost);
+            this.wrapper.append(wrapper);
         }
     }
 }
