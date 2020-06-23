@@ -26,7 +26,7 @@ class Enemy {
         // this.ctx.fillText(this.currentHealth, x, y);
     }
     update() {
-        this.coords[1] += 5;
+        this.coords[1] += 1;
     }
     clear(){
         this.ctx.clearRect(this.coords[0],this.coords[1], this.maxX, this.maxY);

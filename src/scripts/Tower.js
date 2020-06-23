@@ -5,17 +5,16 @@ class Tower {
     constructor(ctx, coords, type){
         this.ctx = ctx;
         this.coords = coords;
-        this.damage = 1;
-        this.speed = 100;
         this.type = type;
         this.towerImage = new Image();
         this.basicTowerImage = "basicTower.png";
         this.powerTowerImage = "powerTower.png";
         this.splashTowerImage = "splashTower.png";
+        this.attackAnimation = 1;
     }
 
     draw(){
-        // debugger
+        debugger
         let image;
         switch (this.type) {
             case 'Basic':
@@ -44,8 +43,13 @@ class Tower {
     }
     
     attack(enemy, game){
-        enemy.currentHealth -= this.damage;
-        game.score += this.damage;
+        debugger
+        this.attackAnimation += this.speed;
+        if (this.attackAnimation >= 500){
+            enemy.currentHealth -= this.damage;
+            game.score += this.damage;
+            this.attackAnimation = 1;
+        }
         const currentScore = document.querySelector('.current-score');
         currentScore.innerText = game.score;
     }

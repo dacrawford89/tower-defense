@@ -7,6 +7,7 @@ class TowerBasic extends Tower {
         this.speed = 100;
         this.cost = 100;
         this.image = image; 
+        this.attackAnimation = 1;
     }
     draw(image){
         super.draw(image);
@@ -14,6 +15,7 @@ class TowerBasic extends Tower {
     }
     attack(enemy, game){
         super.attack(enemy, game);
+
     }
 }
 export default TowerBasic

@@ -17,7 +17,7 @@ class Battlefield {
         this.ctx = this.canvas.getContext('2d');
         this.battlefieldColor = "#3dd11f";
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07];
-        this.firstTowerCoords = [this.castleCoords[0] + (this.canvas.width * .02), this.castleCoords[1] + this.castleCoords[3], this.canvas.width * .133, this.canvas.height * -.09];
+        this.firstTowerCoords = [this.castleCoords[0] + (this.canvas.width * .02), this.castleCoords[1] + this.castleCoords[3] * .7, this.canvas.width * .133, this.canvas.height * -.09];
         this.numTowers = 6;
         this.castle = "";
         this.currentLevel = 1;
@@ -26,6 +26,8 @@ class Battlefield {
         this.enemies = {};
         this.towers = {};
 
+        this.battlefieldGrass = new Image();
+        this.battlefieldGrass.src = path.join(__dirname, images, "../images/grass.jpg");
 
      }
      initialize(){
@@ -70,7 +72,8 @@ class Battlefield {
         if (!document.querySelector('canvas')) canvasContainer.append(this.canvas);
      }
      drawBattlefield(){
-        this.ctx.fillStyle = this.battlefieldColor;
+        const pat = this.ctx.createPattern(this.battlefieldGrass, 'repeat');
+        this.ctx.fillStyle = pat;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
      }
      createCastle(){
