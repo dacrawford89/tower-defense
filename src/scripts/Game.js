@@ -6,6 +6,7 @@ import RightBar from './RightBar'
 import Timer from './Timer'
 import Battlefield from './Battlefield'
 import * as THREE from 'three';
+import * as d3 from 'd3'
 
 class Game {
     constructor(){
