@@ -8,8 +8,7 @@ class TowerSplash extends Tower {
         this.cost = 300;
     }
     draw(){
-        this.ctx.strokeStyle = "#d4d9d2";
-        this.ctx.fillStyle = "#d19111";
+
         this.ctx.fillRect(...this.coords);
         this.ctx.font = "16px Arial";
         this.ctx.fillStyle = "#ff871f"

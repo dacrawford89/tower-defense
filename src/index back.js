@@ -49,7 +49,7 @@ const main = () => {
       bf.drawEnemies(key);
       })
     } else {
-      debugger;
+      
       const newTimer = new Timer(0);
       timer.create();
     }

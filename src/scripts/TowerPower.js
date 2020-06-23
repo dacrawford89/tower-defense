@@ -8,11 +8,8 @@ class TowerPower extends Tower {
         this.cost = 200;
     }
     draw(){
-        this.ctx.strokeStyle = "#d4d9d2";
-        this.ctx.fillStyle = "#ad1313";
         this.ctx.fillRect(...this.coords);
-        this.ctx.font = "16px Arial";
-        this.ctx.fillStyle = "#ff871f"
+
     }
     attack(enemy, game){
         super.attack(enemy, game);

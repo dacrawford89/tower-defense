@@ -9,7 +9,7 @@ class Enemy {
     }
 
     draw(){
-        // debugger
+        // 
         this.ctx.beginPath();
         let radius = 20;
         let x = this.coords[0];

@@ -8,6 +8,7 @@ import Battlefield from './Battlefield'
 import * as THREE from 'three';
 import * as d3 from 'd3'
 
+
 class Game {
     constructor(){
         this.level = 0;
@@ -37,6 +38,7 @@ class Game {
     initialize(){
         this.battlefield.initialize();
         this.battlefield.render();
+
         this.leftBar.render();
         for (let i = 0; i < this.towerTypes.length; i++){
             document.querySelector(`.${this.towerTypes[i].type}`)
@@ -48,7 +50,7 @@ class Game {
                 });
         }
 
-        // debugger
+        // 
         this.resourceInterval = setInterval(this.generateResources.bind(this), this.resourceRate);
 
         
@@ -87,7 +89,7 @@ class Game {
         document.querySelector('.start-button').addEventListener('click', this.startGame);
     }
     generateInstructions(){
-        debugger
+        
         const instructionsWrapper = document.querySelector('.instructions-wrapper');
         this.canvasContainer.append(instructionsWrapper);
     }
@@ -107,7 +109,7 @@ class Game {
         button.innerText = "START";
         wrapper.append(button);
 
-        document.body.append(wrapper);
+        document.querySelector('.instructions-wrapper').append(wrapper);
 
     }
     newRound(remaining){
@@ -116,7 +118,7 @@ class Game {
         this.startTimer(remaining);
     }
     upgradeIncome(){
-        debugger
+        
         if (this.resources >= this.updateResourceCost){
             this.resources -= this.updateResourceCost;
             this.updateResourceCost += 100;
@@ -143,6 +145,7 @@ class Game {
         currentLevel.innerText = this.level;
     }
     startTimer(remaining){
+   
         this.timer = new Timer(remaining);
         this.timer.render();
     }
@@ -150,7 +153,7 @@ class Game {
         this.timer.clear();
     }
     lose(requestId){
-        debugger
+        
         window.cancelAnimationFrame(requestId);
         this.clearTimer();
         this.stopResources();

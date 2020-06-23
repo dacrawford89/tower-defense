@@ -30,7 +30,7 @@ const main = () => {
   game.initialize();
 
   let requestId;
-  debugger
+  
   document.querySelector('.start-button').addEventListener('click', () => startGame());
   function intro(){
     game.animateIntro();
@@ -41,7 +41,7 @@ const main = () => {
 
   const startGame = () => {
     const bf = game.battlefield;
-      // debugger
+      // 
       let animating = true;
       let spawning = true;
 
@@ -52,8 +52,7 @@ const main = () => {
           game.lose();
           return;
         }
-        bf.test();
-          // debugger
+          // 
           const towers = bf.towers;
           if (Object.keys(towers).length){
             Object.keys(towers).forEach(towerKey => {
@@ -65,8 +64,8 @@ const main = () => {
             game.newRound(0);
 
           } else if (timer.remaining < 0) {
-            // debugger
-
+       
+          
             timer.clear();
             if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
             bf.animateField(game);
