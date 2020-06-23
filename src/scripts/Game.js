@@ -11,7 +11,7 @@ class Game {
         this.level = 0;
         this.score = 0;
         this.resources = 0;
-        this.health = 100;
+        this.health = 20;
         this.towerTypes = [
             {type: "Basic", cost: 100},
             {type: "Power", cost: 200},
@@ -70,6 +70,9 @@ class Game {
         const resources = document.querySelector('.current-resources');
         resources.innerText = this.resources;
     }
+    stopResources(){
+        clearInterval(this.resourceInterval);
+    }
     generateScore(){
 
     }
@@ -85,6 +88,21 @@ class Game {
     }
     clearTimer(){
         this.timer.clear();
+    }
+    lose(requestId){
+        window.cancelAnimationFrame(requestId);
+        this.clearTimer();
+        this.stopResources();
+        this.generateLoseMessage();
+    }
+    generateLoseMessage(){
+        debugger;
+        if (!document.querySelector('.lose-message')){
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('lose-message');
+            wrapper.innerText = "You Lose";
+            document.body.append(wrapper);
+        }
     }
 }
 

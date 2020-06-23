@@ -1,15 +1,19 @@
 body {
-    background-color: #ccccff;
-    color: blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* flex-direction: column;  */
-  }
-  
-  .timer {
-    position: absolute;
-  }
+  background-color: #ccccff;
+  color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column;  */
+}
 
- 
+.timer {
+  position: absolute;
+}
+
+.lose-message {
+  position: absolute;
+}
+
+
 

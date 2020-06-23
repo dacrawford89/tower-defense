@@ -9,6 +9,9 @@ body {
 .timer {
   position: absolute; }
 
+.lose-message {
+  position: absolute; }
+
 .left-bar, .right-bar {
   height: 50vh;
   width: 10vw;
