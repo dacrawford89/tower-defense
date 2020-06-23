@@ -3,8 +3,57 @@ body {
   color: blue;
   display: flex;
   justify-content: center;
+  align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
   /* flex-direction: column;  */ }
 
 .timer {
   position: absolute; }
+
+.lose-message {
+  position: absolute; }
+
+.left-bar, .right-bar {
+  height: 50vh;
+  width: 10vw;
+  background-color: #0ac9b6;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1vw; }
+
+.left-bar {
+  margin-right: 1vw; }
+
+.right-bar {
+  margin-left: 1vw; }
+
+.upgrade-income:hover {
+  color: red;
+  cursor: pointer; }
+
+.add-towers-wrapper {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; }
+
+.add-towers-wrapper > div:hover {
+  color: green; }
+
+.resources-display {
+  background-color: #0ac9b6; }
 

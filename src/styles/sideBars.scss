@@ -1,0 +1,46 @@
+.left-bar, .right-bar {
+  height: 50vh;
+  width: 10vw;
+  background-color: $lightblue;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1vw;
+}
+
+
+
+.left-bar {
+  margin-right: 1vw;
+}
+.right-bar {
+  margin-left: 1vw;
+}
+
+.upgrade-income {
+
+  // background-color: green;
+}
+
+.upgrade-income:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.add-towers-wrapper {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.add-towers-wrapper > div:hover {
+  color: green;
+}
+
+.resources-display {
+
+  background-color: $lightblue;
+}

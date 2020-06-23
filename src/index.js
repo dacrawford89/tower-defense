@@ -1,4 +1,6 @@
+import Game from './scripts/Game'
 import Battlefield from "./scripts/Battlefield";
+import LeftBar from './scripts/LeftBar'
 import Timer from "./scripts/Timer";
 import './styles/index.scss'
 // const testObj = {
@@ -21,49 +23,54 @@ import './styles/index.scss'
 // });
 
 const main = () => {
-  const bf = new Battlefield(20);
-  bf.createCanvas();
-  bf.drawBattlefield();
-  bf.drawCastle();
-  bf.createTowers();
-  
-  bf.drawTowers();
-  bf.createEnemies();
-  bf.drawEnemies();
-  let animating = true;
+  // initial load
+  const game = new Game();
+  game.initialize();
 
-  const timer = new Timer(0);
-  timer.create();
-  const animation = () => {
-    bf.drawBattlefield();
-    bf.drawCastle();
-    Object.keys(bf.towers).forEach(key => {
-      bf.drawTowers(key);
-    })
-      if (timer.remaining < 0 && Object.keys(bf.enemies).length) {
-        timer.clear();
-        bf.attackEnemies();
-        Object.keys(bf.enemies).forEach(key => {
+  let requestId;
 
-          if (animating) bf.updateEnemies(key);
-          
-          bf.clearEnemies(key);
-          bf.drawEnemies(key);
-        })
+  const bf = game.battlefield;
+    // debugger
+    let animating = true;
+    let spawning = true;
+
+    const animation = () => {
+      if (game.health <= 0){
+        
+        // game.lose(requestId);
+        game.lose();
+        return;
       }
-      window.requestAnimationFrame(animation);
+        // debugger
+        const towers = bf.towers;
+        if (Object.keys(towers).length){
+          Object.keys(towers).forEach(towerKey => {
+            bf.drawTowers(towerKey);
+          })
+        }
+        const timer = game.timer;
+        if (!timer && game.health > 0){
+          game.newRound(0);
+
+        } else if (timer.remaining < 0) {
+          // debugger
+
+          timer.clear();
+          if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
+          bf.animateField(game);
+          if (game.health <= 0) game.lose();
+          if (Object.keys(bf.enemies).length <= 0) {
+            game.newRound(0);
+          }
+        }
+          requestId = window.requestAnimationFrame(animation);
+      }
+      
     
-    // if (canvas.coords[0] + canvas.coords[2] > canvas.canvas.width)
-      // canvas.reverseAnimation();
-    // if (canvas.coords[0] < 0) canvas.reverseAnimation();
-  };
-  
+    requestId = window.requestAnimationFrame(animation);
+    const lose = () => {
 
-  
-
-  window.requestAnimationFrame(animation);
-
-  
+    }
 }
 
 window.addEventListener("DOMContentLoaded", main);

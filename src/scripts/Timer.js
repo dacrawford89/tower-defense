@@ -6,7 +6,7 @@ class Timer {
         this.timer.innerText = this.remaining;
         this.interval = setInterval(this.tick.bind(this), 1000);
     }
-    create(){
+    render(){
         document.body.prepend(this.timer);
     }
     tick(){

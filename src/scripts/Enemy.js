@@ -9,7 +9,7 @@ class Enemy {
     }
 
     draw(){
-        debugger
+        // debugger
         this.ctx.beginPath();
         let radius = 20;
         let x = this.coords[0];
@@ -18,15 +18,15 @@ class Enemy {
         let endAngle = Math.PI * 2;
         this.ctx.arc(x, y, radius, startAngle, endAngle);
         this.ctx.fillStyle = this.enemyColors[0];
-        this.ctx.globalAlpha = (this.health / this.maxHealth);
+        this.ctx.globalAlpha = (this.currentHealth / this.maxHealth);
         this.ctx.fill();
         this.ctx.globalAlpha = 1;
-        this.ctx.font = "16px Arial";
-        this.ctx.fillStyle = "#ff871f"
-        this.ctx.fillText(this.currentHealth, x, y);
+        // this.ctx.font = "16px Arial";
+        // this.ctx.fillStyle = "#ff871f"
+        // this.ctx.fillText(this.currentHealth, x, y);
     }
     update() {
-        this.coords[1] += 1;
+        this.coords[1] += 5;
     }
     clear(){
         this.ctx.clearRect(this.coords[0],this.coords[1], this.maxX, this.maxY);
