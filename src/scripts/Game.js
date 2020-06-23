@@ -8,7 +8,7 @@ import Battlefield from './Battlefield'
 
 class Game {
     constructor(){
-        this.level = 1;
+        this.level = 0;
         this.score = 0;
         this.resources = 0;
         this.health = 100;
@@ -29,7 +29,6 @@ class Game {
 
     }
     initialize(){
-        
         this.battlefield.initialize();
         this.battlefield.render();
         this.leftBar.render();
@@ -49,6 +48,12 @@ class Game {
         document.querySelector('.upgrade-income').addEventListener('click', () => this.upgradeIncome());
         this.rightBar.render();
     }
+    newRound(remaining){
+        debugger
+        this.level++;
+        this.generateLevel();
+        this.startTimer(remaining);
+    }
     upgradeIncome(){
         if (this.resources >= this.updateResourceCost){
             this.resources -= this.updateResourceCost;
@@ -65,8 +70,16 @@ class Game {
         const resources = document.querySelector('.current-resources');
         resources.innerText = this.resources;
     }
-    
+    generateScore(){
+
+    }
+    generateLevel(){
+        debugger;
+        const currentLevel = document.querySelector('.current-level');
+        currentLevel.innerText = this.level;
+    }
     startTimer(remaining){
+        debugger
         this.timer = new Timer(remaining);
         this.timer.render();
     }

@@ -40,13 +40,17 @@ const main = () => {
       }
       const timer = game.timer;
       if (!timer){
-        game.startTimer(0);
+        game.newRound(0);
+
       } else if (timer.remaining < 0) {
         // debugger
+
         timer.clear();
-        if (!Object.keys(bf.enemies).length) bf.createEnemies();
-        bf.animateField();
-        if (Object.keys(bf.enemies).length <= 0) game.startTimer(0);
+        if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
+        bf.animateField(game);
+        if (Object.keys(bf.enemies).length <= 0) {
+          game.newRound(0);
+        }
       }
       window.requestAnimationFrame(animation);
     }

@@ -15,7 +15,6 @@ class LeftBar {
         this.addResourcesDisplay();
         this.addTowerButtons();
     }
-    
     addUpgradeIncome(){
         const wrapper = document.createElement('div');
         wrapper.classList.add('upgrade-income');
@@ -35,7 +34,6 @@ class LeftBar {
         wrapper.innerText = `Resources:`;
         wrapper.append(currentResources);
         this.wrapper.append(wrapper);
-
     }
     addTowerButtons(){
         let wrapper;

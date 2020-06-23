@@ -14,8 +14,8 @@ class TowerPower extends Tower {
         this.ctx.font = "16px Arial";
         this.ctx.fillStyle = "#ff871f"
     }
-    attack(enemy){
-        super.attack(enemy);
+    attack(enemy, game){
+        super.attack(enemy, game);
     }
 }
 export default TowerPower;
