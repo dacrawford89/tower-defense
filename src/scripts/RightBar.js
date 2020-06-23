@@ -1,7 +1,8 @@
 class RightBar {
-    constructor(){
+    constructor(health){
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add('right-bar');
+        this.health = health;
     }
     render(){
         this.initialize();
@@ -44,7 +45,7 @@ class RightBar {
         wrapper.innerText = "Health:";
 
         const currentHealth = document.createElement('div');
-        currentHealth.innerText = 100;
+        currentHealth.innerText = this.health;
         currentHealth.classList.add('current-health');
         wrapper.append(currentHealth);
 

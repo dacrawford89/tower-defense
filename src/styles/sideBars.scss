@@ -3,7 +3,14 @@
   width: 10vw;
   background-color: $lightblue;
   border-radius: 25px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
+
+
 
 .left-bar {
   margin-right: 1vw;
@@ -13,19 +20,16 @@
 }
 
 .upgrade-income {
-  height: 40%;
-  width: 100%;
-  background-color: green;
+
+  // background-color: green;
 }
 
 .add-tower {
-  height: 10%;
-  width: 100%;
+
   background-color: red;
 }
 
 .resources-display {
-  height: 10%;
-  width: 100%;
+
   background-color: $lightblue;
 }

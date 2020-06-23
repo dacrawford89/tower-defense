@@ -25,7 +25,9 @@ class Game {
 
         this.leftBar = new LeftBar(this.towerTypes, this.resources, this.updateResourceCost);
 
-        this.rightBar = new RightBar();
+        this.rightBar = new RightBar(this.health);
+
+        this.upgradeIncomeBind = this.upgradeIncome.bind(this);
 
     }
     initialize(){
@@ -33,7 +35,6 @@ class Game {
         this.battlefield.render();
         this.leftBar.render();
         for (let i = 0; i < this.towerTypes.length; i++){
-            debugger
             document.querySelector(`.${this.towerTypes[i].type}`)
                 .addEventListener('click', () => {
                     if (this.resources >= this.towerTypes[i].cost && Object.keys(this.battlefield.towers).length < 6){
@@ -45,16 +46,18 @@ class Game {
 
         // debugger
         this.resourceInterval = setInterval(this.generateResources.bind(this), this.resourceRate);
-        document.querySelector('.upgrade-income').addEventListener('click', () => this.upgradeIncome());
+
+        
+        document.querySelector('.upgrade-income').addEventListener('click', this.upgradeIncomeBind);
         this.rightBar.render();
     }
     newRound(remaining){
-        debugger
         this.level++;
         this.generateLevel();
         this.startTimer(remaining);
     }
     upgradeIncome(){
+        debugger
         if (this.resources >= this.updateResourceCost){
             this.resources -= this.updateResourceCost;
             this.updateResourceCost += 100;
@@ -77,12 +80,10 @@ class Game {
 
     }
     generateLevel(){
-        debugger;
         const currentLevel = document.querySelector('.current-level');
         currentLevel.innerText = this.level;
     }
     startTimer(remaining){
-        debugger
         this.timer = new Timer(remaining);
         this.timer.render();
     }
@@ -90,13 +91,15 @@ class Game {
         this.timer.clear();
     }
     lose(requestId){
+        debugger
         window.cancelAnimationFrame(requestId);
         this.clearTimer();
         this.stopResources();
         this.generateLoseMessage();
+
+        document.querySelector('.upgrade-income').removeEventListener('click', this.upgradeIncomeBind);
     }
     generateLoseMessage(){
-        debugger;
         if (!document.querySelector('.lose-message')){
             const wrapper = document.createElement('div');
             wrapper.classList.add('lose-message');

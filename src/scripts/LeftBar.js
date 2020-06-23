@@ -21,7 +21,7 @@ class LeftBar {
         wrapper.innerText = "Upgrade Income";
         const upgradeCost = document.createElement('div');
         upgradeCost.classList.add('income-upgrade-cost');
-        upgradeCost.innerText = this.updateResourceCost;
+        upgradeCost.innerText = `${this.updateResourceCost}`;
         wrapper.append(upgradeCost);
         this.wrapper.append(wrapper);
     }
@@ -50,6 +50,8 @@ class LeftBar {
             wrapper.append(towerCost);
             this.wrapper.append(wrapper);
         }
+    }
+    removeHandlers(){
     }
 }
 

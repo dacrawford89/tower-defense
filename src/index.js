@@ -37,7 +37,6 @@ const main = () => {
     const animation = () => {
       if (game.health <= 0){
         
-        debugger
         // game.lose(requestId);
         game.lose();
         return;
@@ -64,8 +63,6 @@ const main = () => {
             game.newRound(0);
           }
         }
-        console.log('hi');
-        debugger
           requestId = window.requestAnimationFrame(animation);
       }
       

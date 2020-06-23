@@ -110,7 +110,6 @@ class Battlefield {
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
             let enemySize = 20;
             let health = currentLevel * 10;
-            debugger
 
             // set x value on enmies to spawn within the canvas
             if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
