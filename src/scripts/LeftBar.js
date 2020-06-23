@@ -36,18 +36,21 @@ class LeftBar {
         this.wrapper.append(wrapper);
     }
     addTowerButtons(){
-        let wrapper;
+        let wrapper = document.createElement('div');
+        wrapper.classList.add('add-towers-wrapper');
         for (let i = 0; i < this.towerTypes.length; i++){
-            wrapper = document.createElement('div');
-            wrapper.classList.add(this.towerTypes[i].type);
+            const tower = document.createElement('div');
+            tower.classList.add(this.towerTypes[i].type);
             const towerType = document.createElement('div');
             towerType.classList.add('tower-type');
             towerType.innerText = this.towerTypes[i].type;
-            wrapper.append(towerType);
+            tower.append(towerType);
             const towerCost = document.createElement('div');
             towerCost.classList.add('tower-cost');
             towerCost.innerText = this.towerTypes[i].cost
-            wrapper.append(towerCost);
+            tower.append(towerCost);
+            wrapper.append(tower);
+
             this.wrapper.append(wrapper);
         }
     }

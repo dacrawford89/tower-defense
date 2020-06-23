@@ -4,6 +4,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
   /* flex-direction: column;  */ }
 
 .timer {
@@ -21,7 +32,8 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; }
+  justify-content: space-evenly;
+  padding: 1vw; }
 
 .left-bar {
   margin-right: 1vw; }
@@ -29,8 +41,18 @@ body {
 .right-bar {
   margin-left: 1vw; }
 
-.add-tower {
-  background-color: red; }
+.upgrade-income:hover {
+  color: red;
+  cursor: pointer; }
+
+.add-towers-wrapper {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; }
+
+.add-towers-wrapper > div:hover {
+  color: green; }
 
 .resources-display {
   background-color: #0ac9b6; }
