@@ -6,7 +6,7 @@ class TowerBasic extends Tower {
         this.damage = 1;
         this.speed = 100;
         this.cost = 100;
-        // this.image = image; 
+        this.image = image; 
     }
     draw(image){
         super.draw(image);

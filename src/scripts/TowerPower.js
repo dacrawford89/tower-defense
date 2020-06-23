@@ -7,8 +7,8 @@ class TowerPower extends Tower {
         this.speed = 10;
         this.cost = 200;
     }
-    draw(){
-        this.ctx.fillRect(...this.coords);
+    draw(image){
+        super.draw(image);
 
     }
     attack(enemy, game){

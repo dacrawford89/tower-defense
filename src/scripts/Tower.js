@@ -8,15 +8,35 @@ class Tower {
         this.damage = 1;
         this.speed = 100;
         this.type = type;
-
+        this.towerImage = new Image();
+        this.basicTowerImage = "basicTower.png";
+        this.powerTowerImage = "powerTower.png";
+        this.splashTowerImage = "splashTower.png";
     }
 
-    draw(image){
-        debugger
-        this.ctx.clearRect(...this.coords);
+    draw(){
+        // debugger
+        let image;
+        switch (this.type) {
+            case 'Basic':
+                image = path.join(__dirname, images, this.basicTowerImage);
+                break;
+            case 'Power':
+                image = path.join(__dirname, images, this.powerTowerImage);
+                break;
+            case 'Splash':
+                image = path.join(__dirname, images, this.splashTowerImage);
+                break;
+            default:
+                break;
+        }
+        this.towerImage.src = image;
+        // this.ctx.clearRect(...this.coords);
+        // this.ctx.globalAlpha = .2;
         // this.towerTile.width = this.coords[2];
         // this.towerTile.height = this.coords[3];
-        this.ctx.drawImage(image, ...this.coords);
+        this.ctx.drawImage(this.towerImage, ...this.coords);
+        // this.ctx.globalAlpha = 1;
         // const pat = this.ctx.createPattern(image, 'repeat-y');
         // this.ctx.fillStyle = "white";
         // this.ctx.fillStyle = pat;

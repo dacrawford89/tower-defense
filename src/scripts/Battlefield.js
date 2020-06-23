@@ -25,9 +25,8 @@ class Battlefield {
         this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
-        this.towerTile = new Image();
-        const towerTileImage = "towerTile.png";
-        this.towerTile.src = path.join(__dirname, images, towerTileImage);
+
+
      }
      initialize(){
         this.createCanvas();
@@ -82,7 +81,8 @@ class Battlefield {
         this.castle.draw(this.castleTile);
      }
      createTower({type, cost}){
-
+        debugger
+            
             let tower;
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
@@ -119,9 +119,8 @@ class Battlefield {
     //     }
     //  }
      drawTowers(key){
-         debugger
         const tower = this.towers[key];
-        if (!!tower) tower.draw(this.towerTile);
+        if (!!tower) tower.draw(this.towerImage);
      }
     createEnemies(currentLevel){
         for (let i = 0; i < this.numEnemies; i++){

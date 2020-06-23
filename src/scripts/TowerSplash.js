@@ -7,11 +7,8 @@ class TowerSplash extends Tower {
         this.speed = 10;
         this.cost = 300;
     }
-    draw(){
-
-        this.ctx.fillRect(...this.coords);
-        this.ctx.font = "16px Arial";
-        this.ctx.fillStyle = "#ff871f"
+    draw(image){
+        super.draw(image);
     }
     attack(enemy, game){
         super.attack(enemy, game);
