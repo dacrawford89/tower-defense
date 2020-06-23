@@ -27,63 +27,50 @@ const main = () => {
   const game = new Game();
   game.initialize();
 
+  let requestId;
+
   const bf = game.battlefield;
     // debugger
     let animating = true;
+    let spawning = true;
+
     const animation = () => {
-      // debugger
-      const towers = bf.towers;
-      if (Object.keys(towers).length){
-        Object.keys(towers).forEach(towerKey => {
-          bf.drawTowers(towerKey);
-        })
+      if (game.health <= 0){
+        
+        // game.lose(requestId);
+        game.lose();
+        return;
       }
-      const timer = game.timer;
-      if (!timer){
-        game.startTimer(0);
-      } else if (timer.remaining < 0) {
         // debugger
-        timer.clear();
-        if (!Object.keys(bf.enemies).length) bf.createEnemies();
-        bf.animateField();
-        if (Object.keys(bf.enemies).length <= 0) game.startTimer(0);
+        const towers = bf.towers;
+        if (Object.keys(towers).length){
+          Object.keys(towers).forEach(towerKey => {
+            bf.drawTowers(towerKey);
+          })
+        }
+        const timer = game.timer;
+        if (!timer && game.health > 0){
+          game.newRound(0);
+
+        } else if (timer.remaining < 0) {
+          // debugger
+
+          timer.clear();
+          if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
+          bf.animateField(game);
+          if (game.health <= 0) game.lose();
+          if (Object.keys(bf.enemies).length <= 0) {
+            game.newRound(0);
+          }
+        }
+          requestId = window.requestAnimationFrame(animation);
       }
-      window.requestAnimationFrame(animation);
+      
+    
+    requestId = window.requestAnimationFrame(animation);
+    const lose = () => {
+
     }
-    window.requestAnimationFrame(animation);
- 
-
-
-    // let animating = true;
-
-    //   let timer = new Timer(0);
-    //   timer.create();
-    //   bf.createEnemies();
-    //   bf.drawEnemies();
-    //   const animation = () => {
-    //     bf.render();
-    //     Object.keys(bf.towers).forEach(key => {
-    //       bf.drawTowers(key);
-    //     })
-    //     // debugger
-    //     if (timer.remaining < 0 && Object.keys(bf.enemies).length) {
-    //       // debugger
-    //       timer.clear();
-    //       bf.attackEnemies();
-    //       Object.keys(bf.enemies).forEach(key => {
-    //       if (animating) bf.updateEnemies(key);
-    //         bf.clearEnemies(key);
-    //         bf.drawEnemies(key);
-    //       })
-    //     }
-    //     if (Object.keys(bf.enemies).length === 0){
-    //       main();
-    //     } else {
-    //       window.requestAnimationFrame(animation);
-    //     }
-    //   };
-    //   window.requestAnimationFrame(animation);
-
 }
 
 window.addEventListener("DOMContentLoaded", main);

@@ -5,6 +5,7 @@ class TowerPower extends Tower {
         super(ctx, coords, type);
         this.damage = 10;
         this.speed = 10;
+        this.cost = 200;
     }
     draw(){
         this.ctx.strokeStyle = "#d4d9d2";
@@ -13,8 +14,8 @@ class TowerPower extends Tower {
         this.ctx.font = "16px Arial";
         this.ctx.fillStyle = "#ff871f"
     }
-    attack(enemy){
-        super.attack(enemy);
+    attack(enemy, game){
+        super.attack(enemy, game);
     }
 }
 export default TowerPower;

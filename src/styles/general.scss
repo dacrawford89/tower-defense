@@ -1,33 +1,25 @@
 body {
-    background-color: #ccccff;
-    color: blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* flex-direction: column;  */
-  }
-  
-  .timer {
-    position: absolute;
-  }
+  background-color: #ccccff;
+  color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; 
+  /* flex-direction: column;  */
+}
 
-  .left-bar, .right-bar {
-    height: 50vh;
-    width: 10vw;
-    background-color: $lightblue;
-    border-radius: 25px;
-  }
+.timer {
+  position: absolute;
+}
 
-  .left-bar {
-    margin-right: 1vw;
-  }
-  .right-bar {
-    margin-left: 1vw;
-  }
+.lose-message {
+  position: absolute;
+}
 
-  .add-tower {
-      height: 10%;
-      width: 100%;
-      background-color: red;
-  }
+
 
