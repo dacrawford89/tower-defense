@@ -5,6 +5,7 @@ import LeftBar from './LeftBar'
 import RightBar from './RightBar'
 import Timer from './Timer'
 import Battlefield from './Battlefield'
+import * as THREE from 'three';
 
 class Game {
     constructor(){
@@ -29,6 +30,8 @@ class Game {
 
         this.upgradeIncomeBind = this.upgradeIncome.bind(this);
 
+        this.startGame = this.startGame.bind(this);
+
     }
     initialize(){
         this.battlefield.initialize();
@@ -50,6 +53,58 @@ class Game {
         
         document.querySelector('.upgrade-income').addEventListener('click', this.upgradeIncomeBind);
         this.rightBar.render();
+        this.intro();
+    }
+    animateIntro(){
+        this.cube.rotation.x += 0.01;
+        this.cube.rotation.y += 0.01;
+    }
+    intro(){
+        this.canvasContainer = document.querySelector('.canvas-container');
+
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color('white');
+        this.camera = new THREE.PerspectiveCamera( 75, this.battlefield.canvas.width / this.battlefield.canvas.height, 0.1, 1000 );
+       
+        this.renderer = new THREE.WebGLRenderer({alpha: true});
+        this.renderer.setClearColor( 0xFFFFFF, 0 );
+        this.renderer.domElement.id = "intro"
+        this.renderer.domElement.classList.add('intro');
+        this.renderer.setSize( this.battlefield.canvas.width, this.battlefield.canvas.height );
+        this.canvasContainer.appendChild( this.renderer.domElement );
+        this.renderer.render( this.scene, this.camera );
+        var geometry = new THREE.BoxGeometry();
+        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        this.cube = new THREE.Mesh( geometry, material );
+        this.scene.add( this.cube );
+
+        this.camera.position.z = 5;
+
+        this.generateInstructions();
+
+        this.addStartButton();
+        document.querySelector('.start-button').addEventListener('click', this.startGame);
+    }
+    generateInstructions(){
+        debugger
+        const instructionsWrapper = document.querySelector('.instructions-wrapper');
+        this.canvasContainer.append(instructionsWrapper);
+    }
+    startGame(){
+        const intro = document.getElementById('intro');
+        intro.style.display = "none";
+    }
+    addStartButton(){
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('start-button-wrapper');
+
+        const button = document.createElement('button');
+        button.classList.add('start-button');
+        button.innerText = "START";
+        wrapper.append(button);
+
+        document.body.append(wrapper);
+
     }
     newRound(remaining){
         this.level++;

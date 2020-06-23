@@ -3,13 +3,15 @@ import Castle from './Castle'
 import TowerBasic from './TowerBasic'
 import TowerPower from './TowerPower'
 import TowerSplash from './TowerSplash'
+import * as THREE from 'three'
 
 class Battlefield {
     constructor(){
         this.canvas = document.createElement('canvas');
+        this.canvas.id = "canvas";
+        this.canvas.classList.add('battlefield');
         this.canvas.width = window.innerWidth * .33;
         this.canvas.height = window.innerHeight * .9;
-        this.canvas.style.border = "1px solid black";
         this.ctx = this.canvas.getContext('2d');
         this.battlefieldColor = "#3dd11f";
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07];
@@ -24,12 +26,17 @@ class Battlefield {
      }
      initialize(){
         this.createCanvas();
-        this.createCastle()
+        this.createCastle();
      }
      render(){
         this.drawBattlefield();
         this.drawCastle();
         this.drawTowers();
+
+
+     }
+     test(){
+
      }
      clear(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -50,7 +57,10 @@ class Battlefield {
         })
      }
      createCanvas(){
-        if (!document.querySelector('canvas')) document.body.append(this.canvas);
+         const canvasContainer = document.createElement('div');
+         canvasContainer.classList.add('canvas-container');
+         document.body.append(canvasContainer);
+        if (!document.querySelector('canvas')) canvasContainer.append(this.canvas);
      }
      drawBattlefield(){
         this.ctx.fillStyle = this.battlefieldColor;
@@ -128,6 +138,7 @@ class Battlefield {
     animateField(game){
         this.drawBattlefield();
         this.drawCastle();
+
         Object.keys(this.towers).forEach(towerKey => {
             this.drawTowers(towerKey);
         });

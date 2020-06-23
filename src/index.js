@@ -3,6 +3,7 @@ import Battlefield from "./scripts/Battlefield";
 import LeftBar from './scripts/LeftBar'
 import Timer from "./scripts/Timer";
 import './styles/index.scss'
+
 // const testObj = {
 //   key1: "hi",
 //   key2: {
@@ -22,54 +23,63 @@ import './styles/index.scss'
 //   document.body.appendChild(imgCard);
 // });
 
+
 const main = () => {
   // initial load
   const game = new Game();
   game.initialize();
 
   let requestId;
+  debugger
+  document.querySelector('.start-button').addEventListener('click', () => startGame());
+  function intro(){
+    game.animateIntro();
+    requestAnimationFrame( intro );
+    game.renderer.render( game.scene, game.camera );
+  }
+  intro();
 
-  const bf = game.battlefield;
-    // debugger
-    let animating = true;
-    let spawning = true;
+  const startGame = () => {
+    const bf = game.battlefield;
+      // debugger
+      let animating = true;
+      let spawning = true;
 
-    const animation = () => {
-      if (game.health <= 0){
-        
-        // game.lose(requestId);
-        game.lose();
-        return;
-      }
-        // debugger
-        const towers = bf.towers;
-        if (Object.keys(towers).length){
-          Object.keys(towers).forEach(towerKey => {
-            bf.drawTowers(towerKey);
-          })
+      const animation = () => {
+        if (game.health <= 0){
+          
+          // game.lose(requestId);
+          game.lose();
+          return;
         }
-        const timer = game.timer;
-        if (!timer && game.health > 0){
-          game.newRound(0);
-
-        } else if (timer.remaining < 0) {
+        bf.test();
           // debugger
-
-          timer.clear();
-          if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
-          bf.animateField(game);
-          if (game.health <= 0) game.lose();
-          if (Object.keys(bf.enemies).length <= 0) {
-            game.newRound(0);
+          const towers = bf.towers;
+          if (Object.keys(towers).length){
+            Object.keys(towers).forEach(towerKey => {
+              bf.drawTowers(towerKey);
+            })
           }
-        }
-          requestId = window.requestAnimationFrame(animation);
-      }
-      
-    
-    requestId = window.requestAnimationFrame(animation);
-    const lose = () => {
+          const timer = game.timer;
+          if (!timer && game.health > 0){
+            game.newRound(0);
 
+          } else if (timer.remaining < 0) {
+            // debugger
+
+            timer.clear();
+            if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
+            bf.animateField(game);
+            if (game.health <= 0) game.lose();
+            if (Object.keys(bf.enemies).length <= 0) {
+              game.newRound(0);
+            }
+          }
+            requestId = window.requestAnimationFrame(animation);
+        }
+        
+      
+      requestId = window.requestAnimationFrame(animation);
     }
 }
 
