@@ -93,6 +93,9 @@ class Game {
     startGame(){
         const intro = document.getElementById('intro');
         intro.style.display = "none";
+        
+        const instructions = document.querySelector('.instructions-wrapper');
+        instructions.style.display = "none";
     }
     addStartButton(){
         const wrapper = document.createElement('div');
