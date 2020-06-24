@@ -58,8 +58,9 @@ class Battlefield {
          if (!!enemiesArr.length){
             Object.keys(this.towers).forEach(towerKey => {
                 const tower = this.towers[towerKey];
-                if (tower.target){
+                if (tower.target && tower.target.currentHealth > 0){
                     tower.attack(game)
+                } else {
                 }
                 if (!tower.target){
                     const enemyKey = Math.floor(Math.random() * enemiesArr.length);
@@ -68,6 +69,7 @@ class Battlefield {
                 }
             })
         }
+        // debugger
         Object.keys(this.enemies).forEach(key => {
             if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
         })
@@ -115,18 +117,7 @@ class Battlefield {
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
 
      }
-    //  createTowers(){
-    //     for (let i = 0; i < this.numTowers; i++){
-    //         let x = this.firstTowerCoords[0];
-    //         let y = this.firstTowerCoords[1];
-    //         let width = this.firstTowerCoords[2];
-    //         let height = this.firstTowerCoords[3];
-    //         let coords = this.firstTowerCoords;
-    //         let tower = new Tower(this.ctx, [x,y,width,height]);
-    //         this.towers[i] = tower;
-    //         coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
-    //     }
-    //  }
+
      drawTowers(key){
         const tower = this.towers[key];
         if (!!tower) tower.draw(this.towerImage);
@@ -161,12 +152,14 @@ class Battlefield {
         Object.keys(this.towers).forEach(towerKey => {
             this.drawTowers(towerKey);
         });
-        this.attackEnemies(game);
-        Object.keys(this.enemies).forEach(key => {
-            this.clearEnemies(key, game);
-            this.drawEnemies(key);
-            this.updateEnemies(key);
-        });
+        if (!!Object.keys(this.enemies).length){
+            this.attackEnemies(game);
+            Object.keys(this.enemies).forEach(key => {
+                this.clearEnemies(key, game);
+                this.drawEnemies(key);
+                this.updateEnemies(key);
+            });
+        }
         const numEnemies = document.querySelector('.num-enemies');
         numEnemies.innerText = Object.keys(this.enemies).length;
     }

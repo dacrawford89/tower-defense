@@ -15,7 +15,7 @@ class Timer {
         this.timer.innerText = this.remaining;
     }
     clear(){
-     
+        debugger
         clearInterval(this.interval);
         const timer = document.querySelector('.timer');
         if (!!timer) timer.parentNode.removeChild(timer);

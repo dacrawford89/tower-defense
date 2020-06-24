@@ -154,6 +154,7 @@ class Game {
     }
     clearTimer(){
         this.timer.clear();
+        delete this.timer;
     }
     lose(requestId){
         

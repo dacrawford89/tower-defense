@@ -14,6 +14,9 @@ class Tower {
         this.attackAnimation = 1;
         this.enemiesDefeated = 0;
     }
+    clear(){
+        this.ctx.clearRect(...this.coords);
+    }
 
     draw(){
         let image;
@@ -33,24 +36,26 @@ class Tower {
         this.towerImage.src = image;
 
         this.checkEnemyHealth();
-        if (this.enemiesDefeated % 10 == 0 && this.enemiesDefeated > 0) this.levelUp(); 
+        if (this.enemiesDefeated % 10 == 0 && this.enemiesDefeated > 0) {
+            // debugger
+            this.levelUp(); 
+        }
         if (!!this.levelAnimation && this.levelAnimation > 0) {
+            
             this.levelAnimation -= .01;
             this.ctx.globalAlpha = this.levelAnimation;
             this.ctx.font = "16px Arial";
             this.ctx.fillStyle = "#bd0900"
             this.ctx.fillText("Level Up!", this.coords[0], this.coords[1]);
             this.ctx.globalAlpha = 1;
-        } else if (this.levelAnimation <= 0){
-            delete this.levelAnimation;
-        }
+        } 
 
     }
     levelUp(){
         debugger;
         this.enemiesDefeated = 0;
         this.towerLevel++;
-        if (!this.levelAnimation) this.levelAnimation = 1;
+        this.levelAnimation = 1;
         
     }
 
@@ -60,7 +65,7 @@ class Tower {
            
         } else if (!!this.target && this.target.currentHealth <= 0) {
             this.defeatEnemy();
-            // this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
+            this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
         } else {
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
 
@@ -68,6 +73,7 @@ class Tower {
     }
 
     defeatEnemy(){
+        // debugger
         this.enemiesDefeated += 1;
         this.target = undefined;
     }
