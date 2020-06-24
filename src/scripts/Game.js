@@ -95,7 +95,7 @@ class Game {
     }
     startGame(){
         this.resourceInterval = setInterval(this.generateResources.bind(this), 10 / this.resourceRate);
-        
+
         const intro = document.getElementById('intro');
         intro.style.display = "none";
         
@@ -128,7 +128,6 @@ class Game {
             resources.innerText = this.updateResourceCost;
             clearInterval(this.resourceInterval);
             this.resourceRate += .01;
-            debugger
             const resourceSpeed = 10 / this.resourceRate;
             this.resourceInterval = setInterval(this.generateResources.bind(this), resourceSpeed);
         }
