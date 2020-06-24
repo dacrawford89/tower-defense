@@ -51,7 +51,7 @@ class Game {
         }
 
         // 
-        this.resourceInterval = setInterval(this.generateResources.bind(this), 10 / this.resourceRate);
+
 
         
         document.querySelector('.upgrade-income').addEventListener('click', this.upgradeIncomeBind);
@@ -94,6 +94,8 @@ class Game {
         this.canvasContainer.append(instructionsWrapper);
     }
     startGame(){
+        this.resourceInterval = setInterval(this.generateResources.bind(this), 10 / this.resourceRate);
+        
         const intro = document.getElementById('intro');
         intro.style.display = "none";
         
