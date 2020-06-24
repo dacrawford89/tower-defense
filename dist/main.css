@@ -329,6 +329,7 @@ canvas {
 
 body {
   background-color: #ccccff;
+  padding: 5vh 0;
   color: blue;
   font-family: "Pangolin", cursive;
   display: flex;
@@ -385,7 +386,7 @@ body {
 
 .left-bar, .right-bar {
   height: 50vh;
-  width: 10vw;
+  width: 13vw;
   background-color: #0ac9b6;
   border-radius: 25px;
   text-align: center;
@@ -393,10 +394,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 1vw;
   background: #020024;
   background: radial-gradient(circle, #020024 0%, #313160 56%, #20798b 100%);
-  box-shadow: 0px 0px 10px grey; }
+  box-shadow: 0px 0px 10px grey;
+  font-size: 2vw;
+  padding: 1vw; }
 
 .left-bar {
   margin-right: 1vw; }

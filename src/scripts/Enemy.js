@@ -1,17 +1,18 @@
 class Enemy {
-    constructor(ctx, coords, radius, health){
+    constructor(ctx, coords, radius, health, speed){
         this.ctx = ctx;
         this.maxHealth = health;
         this.currentHealth = health;
         this.coords = coords;
         this.enemyColors = ["#9be5e8","#e80c1e","#7f53a3","#ff871f","#ffff0f"];
         this.radius = radius;
+        this.speed = speed;
     }
 
     draw(){
         // 
         this.ctx.beginPath();
-        let radius = 20;
+        let radius = this.radius;
         let x = this.coords[0];
         let y = this.coords[1];
         let startAngle = 0;
@@ -26,7 +27,7 @@ class Enemy {
         // this.ctx.fillText(this.currentHealth, x, y);
     }
     update() {
-        this.coords[1] += 1;
+        this.coords[1] += this.speed;
     }
     clear(){
         this.ctx.clearRect(this.coords[0],this.coords[1], this.maxX, this.maxY);

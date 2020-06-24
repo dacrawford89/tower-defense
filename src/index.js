@@ -25,6 +25,7 @@ import './styles/index.scss'
 
 
 const main = () => {
+
   // initial load
   const game = new Game();
   game.initialize();
@@ -40,12 +41,16 @@ const main = () => {
   intro();
 
   const startGame = () => {
+    
     const bf = game.battlefield;
+    // bf.canvas.width = window.innerWidth * .33;
+    // bf.canvas.height = window.innerHeight * .9;
       // 
       let animating = true;
       let spawning = true;
 
       const animation = () => {
+       
         if (game.health <= 0){
           
           // game.lose(requestId);
@@ -64,7 +69,6 @@ const main = () => {
             game.newRound(0);
 
           } else if (timer.remaining < 0) {
-       
           
             timer.clear();
             if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);

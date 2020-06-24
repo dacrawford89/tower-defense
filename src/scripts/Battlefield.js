@@ -12,7 +12,7 @@ class Battlefield {
         this.canvas = document.createElement('canvas');
         this.canvas.id = "canvas";
         this.canvas.classList.add('battlefield');
-        this.canvas.width = window.innerWidth * .33;
+        this.canvas.width = window.innerWidth * .25;
         this.canvas.height = window.innerHeight * .9;
         this.ctx = this.canvas.getContext('2d');
         this.battlefieldColor = "#3dd11f";
@@ -55,12 +55,10 @@ class Battlefield {
          const remainingEnemies = Object.keys(this.enemies).length;
          // enemiesArr makes towers attack the closest enemy
          const enemiesArr = Object.values(this.enemies).filter(value => value.coords[1] == Math.max(...Object.values(this.enemies).filter(value => value.coords[1] > 0).map(enemy => enemy.coords[1])));
-         debugger
          if (!!enemiesArr.length){
             Object.keys(this.towers).forEach(towerKey => {
                 const tower = this.towers[towerKey];
                 if (tower.target){
-
                     tower.attack(game)
                 }
                 if (!tower.target){
@@ -68,7 +66,6 @@ class Battlefield {
                     const enemy = enemiesArr[enemyKey];
                     if ((enemy.coords[1] < this.canvas.height) && (enemy.coords[1] > 0)) tower.target = enemy;
                 }
-                debugger
             })
         }
         Object.keys(this.enemies).forEach(key => {
@@ -135,13 +132,13 @@ class Battlefield {
         if (!!tower) tower.draw(this.towerImage);
      }
     createEnemies(currentLevel){
+        let enemySize = this.canvas.width * .05;
+        let health = currentLevel * 10;
+        let speed = this.canvas.height * .005;
         for (let i = 0; i < this.numEnemies; i++){
-            let coords;
             let maxX = Math.random() * this.canvas.width;
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
-            let enemySize = 20;
-            let health = currentLevel * 10;
-
+            
             // set x value on enmies to spawn within the canvas
             if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
                 maxX -= enemySize;
@@ -152,11 +149,12 @@ class Battlefield {
             if ((this.canvas.height + maxY >= 0)){ // have enemies spawn offscreen from the top
                 maxY -= enemySize;
             }
-            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize, health);
+            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize, health, speed);
             this.enemies[i] = enemy;
         }
     }
     animateField(game){
+
         this.drawBattlefield();
         this.drawCastle();
         

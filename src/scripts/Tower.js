@@ -44,7 +44,6 @@ class Tower {
 
             const baseRadian = (radians >= 0) ? -1.5708 : 1.5708
 
-            debugger
 
             this.ctx.save();  
  

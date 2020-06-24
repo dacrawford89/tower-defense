@@ -3,8 +3,8 @@ import Tower from './Tower'
 class TowerSplash extends Tower {
     constructor(ctx, coords, type){
         super(ctx, coords, type);
-        this.damage = 5;
-        this.speed = 10;
+        this.damage = 10;
+        this.speed = 50;
         this.cost = 300;
     }
     draw(image){

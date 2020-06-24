@@ -4,10 +4,12 @@ html {
 
 canvas {
   position: relative;
+
 }
 
 body {
   background-color: #ccccff;
+  padding: 5vh 0;
   color: blue;
   font-family: $pangolin;
   display: flex;
@@ -27,6 +29,7 @@ body {
 .canvas-container {
   position: relative;
   box-shadow: 0px 0px 5px grey;
+
 }
 
 .intro {
