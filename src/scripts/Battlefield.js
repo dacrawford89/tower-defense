@@ -52,12 +52,13 @@ class Battlefield {
      }
      findClosestEnemy(){
          const enemiesArr = Object.values(this.enemies);
-         const availableEnemies = enemiesArr.filter(enemy => enemy.coords[1] > 0).sort();
+         const availableEnemies = enemiesArr.filter(enemy => enemy.coords[1] > 0);
          const availableCoords = availableEnemies.map(enemy => enemy.coords[1]);
-         const closestCoord = Math.max(...availableCoords);
-         const closestEnemy = availableEnemies.filter(enemy => enemy.coords[1] == closestCoord);
+         const closestThreeCoords = availableCoords.sort((a,b) => b-a).slice(0,3);
+         const closestEnemies = availableEnemies.filter(enemy => closestThreeCoords.includes(enemy.coords[1]));
+         const randomIdx = Math.floor(Math.random() * 2);
          debugger
-         return closestEnemy[0];
+         return closestEnemies[randomIdx];
 
         // closestEnemy == Math.max(...Object.values(this.enemies).filter(value => value.coords[1] > 0).map(enemy => enemy.coords[1]))) [0];
      }
@@ -133,7 +134,7 @@ class Battlefield {
      }
     createEnemies(currentLevel){
         let enemySize = this.canvas.width * .05;
-        let health = currentLevel * 10;
+        let health = currentLevel * 20;
         let speed = this.canvas.height * .005;
         for (let i = 0; i < this.numEnemies; i++){
             let maxX = Math.random() * this.canvas.width;
