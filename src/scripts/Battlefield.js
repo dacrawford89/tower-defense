@@ -50,22 +50,31 @@ class Battlefield {
      clear(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
      }
+     findClosestEnemy(){
+         const enemiesArr = Object.values(this.enemies);
+         const availableEnemies = enemiesArr.filter(enemy => enemy.coords[1] > 0).sort();
+         const availableCoords = availableEnemies.map(enemy => enemy.coords[1]);
+         const closestCoord = Math.max(...availableCoords);
+         const closestEnemy = availableEnemies.filter(enemy => enemy.coords[1] == closestCoord);
+         debugger
+         return closestEnemy[0];
+
+        // closestEnemy == Math.max(...Object.values(this.enemies).filter(value => value.coords[1] > 0).map(enemy => enemy.coords[1]))) [0];
+     }
      attackEnemies(game){
         //  
          const remainingEnemies = Object.keys(this.enemies).length;
          // enemiesArr makes towers attack the closest enemy
-         const enemiesArr = Object.values(this.enemies).filter(value => value.coords[1] == Math.max(...Object.values(this.enemies).filter(value => value.coords[1] > 0).map(enemy => enemy.coords[1])));
-         if (!!enemiesArr.length){
+         const closestEnemy = this.findClosestEnemy();
+         if (!!closestEnemy){
             Object.keys(this.towers).forEach(towerKey => {
                 const tower = this.towers[towerKey];
                 if (tower.target && tower.target.currentHealth > 0){
                     tower.attack(game)
-                } else {
-                }
+                } 
                 if (!tower.target){
-                    const enemyKey = Math.floor(Math.random() * enemiesArr.length);
-                    const enemy = enemiesArr[enemyKey];
-                    if ((enemy.coords[1] < this.canvas.height) && (enemy.coords[1] > 0)) tower.target = enemy;
+  
+                    if ((closestEnemy.coords[1] < this.canvas.height) && (closestEnemy.coords[1] > 0)) tower.target = closestEnemy;
                 }
             })
         }

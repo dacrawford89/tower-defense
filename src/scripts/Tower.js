@@ -73,8 +73,9 @@ class Tower {
     }
 
     defeatEnemy(){
-        // debugger
-        this.enemiesDefeated += 1;
+        debugger
+        if (this.target.currentHealth !== null) this.enemiesDefeated += 1;
+        this.target.currentHealth = null;
         this.target = undefined;
     }
 

@@ -38,7 +38,7 @@ const main = () => {
     requestAnimationFrame( intro );
     game.renderer.render( game.scene, game.camera );
   }
-  intro();
+  intro(); // find why this is running when it shouldnt
 
   const startGame = () => {
     
@@ -56,7 +56,6 @@ const main = () => {
       }
       
       let timer = game.timer;
-      debugger
       if (!timer && !Object.keys(bf.enemies).length && game.health > 0){
         game.newRound(2);
       }  else if (!!timer && timer.remaining < 0){
