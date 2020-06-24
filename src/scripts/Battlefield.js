@@ -53,14 +53,24 @@ class Battlefield {
      attackEnemies(game){
         //  
          const remainingEnemies = Object.keys(this.enemies).length;
-         const enemiesArr = Object.keys(this.enemies).map(key => this.enemies[key]);
-         Object.keys(this.towers).forEach(towerKey => {
-            if (!this.towers[towerKey].target){
-                const enemyKey = Math.floor(Math.random() * enemiesArr.length);
-                const enemy = enemiesArr[enemyKey];
-                if ((enemy.coords[1] < this.canvas.height) && (enemy.coords[1] > 0)) this.towers[towerKey].attack(enemy, game);
-            }
-        })
+         // enemiesArr makes towers attack the closest enemy
+         const enemiesArr = Object.values(this.enemies).filter(value => value.coords[1] == Math.max(...Object.values(this.enemies).filter(value => value.coords[1] > 0).map(enemy => enemy.coords[1])));
+         debugger
+         if (!!enemiesArr.length){
+            Object.keys(this.towers).forEach(towerKey => {
+                const tower = this.towers[towerKey];
+                if (tower.target){
+
+                    tower.attack(game)
+                }
+                if (!tower.target){
+                    const enemyKey = Math.floor(Math.random() * enemiesArr.length);
+                    const enemy = enemiesArr[enemyKey];
+                    if ((enemy.coords[1] < this.canvas.height) && (enemy.coords[1] > 0)) tower.target = enemy;
+                }
+                debugger
+            })
+        }
         Object.keys(this.enemies).forEach(key => {
             if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
         })
@@ -84,7 +94,6 @@ class Battlefield {
         this.castle.draw(this.castleTile);
      }
      createTower({type, cost}){
-        debugger
             
             let tower;
             let x = this.firstTowerCoords[0];
