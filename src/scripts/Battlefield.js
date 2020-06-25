@@ -163,7 +163,7 @@ class Battlefield {
             this.addTowerModal(tower);
             this.addTowerStyleBox(tower);
             debugger
-            document.querySelector(`.tower-modal-wrapper.tower-${tower.id}`).addEventListener('click', this.showTowerModal(tower), false);
+            document.querySelector(`.tower-modal-wrapper.tower-${tower.id}`).addEventListener('click', this.showTowerModal(tower).bind(this), false);
      }
      hideTowerModal(){
         //  const towerModal = document.querySelector.
