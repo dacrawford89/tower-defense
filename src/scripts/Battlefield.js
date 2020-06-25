@@ -56,7 +56,6 @@ class Battlefield {
          const availableCoords = availableEnemies.map(enemy => enemy.coords[1]);
          const closestThreeCoords = availableCoords.sort((a,b) => b-a).slice(0,3);
          const closestEnemies = availableEnemies.filter(enemy => closestThreeCoords.includes(enemy.coords[1])).sort((a,b) => b-a);
-         debugger
          
          return closestEnemies;
      }
@@ -72,7 +71,6 @@ class Battlefield {
             const closestEnemy = closestEnemies.filter(enemy => enemy.coords[1] == closestCoord)[0];
             const tower = this.towers[towerKey];
 
-            debugger
             if (!tower.target){
                 tower.target = closestEnemies[randomIdx];
             }
@@ -111,6 +109,7 @@ class Battlefield {
      createTower({type, cost}){
             
             let tower;
+            let id = Object.keys(this.towers).length + 1;
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
             let width = this.firstTowerCoords[2];
@@ -118,21 +117,85 @@ class Battlefield {
             let coords = this.firstTowerCoords;
             switch (type) {
                 case 'Basic':
-                    tower = new TowerBasic(this.ctx, [x,y,width,height], type);
+                    tower = new TowerBasic(this.ctx, [x,y,width,height], type, id);
                     break;
                 case 'Power':
-                    tower = new TowerPower(this.ctx, [x,y,width,height], type);
+                    tower = new TowerPower(this.ctx, [x,y,width,height], type, id);
                     break
                 case 'Splash':
-                    tower = new TowerSplash(this.ctx, [x,y,width,height], type);
+                    tower = new TowerSplash(this.ctx, [x,y,width,height], type, id);
                     break
                 default:
                     break;
             }
-            this.towers[Object.keys(this.towers).length + 1] = tower;
+            this.towers[id] = tower;
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
 
+            this.addTowerModal(tower);
+
+            // this.canvas.addEventListener('click', this.addTowerHandler(tower), false);
      }
+     addTowerModal(tower){
+            const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
+            const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
+            const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
+            const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+
+
+            const towerModalWrapper = document.createElement('div');
+            towerModalWrapper.classList.add(`tower-modal-wrapper-${tower.id}`);
+            towerModalWrapper.style.opacity = .9;
+            towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
+            towerModalWrapper.style.width = `${tower.coords[2]}px`;
+            towerModalWrapper.style.position = "absolute";
+            towerModalWrapper.style.left = `${towerX[0]}px`;
+            towerModalWrapper.style.top = `${towerY[1]}px`;
+            towerModalWrapper.style.backgroundColor = "red";
+
+            const id = document.createElement('div');
+            id.classList.add('tower-id');
+            id.innerText = tower.id;
+            towerModalWrapper.append(id);
+
+            const enemiesDefeated = document.createElement('div');
+            enemiesDefeated.classList.add('enemies-defeated');
+            enemiesDefeated.innerText = tower.enemiesDefeated;
+            towerModalWrapper.append(enemiesDefeated);
+
+            document.querySelector('.canvas-container').append(towerModalWrapper);
+
+     }
+    //  addTowerModal(tower){
+    //      return event => {
+    //         const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
+    //         const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
+    //         const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
+    //         const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+    //         debugger
+    //         if ((event.offsetX < towerX[1] && event.offsetX > towerX[0]) && (event.offsetY < towerY[0] && event.offsetY > towerY[1])){
+    //             // alert('yes');
+
+    //             const towerModalWrapper = document.createElement('div');
+    //             towerModalWrapper.classList.add('tower-modal-wrapper');
+    //             towerModalWrapper.style.opacity = .9;
+    //             towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
+    //             towerModalWrapper.style.width = `${tower.coords[2]}px`;
+    //             towerModalWrapper.style.position = "absolute";
+    //             towerModalWrapper.style.left = `${towerX[0]}px`;
+    //             towerModalWrapper.style.top = `${towerY[1]}px`;
+    //             towerModalWrapper.style.backgroundColor = "red";
+
+    //             const enemiesDefeated = document.createElement('div');
+    //             enemiesDefeated.classList.add('enemies-defeated');
+    //             enemiesDefeated.innerText = tower.enemiesDefeated;
+    //             towerModalWrapper.append(enemiesDefeated);
+
+    //             document.querySelector('.canvas-container').append(towerModalWrapper);
+    //         } 
+    //         debugger
+            
+    //     }
+    //  }
 
      drawTowers(key){
         const tower = this.towers[key];

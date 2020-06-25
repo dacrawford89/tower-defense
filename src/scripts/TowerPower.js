@@ -1,8 +1,8 @@
 import Tower from './Tower'
 
 class TowerPower extends Tower {
-    constructor(ctx, coords, type){
-        super(ctx, coords, type);
+    constructor(ctx, coords, type, id){
+        super(ctx, coords, type, id);
         this.damage = 10;
         this.speed = 50;
         this.cost = 200;

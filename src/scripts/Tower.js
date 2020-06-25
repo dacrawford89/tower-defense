@@ -13,6 +13,7 @@ class Tower {
         this.splashTowerImage = "splashTower.png";
         this.attackAnimation = 1;
         this.enemiesDefeated = 0;
+        this.id = id;
     }
     clear(){
         this.ctx.clearRect(...this.coords);
@@ -52,7 +53,6 @@ class Tower {
 
     }
     levelUp(){
-        debugger;
         this.enemiesDefeated = 0;
         this.towerLevel++;
         this.levelAnimation = 1;
@@ -67,15 +67,17 @@ class Tower {
             this.defeatEnemy();
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
         } else {
-            debugger
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
 
         }
     }
 
     defeatEnemy(){
-        debugger
         if (this.target.currentHealth !== null) this.enemiesDefeated += 1;
+        const towerModal = document.querySelector(`.tower-modal-wrapper-${this.id}`);
+        const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
+        debugger
+        enemiesDefeated.innerText = this.enemiesDefeated + ((this.towerLevel - 1) * 10)
         this.target.currentHealth = null;
         this.target = undefined;
     }
@@ -115,7 +117,6 @@ class Tower {
         }
         const currentScore = document.querySelector('.current-score');
         currentScore.innerText = game.score;
-        console.log(this.enemiesDefeated);
     }
 }
 export default Tower
