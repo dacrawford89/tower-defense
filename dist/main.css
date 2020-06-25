@@ -384,6 +384,9 @@ body {
 .lose-message {
   position: absolute; }
 
+.tower-modal-wrapper {
+  cursor: pointer; }
+
 .left-bar, .right-bar {
   height: 50vh;
   width: 13vw;

@@ -3,6 +3,7 @@ import Castle from './Castle'
 import TowerBasic from './TowerBasic'
 import TowerPower from './TowerPower'
 import TowerSplash from './TowerSplash'
+import * as d3 from 'd3'
 import * as THREE from 'three'
 const path = require("path");
 const images = './dist/images/';
@@ -90,11 +91,10 @@ class Battlefield {
 
 
             if (!!tower.target && tower.target.currentHealth <= 0){
-                debugger
                 if (!!this.enemies[tower.target.id]){
                     tower.enemiesDefeated++;
                     delete this.enemies[tower.target.id];
-                    const towerModal = document.querySelector(`.tower-modal-wrapper-${tower.id}`);
+                    const towerModal = document.querySelector(`.tower-${tower.id}`);
                     const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
                     enemiesDefeated.innerText = tower.enemiesDefeated + ((tower.towerLevel - 1) * 10);
                 }
@@ -161,24 +161,34 @@ class Battlefield {
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
 
             this.addTowerModal(tower);
-
-            // this.canvas.addEventListener('click', this.addTowerHandler(tower), false);
+            this.addTowerStyleBox(tower);
+            debugger
+            document.querySelector(`.tower-modal-wrapper.tower-${tower.id}`).addEventListener('click', this.showTowerModal(tower), false);
+     }
+     hideTowerModal(){
+        //  const towerModal = document.querySelector.
      }
      addTowerModal(tower){
-            const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
-            const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
-            const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
-            const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+            const modalX = [this.castleCoords[0], this.castleCoords[0] + this.castleCoords[2]];
+            const modalY = [this.firstTowerCoords[1] + (this.firstTowerCoords[3] * 2) - this.canvas.height * .01, this.firstTowerCoords[3]];
+            // const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
+            // const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+            // const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
+            // const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
+            // const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
+            // const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
 
 
             const towerModalWrapper = document.createElement('div');
-            towerModalWrapper.classList.add(`tower-modal-wrapper-${tower.id}`);
+            towerModalWrapper.classList.add(`tower-modal-wrapper`);
+            towerModalWrapper.classList.add(`tower-${tower.id}`);
+            towerModalWrapper.style.display = "none";
             towerModalWrapper.style.opacity = .9;
-            towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
-            towerModalWrapper.style.width = `${tower.coords[2]}px`;
+            towerModalWrapper.style.height = `${modalY[1] * -1}px`;
+            towerModalWrapper.style.width = `${modalX[1]}px`;
             towerModalWrapper.style.position = "absolute";
-            towerModalWrapper.style.left = `${towerX[0]}px`;
-            towerModalWrapper.style.top = `${towerY[1]}px`;
+            towerModalWrapper.style.left = `${modalX[0]}px`;
+            towerModalWrapper.style.top = `${modalY[0]}px`;
             towerModalWrapper.style.backgroundColor = "red";
 
             const id = document.createElement('div');
@@ -193,38 +203,86 @@ class Battlefield {
 
             document.querySelector('.canvas-container').append(towerModalWrapper);
 
+            // const towerModalWrapper = document.createElement('div');
+            // towerModalWrapper.classList.add(`tower-modal-wrapper-${tower.id}`);
+            // towerModalWrapper.style.opacity = .9;
+            // towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
+            // towerModalWrapper.style.width = `${tower.coords[2]}px`;
+            // towerModalWrapper.style.position = "absolute";
+            // towerModalWrapper.style.left = `${towerX[0]}px`;
+            // towerModalWrapper.style.top = `${towerY[1]}px`;
+            // towerModalWrapper.style.backgroundColor = "red";
+
+            // const id = document.createElement('div');
+            // id.classList.add('tower-id');
+            // id.innerText = tower.id;
+            // towerModalWrapper.append(id);
+
+            // const enemiesDefeated = document.createElement('div');
+            // enemiesDefeated.classList.add('enemies-defeated');
+            // enemiesDefeated.innerText = tower.enemiesDefeated;
+            // towerModalWrapper.append(enemiesDefeated);
+
+            // document.querySelector('.canvas-container').append(towerModalWrapper);
+
      }
-    //  addTowerModal(tower){
-    //      return event => {
-    //         const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
-    //         const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
-    //         const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
-    //         const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
-    //         debugger
-    //         if ((event.offsetX < towerX[1] && event.offsetX > towerX[0]) && (event.offsetY < towerY[0] && event.offsetY > towerY[1])){
-    //             // alert('yes');
+     hideTowerModals(){
+         debugger
+         d3.selectAll('.tower-modal-wrapper').style("display", "none");
+     }
+     addTowerStyleBox(tower){
+        const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
+        const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
+        const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
+        const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
 
-    //             const towerModalWrapper = document.createElement('div');
-    //             towerModalWrapper.classList.add('tower-modal-wrapper');
-    //             towerModalWrapper.style.opacity = .9;
-    //             towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
-    //             towerModalWrapper.style.width = `${tower.coords[2]}px`;
-    //             towerModalWrapper.style.position = "absolute";
-    //             towerModalWrapper.style.left = `${towerX[0]}px`;
-    //             towerModalWrapper.style.top = `${towerY[1]}px`;
-    //             towerModalWrapper.style.backgroundColor = "red";
+        const towerModalWrapper = document.createElement('div');
+        towerModalWrapper.classList.add(`tower-box`);
+        towerModalWrapper.classList.add(`tower-${tower.id}`);
+        towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
+        towerModalWrapper.style.width = `${tower.coords[2]}px`;
+        towerModalWrapper.style.position = "absolute";
+        towerModalWrapper.style.left = `${towerX[0]}px`;
+        towerModalWrapper.style.top = `${towerY[1]}px`;
+        towerModalWrapper.style.cursor = "pointer";
 
-    //             const enemiesDefeated = document.createElement('div');
-    //             enemiesDefeated.classList.add('enemies-defeated');
-    //             enemiesDefeated.innerText = tower.enemiesDefeated;
-    //             towerModalWrapper.append(enemiesDefeated);
+        document.querySelector('.canvas-container').append(towerModalWrapper);
 
-    //             document.querySelector('.canvas-container').append(towerModalWrapper);
-    //         } 
-    //         debugger
+     }
+     showTowerModal(tower){
+         return event => {
+             debugger
+             const towerX = [tower.coords[0], tower.coords[0] + tower.coords[2]];
+             const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
+             const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
+             const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+             debugger
+             if ((event.offsetX < towerX[1] && event.offsetX > towerX[0]) && (event.offsetY < towerY[0] && event.offsetY > towerY[1])){
+                this.hideTowerModals();
+                // this.body.style.cursor = "pointer";
+                // alert('yes');
+                const towerModal = document.querySelector(`.tower-${tower.id}`);
+                towerModal.style.display = "block";
+                // const towerModalWrapper = document.createElement('div');
+                // towerModalWrapper.classList.add('tower-modal-wrapper');
+                // towerModalWrapper.style.opacity = .9;
+                // towerModalWrapper.style.height = `${tower.coords[3] * -1}px`;
+                // towerModalWrapper.style.width = `${tower.coords[2]}px`;
+                // towerModalWrapper.style.position = "absolute";
+                // towerModalWrapper.style.left = `${towerX[0]}px`;
+                // towerModalWrapper.style.top = `${towerY[1]}px`;
+                // towerModalWrapper.style.backgroundColor = "red";
+
+                // const enemiesDefeated = document.createElement('div');
+                // enemiesDefeated.classList.add('enemies-defeated');
+                // enemiesDefeated.innerText = tower.enemiesDefeated;
+                // towerModalWrapper.append(enemiesDefeated);
+
+                // document.querySelector('.canvas-container').append(towerModalWrapper);
+            } 
             
-    //     }
-    //  }
+        }
+     }
 
      drawTowers(key){
         const tower = this.towers[key];
