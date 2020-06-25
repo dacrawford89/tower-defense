@@ -2,7 +2,7 @@ const path = require('path');
 const images = './dist/images/';
 
 class Tower {
-    constructor(ctx, coords, type){
+    constructor(ctx, coords, type, id){
         this.ctx = ctx;
         this.coords = coords;
         this.type = type;
@@ -67,6 +67,7 @@ class Tower {
             this.defeatEnemy();
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
         } else {
+            debugger
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
 
         }
@@ -114,6 +115,7 @@ class Tower {
         }
         const currentScore = document.querySelector('.current-score');
         currentScore.innerText = game.score;
+        console.log(this.enemiesDefeated);
     }
 }
 export default Tower
