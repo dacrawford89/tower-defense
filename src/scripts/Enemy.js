@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(ctx, coords, radius, health, speed){
+    constructor(ctx, coords, radius, health, speed, id){
         this.ctx = ctx;
         this.maxHealth = health;
         this.currentHealth = health;
@@ -7,6 +7,7 @@ class Enemy {
         this.enemyColors = ["#9be5e8","#e80c1e","#7f53a3","#ff871f","#ffff0f"];
         this.radius = radius;
         this.speed = speed;
+        this.id = id;
     }
 
     draw(){

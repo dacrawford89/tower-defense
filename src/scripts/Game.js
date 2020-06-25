@@ -21,7 +21,7 @@ class Game {
             {type: "Splash", cost: 300},
         ];
         this.spawn = false;
-        this.battlefield = new Battlefield();
+        this.battlefield = new Battlefield(this);
 
         this.resourceRate = .1;
         this.updateResourceCost = 100;

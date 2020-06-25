@@ -2,7 +2,7 @@ const path = require('path');
 const images = './dist/images/';
 
 class Tower {
-    constructor(ctx, coords, type, id){
+    constructor(ctx, coords, type, id, game){
         this.ctx = ctx;
         this.coords = coords;
         this.type = type;
@@ -14,6 +14,7 @@ class Tower {
         this.attackAnimation = 1;
         this.enemiesDefeated = 0;
         this.id = id;
+        this.game = game;
     }
     clear(){
         this.ctx.clearRect(...this.coords);
@@ -62,7 +63,7 @@ class Tower {
     checkEnemyHealth(){
         if (!!this.target && this.target.currentHealth > 0){ 
            this.faceEnemy();
-           
+           this.attack();
         } else if (!!this.target && this.target.currentHealth <= 0) {
             this.defeatEnemy();
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
@@ -73,12 +74,11 @@ class Tower {
     }
 
     defeatEnemy(){
-        if (this.target.currentHealth !== null) this.enemiesDefeated += 1;
-        const towerModal = document.querySelector(`.tower-modal-wrapper-${this.id}`);
-        const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
-        enemiesDefeated.innerText = this.enemiesDefeated + ((this.towerLevel - 1) * 10)
-        this.target.currentHealth = null;
-        this.target = undefined;
+        // if (this.target.currentHealth !== null) this.enemiesDefeated += 1;
+
+        // this.target.currentHealth = null;
+        // delete this.game.battlefield.enemies[this.target.id];
+        // this.target = undefined;
     }
 
     faceEnemy(){
@@ -104,18 +104,17 @@ class Tower {
         this.ctx.restore(); 
     }
     
-    attack(game){
+    attack(){
         this.attackAnimation += this.speed;
 
         // this.ctx.drawImage(this.towerImage, ...this.coords);
-
         if (this.attackAnimation >= 500 && !!this.target){
             const damageMultiplier = this.damage * this.towerLevel;
             this.target.currentHealth -= damageMultiplier;
-            game.score += damageMultiplier;
+            this.game.score += damageMultiplier;
         }
         const currentScore = document.querySelector('.current-score');
-        currentScore.innerText = game.score;
+        currentScore.innerText = this.game.score;
     }
 }
 export default Tower

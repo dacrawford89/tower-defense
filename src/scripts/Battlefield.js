@@ -8,7 +8,7 @@ const path = require("path");
 const images = './dist/images/';
 
 class Battlefield {
-    constructor(){
+    constructor(game){
         this.canvas = document.createElement('canvas');
         this.canvas.id = "canvas";
         this.canvas.classList.add('battlefield');
@@ -28,6 +28,8 @@ class Battlefield {
 
         this.battlefieldGrass = new Image();
         this.battlefieldGrass.src = path.join(__dirname, images, "../images/grass.jpg");
+
+        this.game = game;
 
      }
      initialize(){
@@ -52,7 +54,7 @@ class Battlefield {
      }
      findClosestEnemies(){
          const enemiesArr = Object.values(this.enemies);
-         const availableEnemies = enemiesArr.filter(enemy => enemy.coords[1] > 0);
+         const availableEnemies = enemiesArr.filter(enemy => enemy.coords[1] > 0 && enemy.currentHealth > 0);
          const availableCoords = availableEnemies.map(enemy => enemy.coords[1]);
          const closestThreeCoords = availableCoords.sort((a,b) => b-a).slice(0,3);
          const closestEnemies = availableEnemies.filter(enemy => closestThreeCoords.includes(enemy.coords[1])).sort((a,b) => b-a);
@@ -62,27 +64,42 @@ class Battlefield {
     randomTowerList(towers){
         const randomIds = [];
         while (towers.length){
-            debugger
             const randomIdx = Math.floor(Math.random() * towers.length);
             randomIds.push(towers[randomIdx]);
             const beg = towers.slice(0, randomIdx);
-            const fin = towers.slice(randomIdx + 1, -1);
+            const fin = towers.slice(randomIdx + 1, towers.length);
             towers = beg.concat(fin);
         }
-
+        return randomIds;
     }
      attackEnemies(game){
         //  
          const remainingEnemies = Object.keys(this.enemies).length;
          // enemiesArr makes towers attack the closest enemy
-         this.randomTowerList(Object.values(this.towers).map(tower => tower.id));
+         const towerKeys = Object.keys(this.towers);
+         const towers = Object.values(this.towers);
+         const towerIds = towers.map(tower => tower.id)
+         const randomIds = this.randomTowerList(towerIds);
          
-         Object.keys(this.towers).forEach(towerKey => {
+         randomIds.forEach(towerId => {
             const closestEnemies = this.findClosestEnemies();
             const randomIdx = Math.floor(Math.random() * closestEnemies.length);
             const closestCoord = Math.max(...closestEnemies.map(enemy => enemy.coords[1]));
             const closestEnemy = closestEnemies.filter(enemy => enemy.coords[1] == closestCoord)[0];
-            const tower = this.towers[towerKey];
+            const tower = this.towers[towerId];
+
+
+            if (!!tower.target && tower.target.currentHealth <= 0){
+                debugger
+                if (!!this.enemies[tower.target.id]){
+                    tower.enemiesDefeated++;
+                    delete this.enemies[tower.target.id];
+                    const towerModal = document.querySelector(`.tower-modal-wrapper-${tower.id}`);
+                    const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
+                    enemiesDefeated.innerText = tower.enemiesDefeated + ((tower.towerLevel - 1) * 10);
+                }
+                tower.target = null;
+            }
 
             if (!tower.target){
                 tower.target = closestEnemies[randomIdx];
@@ -96,10 +113,9 @@ class Battlefield {
             } 
         })
 
-        // debugger
-        Object.keys(this.enemies).forEach(key => {
-            if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
-        })
+        // Object.keys(this.enemies).forEach(key => {
+        //     if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
+        // })
      }
      createCanvas(){
          const canvasContainer = document.createElement('div');
@@ -130,13 +146,13 @@ class Battlefield {
             let coords = this.firstTowerCoords;
             switch (type) {
                 case 'Basic':
-                    tower = new TowerBasic(this.ctx, [x,y,width,height], type, id);
+                    tower = new TowerBasic(this.ctx, [x,y,width,height], type, id, this.game);
                     break;
                 case 'Power':
-                    tower = new TowerPower(this.ctx, [x,y,width,height], type, id);
+                    tower = new TowerPower(this.ctx, [x,y,width,height], type, id, this.game);
                     break
                 case 'Splash':
-                    tower = new TowerSplash(this.ctx, [x,y,width,height], type, id);
+                    tower = new TowerSplash(this.ctx, [x,y,width,height], type, id, this.game);
                     break
                 default:
                     break;
@@ -232,7 +248,7 @@ class Battlefield {
             if ((this.canvas.height + maxY >= 0)){ // have enemies spawn offscreen from the top
                 maxY -= enemySize;
             }
-            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize, health, speed);
+            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize, health, speed, i);
             this.enemies[i] = enemy;
         }
     }
