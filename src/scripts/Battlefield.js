@@ -67,19 +67,22 @@ class Battlefield {
          
          Object.keys(this.towers).forEach(towerKey => {
             const closestEnemies = this.findClosestEnemies();
-            const randomIdx = Math.floor(Math.random() * closestEnemies.length - 1);
+            const randomIdx = Math.floor(Math.random() * closestEnemies.length);
             const closestCoord = Math.max(...closestEnemies.map(enemy => enemy.coords[1]));
             const closestEnemy = closestEnemies.filter(enemy => enemy.coords[1] == closestCoord)[0];
             const tower = this.towers[towerKey];
 
             debugger
-            if (closestCoord >= this.canvas.height / 2) tower.target = closestEnemy;
+            if (!tower.target){
+                tower.target = closestEnemies[randomIdx];
+            }
+            if (closestCoord >= this.canvas.height / 2){
+                tower.target = closestEnemy;
+            }
 
             if (!!tower.target && tower.target.currentHealth > 0){
                 tower.attack(game)
-            } else if (!tower.target){
-                tower.target = closestEnemies[randomIdx];
-            }
+            } 
         })
 
         // debugger
