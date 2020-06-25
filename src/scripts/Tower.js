@@ -76,7 +76,6 @@ class Tower {
         if (this.target.currentHealth !== null) this.enemiesDefeated += 1;
         const towerModal = document.querySelector(`.tower-modal-wrapper-${this.id}`);
         const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
-        debugger
         enemiesDefeated.innerText = this.enemiesDefeated + ((this.towerLevel - 1) * 10)
         this.target.currentHealth = null;
         this.target = undefined;

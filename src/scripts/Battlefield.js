@@ -59,10 +59,23 @@ class Battlefield {
          
          return closestEnemies;
      }
+    randomTowerList(towers){
+        const randomIds = [];
+        while (towers.length){
+            debugger
+            const randomIdx = Math.floor(Math.random() * towers.length);
+            randomIds.push(towers[randomIdx]);
+            const beg = towers.slice(0, randomIdx);
+            const fin = towers.slice(randomIdx + 1, -1);
+            towers = beg.concat(fin);
+        }
+
+    }
      attackEnemies(game){
         //  
          const remainingEnemies = Object.keys(this.enemies).length;
          // enemiesArr makes towers attack the closest enemy
+         this.randomTowerList(Object.values(this.towers).map(tower => tower.id));
          
          Object.keys(this.towers).forEach(towerKey => {
             const closestEnemies = this.findClosestEnemies();
@@ -109,7 +122,7 @@ class Battlefield {
      createTower({type, cost}){
             
             let tower;
-            let id = Object.keys(this.towers).length + 1;
+            let id = Object.keys(this.towers).length;
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
             let width = this.firstTowerCoords[2];
