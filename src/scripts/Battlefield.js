@@ -50,35 +50,38 @@ class Battlefield {
      clear(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
      }
-     findClosestEnemy(){
+     findClosestEnemies(){
          const enemiesArr = Object.values(this.enemies);
          const availableEnemies = enemiesArr.filter(enemy => enemy.coords[1] > 0);
          const availableCoords = availableEnemies.map(enemy => enemy.coords[1]);
          const closestThreeCoords = availableCoords.sort((a,b) => b-a).slice(0,3);
-         const closestEnemies = availableEnemies.filter(enemy => closestThreeCoords.includes(enemy.coords[1]));
-         const randomIdx = Math.floor(Math.random() * 2);
+         const closestEnemies = availableEnemies.filter(enemy => closestThreeCoords.includes(enemy.coords[1])).sort((a,b) => b-a);
          debugger
-         return closestEnemies[randomIdx];
-
-        // closestEnemy == Math.max(...Object.values(this.enemies).filter(value => value.coords[1] > 0).map(enemy => enemy.coords[1]))) [0];
+         
+         return closestEnemies;
      }
      attackEnemies(game){
         //  
          const remainingEnemies = Object.keys(this.enemies).length;
          // enemiesArr makes towers attack the closest enemy
-         const closestEnemy = this.findClosestEnemy();
-         if (!!closestEnemy){
-            Object.keys(this.towers).forEach(towerKey => {
-                const tower = this.towers[towerKey];
-                if (tower.target && tower.target.currentHealth > 0){
-                    tower.attack(game)
-                } 
-                if (!tower.target){
-  
-                    if ((closestEnemy.coords[1] < this.canvas.height) && (closestEnemy.coords[1] > 0)) tower.target = closestEnemy;
-                }
-            })
-        }
+         
+         Object.keys(this.towers).forEach(towerKey => {
+            const closestEnemies = this.findClosestEnemies();
+            const randomIdx = Math.floor(Math.random() * closestEnemies.length - 1);
+            const closestCoord = Math.max(closestEnemies.map(enemy => enemy.coords[1]));
+            const closestEnemy = closestEnemies.filter(enemy => enemy.coords[1] == closestCoord);
+            const tower = this.towers[towerKey];
+
+            debugger
+            if (closestCoord >= this.canvas.height / 2) tower.target = closestEnemy;
+
+            if (tower.target && tower.target.currentHealth > 0){
+                tower.attack(game)
+            } else if (!tower.target){
+                tower.target = closestEnemies[randomIdx];
+            }
+        })
+
         // debugger
         Object.keys(this.enemies).forEach(key => {
             if (this.enemies[key].currentHealth <= 0) delete this.enemies[key];
