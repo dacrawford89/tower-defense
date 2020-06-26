@@ -58,6 +58,8 @@ class Tower {
         this.towerLevel++;
         this.levelAnimation = 1;
         
+        const tower = document.querySelector(`.tower-${this.id} .tower-level`);
+        tower.innerText = `L: ${this.towerLevel}`;
     }
 
     checkEnemyHealth(){

@@ -96,7 +96,7 @@ class Battlefield {
                     delete this.enemies[tower.target.id];
                     const towerModal = document.querySelector(`.tower-${tower.id}`);
                     const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
-                    enemiesDefeated.innerText = tower.enemiesDefeated + ((tower.towerLevel - 1) * 10);
+                    enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
                 }
                 tower.target = null;
             }
@@ -182,33 +182,44 @@ class Battlefield {
             const towerModalWrapper = document.createElement('div');
             towerModalWrapper.classList.add(`tower-modal-wrapper`);
             towerModalWrapper.classList.add(`tower-${tower.id}`);
-            towerModalWrapper.style.display = "none";
-            towerModalWrapper.style.opacity = .9;
             towerModalWrapper.style.height = `${modalY[1] * -1}px`;
             towerModalWrapper.style.width = `${modalX[1]}px`;
-            towerModalWrapper.style.position = "absolute";
             towerModalWrapper.style.left = `${modalX[0]}px`;
             towerModalWrapper.style.top = `${modalY[0]}px`;
-            towerModalWrapper.style.backgroundColor = "red";
+
+            const id = document.createElement('div');
+            id.classList.add('tower-id');
+            id.innerText = `Id: ${tower.id}`;
+            towerModalWrapper.append(id);
+
+            const level = document.createElement('div');
+            level.classList.add('tower-level');
+            level.innerText = `L: ${tower.towerLevel}`;
+            towerModalWrapper.append(level);
 
             const close = document.createElement('div');
             close.classList.add('close-modal');
             close.innerText = "X";
-            close.style.height = "15px";
-            close.style.width = "15px";
             towerModalWrapper.append(close);
             close.onclick = () => this.hideTowerModals();
 
-
-            const id = document.createElement('div');
-            id.classList.add('tower-id');
-            id.innerText = tower.id;
-            towerModalWrapper.append(id);
-
             const enemiesDefeated = document.createElement('div');
             enemiesDefeated.classList.add('enemies-defeated');
-            enemiesDefeated.innerText = tower.enemiesDefeated;
+            enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated}`;
             towerModalWrapper.append(enemiesDefeated);
+
+
+            const upgrade = document.createElement('div');
+            upgrade.classList.add('upgrade-tower');
+            upgrade.innerText = "Upgrade";
+            towerModalWrapper.append(upgrade);
+            upgrade.onclick = () => this.upgradeTower(tower.id);
+
+            const sell = document.createElement('div');
+            sell.classList.add('sell-tower');
+            sell.innerText = "Sell";
+            towerModalWrapper.append(sell);
+            sell.onclick = () => this.sellTower(tower.id);
 
             document.querySelector('.canvas-container').append(towerModalWrapper);
      }
@@ -232,8 +243,7 @@ class Battlefield {
         towerModalWrapper.style.position = "absolute";
         towerModalWrapper.style.left = `${towerX[0]}px`;
         towerModalWrapper.style.top = `${towerY[1]}px`;
-        towerModalWrapper.style.cursor = "pointer";
-        towerModalWrapper.style.background = "red";
+
 
         document.querySelector('.canvas-container').append(towerModalWrapper);
         const towerBox = document.querySelector(`.tower-modal-wrapper.tower-${tower.id}`);
@@ -253,7 +263,7 @@ class Battlefield {
                 this.hideTowerModals();
 
                 const towerModal = document.querySelector(`.${event.target.id}`);
-                towerModal.style.display = "block";
+                towerModal.style.display = "flex";
             } 
             
         }

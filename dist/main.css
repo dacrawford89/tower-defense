@@ -388,7 +388,38 @@ body {
 .tower-modal-wrapper {
   cursor: pointer;
   position: absolute;
-  z-index: 10; }
+  z-index: 10;
+  display: none;
+  opacity: .9;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1vw;
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  font-size: .75em;
+  justify-content: space-between; }
+  .tower-modal-wrapper .tower-id {
+    width: 33.33%; }
+  .tower-modal-wrapper .tower-level {
+    width: 33.33%;
+    text-align: center; }
+  .tower-modal-wrapper .close-modal {
+    height: 15px;
+    width: 33.33%;
+    text-align: right; }
+  .tower-modal-wrapper .enemies-defeated {
+    width: 100%; }
+  .tower-modal-wrapper .upgrade-tower {
+    height: 15px;
+    width: 50%; }
+  .tower-modal-wrapper .sell-tower {
+    height: 15px;
+    width: 50%;
+    text-align: right; }
+
+.tower-box {
+  cursor: pointer; }
 
 .left-bar, .right-bar {
   height: 50vh;

@@ -76,10 +76,48 @@ body {
   position: absolute;
 }
 
-.tower-modal-wrapper {
+.tower-modal-wrapper {// height, width & positioning set by js in "addTowerModal"
   cursor: pointer;
   position: absolute;
   z-index: 10;
+  display: none;
+  opacity: .9;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1vw;
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  font-size: .75em;
+  justify-content: space-between;
+  .tower-id { 
+    width: 33.33%;
+  }
+  .tower-level {
+    width: 33.33%;
+    text-align: center;
+  }
+  .close-modal {
+    height: 15px;
+    width: 33.33%;
+    text-align: right;
+  }
+  .enemies-defeated {
+    width: 100%;
+  }
+  .upgrade-tower {
+    height: 15px;
+    width: 50%;
+  }
+  .sell-tower {
+    height: 15px;
+    width: 50%;
+    text-align: right;
+  }
+}
+
+.tower-box { // height, width & positioning set by js in "addTowerBox"
+  cursor: pointer;
 }
 
 
