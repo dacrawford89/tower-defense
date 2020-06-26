@@ -113,15 +113,18 @@ class Tower {
         if (!this.active) return null;
         this.attackAnimation += this.speed;
 
+        const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${this.id} .tower-damage`);
+        const damageMultiplier = parseFloat((this.damage * this.towerLevel).toFixed(2));
+        towerDamageEle.innerText = `Dmg: ${damageMultiplier}`;
+
         // this.ctx.drawImage(this.towerImage, ...this.coords);
         if (this.attackAnimation >= 500 && !!this.target){
-            const damageMultiplier = this.damage * this.towerLevel;
             this.target.currentHealth -= damageMultiplier;
             this.game.score += damageMultiplier;
             this.attackAnimation = 0;
         }
         const currentScore = document.querySelector('.current-score');
-        currentScore.innerText = this.game.score;
+        currentScore.innerText = parseFloat(this.game.score.toFixed(0));
     }
 }
 export default Tower

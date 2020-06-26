@@ -14,7 +14,6 @@ class TowerBasic extends Tower {
     }
     attack(enemy, game){
         super.attack(enemy, game);
-
     }
 }
 export default TowerBasic

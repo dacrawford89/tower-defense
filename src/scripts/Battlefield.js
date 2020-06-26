@@ -92,6 +92,7 @@ class Battlefield {
 
             if (!!tower.target && tower.target.currentHealth <= 0){
                 if (!!this.enemies[tower.target.id]){
+                    
                     tower.enemiesDefeated++;
                     delete this.enemies[tower.target.id];
                     const towerModal = document.querySelector(`.tower-${tower.id}`);
@@ -167,7 +168,6 @@ class Battlefield {
                     break;
             }
             this.towers[id] = tower;
-            debugger
 
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
 
@@ -216,7 +216,8 @@ class Battlefield {
 
             const damage = document.createElement('div');
             damage.classList.add('tower-damage');
-            damage.innerText = `Dmg: ${tower.damage}`;
+            const damageMultiplier = (tower.damage * tower.towerLevel).toFixed(2);
+            damage.innerText = `Dmg: ${damageMultiplier}`;
             towerModalWrapper.append(damage);
 
             const enemiesDefeated = document.createElement('div');
@@ -246,12 +247,10 @@ class Battlefield {
           this.game.resources += refund;
           this.firstTowerCoords = tower.coords;
           this.nextTowerId = towerId;
-          debugger
 
         //   const towerBox = document.querySelector(`.tower-box.tower-${towerId}`);
         //   towerBox.parentNode.removeChild(towerBox);
 
-          debugger
         //   const towerModal = document.querySelector(`.tower-modal-wrapper.tower-${towerId}`);
         //   towerModal.parentNode.removeChild(towerModal);
 
@@ -259,15 +258,12 @@ class Battlefield {
         //   tower.active = false;
      }
      upgradeTower(towerId, cost){
-         debugger
          
         if (this.game.resources >= cost){
             this.game.resources -= cost;
             const tower = this.towers[towerId];
-            debugger
             tower.damage *= 1.1;
-            const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${towerId} .tower-damage`);
-            towerDamageEle.innerText = `Dmg: ${tower.damage.toFixed(2)}`;
+
             tower.upgradeCost += 100;
         }
      }
@@ -321,7 +317,8 @@ class Battlefield {
         if (!!tower) tower.draw(this.towerImage);
      }
     createEnemies(currentLevel){
-        let enemySize = this.canvas.width * .05;
+        let enemyWidth = this.canvas.width * .15;
+        let enemyHeight = this.canvas.height * .07;
         let health = currentLevel * 20;
         let speed = this.canvas.height * .005;
         for (let i = 0; i < this.numEnemies; i++){
@@ -329,16 +326,16 @@ class Battlefield {
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
             
             // set x value on enmies to spawn within the canvas
-            if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemySize){ // > max length
-                maxX -= enemySize;
-            } else if ( maxX <= enemySize){ // < max length
-                maxX += enemySize;
+            if ((this.canvas.width - maxX >= 0) && this.canvas.width - maxX <= enemyWidth){ // > max length
+                maxX -= enemyWidth;
+            } else if ( maxX <= enemyWidth){ // < max length
+                maxX += enemyWidth;
             }
             // set y value on enmies to spawn within the canvas
             if ((this.canvas.height + maxY >= 0)){ // have enemies spawn offscreen from the top
-                maxY -= enemySize;
+                maxY -= enemyHeight;
             }
-            let enemy = new Enemy(this.ctx, [maxX, maxY], enemySize, health, speed, i);
+            let enemy = new Enemy(this.ctx, [maxX, maxY], enemyWidth, enemyHeight, health, speed, i);
             this.enemies[i] = enemy;
         }
     }
