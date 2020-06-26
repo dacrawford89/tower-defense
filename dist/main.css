@@ -398,7 +398,8 @@ body {
   flex-flow: row wrap;
   justify-content: space-between;
   font-size: .75em;
-  justify-content: space-between; }
+  justify-content: space-between;
+  margin: 0 auto; }
   .tower-modal-wrapper .tower-id {
     width: 33.33%; }
   .tower-modal-wrapper .tower-level {

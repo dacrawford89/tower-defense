@@ -182,8 +182,8 @@ class Battlefield {
             const towerModalWrapper = document.createElement('div');
             towerModalWrapper.classList.add(`tower-modal-wrapper`);
             towerModalWrapper.classList.add(`tower-${tower.id}`);
-            towerModalWrapper.style.height = `${modalY[1] * -1}px`;
-            towerModalWrapper.style.width = `${modalX[1]}px`;
+            // towerModalWrapper.style.height = `${modalY[1] * -1}px`;
+            // towerModalWrapper.style.width = `${modalX[1]}px`;
             towerModalWrapper.style.left = `${modalX[0]}px`;
             towerModalWrapper.style.top = `${modalY[0]}px`;
 
