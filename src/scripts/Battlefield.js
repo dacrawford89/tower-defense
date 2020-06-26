@@ -138,7 +138,16 @@ class Battlefield {
      createTower({type, cost}){
             
             let tower;
-            let id = Object.keys(this.towers).length;
+
+            // let id;
+            const towerIds = Object.keys(this.towers);
+
+
+            let id = this.nextTowerId || Object.keys(this.towers).length;
+            if (this.nextTowerId){
+                this.nextTowerId = undefined;
+            } 
+
             let x = this.firstTowerCoords[0];
             let y = this.firstTowerCoords[1];
             let width = this.firstTowerCoords[2];
@@ -158,9 +167,8 @@ class Battlefield {
                     break;
             }
             this.towers[id] = tower;
-            // this.towers.forEach(tower => {
+            debugger
 
-            // })
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
 
             this.addTowerModal(tower);
@@ -231,13 +239,24 @@ class Battlefield {
             document.querySelector('.canvas-container').append(towerModalWrapper);
      }
      sellTower(towerId){
-         debugger
+        //  debugger
           const tower = this.towers[towerId];
 
           const refund = (tower.cost + (tower.upgradeCost - 100)) * .8;
           this.game.resources += refund;
           this.firstTowerCoords = tower.coords;
-          tower.active = false;
+          this.nextTowerId = towerId;
+          debugger
+
+        //   const towerBox = document.querySelector(`.tower-box.tower-${towerId}`);
+        //   towerBox.parentNode.removeChild(towerBox);
+
+          debugger
+        //   const towerModal = document.querySelector(`.tower-modal-wrapper.tower-${towerId}`);
+        //   towerModal.parentNode.removeChild(towerModal);
+
+          delete this.towers[towerId];
+        //   tower.active = false;
      }
      upgradeTower(towerId, cost){
          debugger
