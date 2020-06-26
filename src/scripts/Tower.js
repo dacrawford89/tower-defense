@@ -15,6 +15,7 @@ class Tower {
         this.enemiesDefeated = 0;
         this.id = id;
         this.game = game;
+        this.upgradeCost = 100;
     }
     clear(){
         this.ctx.clearRect(...this.coords);

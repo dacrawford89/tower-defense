@@ -213,7 +213,7 @@ class Battlefield {
             upgrade.classList.add('upgrade-tower');
             upgrade.innerText = "Upgrade";
             towerModalWrapper.append(upgrade);
-            upgrade.onclick = () => this.upgradeTower(tower.id);
+            upgrade.onclick = () => this.upgradeTower(tower.id, tower.upgradeCost);
 
             const sell = document.createElement('div');
             sell.classList.add('sell-tower');
@@ -222,6 +222,16 @@ class Battlefield {
             sell.onclick = () => this.sellTower(tower.id);
 
             document.querySelector('.canvas-container').append(towerModalWrapper);
+     }
+     upgradeTower(towerId, cost){
+         debugger
+         
+        if (this.game.resources >= cost){
+            this.game.resources -= cost;
+            const tower = this.towers[towerId];
+            tower.damage *= 1.1;
+            tower.upgradeCost += 100;
+        }
      }
      hideTowerModals(){
         //  debugger
@@ -257,7 +267,6 @@ class Battlefield {
              const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
              const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
              const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
-             debugger
             //  if ((event.offsetX < towerX[1] && event.offsetX > towerX[0]) && (event.offsetY < towerY[0] && event.offsetY > towerY[1])){
              if (event.target.classList.contains('tower-box')){
                 this.hideTowerModals();
