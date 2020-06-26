@@ -158,6 +158,9 @@ class Battlefield {
                     break;
             }
             this.towers[id] = tower;
+            // this.towers.forEach(tower => {
+
+            // })
             coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
 
             this.addTowerModal(tower);
@@ -226,6 +229,15 @@ class Battlefield {
             sell.onclick = () => this.sellTower(tower.id);
 
             document.querySelector('.canvas-container').append(towerModalWrapper);
+     }
+     sellTower(towerId){
+         debugger
+          const tower = this.towers[towerId];
+
+          const refund = (tower.cost + (tower.upgradeCost - 100)) * .8;
+          this.game.resources += refund;
+          this.firstTowerCoords = tower.coords;
+          tower.active = false;
      }
      upgradeTower(towerId, cost){
          debugger

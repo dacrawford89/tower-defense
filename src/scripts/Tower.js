@@ -16,6 +16,7 @@ class Tower {
         this.id = id;
         this.game = game;
         this.upgradeCost = 100;
+        this.active = true;
     }
     clear(){
         this.ctx.clearRect(...this.coords);
@@ -23,6 +24,7 @@ class Tower {
 
     draw(){
         let image;
+        if (!this.active) return null
         switch (this.type) {
             case 'Basic':
                 image = path.join(__dirname, images, this.basicTowerImage);
@@ -108,6 +110,7 @@ class Tower {
     }
     
     attack(){
+        if (!this.active) return null;
         this.attackAnimation += this.speed;
 
         // this.ctx.drawImage(this.towerImage, ...this.coords);
@@ -115,6 +118,7 @@ class Tower {
             const damageMultiplier = this.damage * this.towerLevel;
             this.target.currentHealth -= damageMultiplier;
             this.game.score += damageMultiplier;
+            this.attackAnimation = 0;
         }
         const currentScore = document.querySelector('.current-score');
         currentScore.innerText = this.game.score;
