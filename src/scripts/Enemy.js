@@ -2,28 +2,24 @@ const path = require('path');
 const images = './dist/images/';
 
 class Enemy {
-    constructor(ctx, coords, width, height, health, speed, id){
+    constructor(ctx, coords, health, speed, id){
         this.ctx = ctx;
         this.maxHealth = health;
         this.currentHealth = health;
         this.coords = coords;
         this.enemyColors = ["#9be5e8","#e80c1e","#7f53a3","#ff871f","#ffff0f"];
-        this.width = width;
-        this.height = height;
         this.speed = speed;
         this.id = id;
         this.enemyImage = new Image();
         this.enemyImagePath = "troll.png";
         this.enemyImage.src = path.join(__dirname, images, this.enemyImagePath);
-        debugger
         
     }
 
     draw(){
-        debugger
         // 
         this.ctx.globalAlpha = (this.currentHealth / this.maxHealth);
-        this.ctx.drawImage(this.enemyImage, ...this.coords, this.width, this.height) 
+        this.ctx.drawImage(this.enemyImage, ...this.coords) 
         this.ctx.globalAlpha = 1;
     }
     update() {

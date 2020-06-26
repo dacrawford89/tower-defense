@@ -110,7 +110,7 @@ class Battlefield {
             }
 
             if (!!tower.target && tower.target.currentHealth > 0){
-                tower.attack(game)
+                tower.attack(tower.target, this.game)
             } 
         })
 
@@ -335,7 +335,7 @@ class Battlefield {
             if ((this.canvas.height + maxY >= 0)){ // have enemies spawn offscreen from the top
                 maxY -= enemyHeight;
             }
-            let enemy = new Enemy(this.ctx, [maxX, maxY], enemyWidth, enemyHeight, health, speed, i);
+            let enemy = new Enemy(this.ctx, [maxX, maxY, enemyWidth, enemyHeight], health, speed, i);
             this.enemies[i] = enemy;
         }
     }

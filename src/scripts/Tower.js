@@ -109,7 +109,7 @@ class Tower {
         this.ctx.restore(); 
     }
     
-    attack(){
+    attack(enemy, game){
         if (!this.active) return null;
         this.attackAnimation += this.speed;
 
