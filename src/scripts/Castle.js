@@ -5,8 +5,11 @@ class Castle {
         this.coords = coords;
         this.health = health;
     }
-    draw(){
-        this.ctx.fillStyle = "#eef2ed";
+    draw(image){
+        
+
+        const pat = this.ctx.createPattern(image, 'repeat');
+        this.ctx.fillStyle = pat;
         this.ctx.fillRect(...this.coords);
     }
 }

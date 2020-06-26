@@ -1,21 +1,29 @@
 import Tower from './Tower'
 
 class TowerSplash extends Tower {
-    constructor(ctx, coords, type){
-        super(ctx, coords, type);
-        this.damage = 5;
-        this.speed = 10;
+    constructor(ctx, coords, type, id, score){
+        super(ctx, coords, type, id, score);
+        this.damage = 10;
+        this.speed = 50;
         this.cost = 300;
+        this.score = score;
     }
-    draw(){
-        this.ctx.strokeStyle = "#d4d9d2";
-        this.ctx.fillStyle = "#d19111";
-        this.ctx.fillRect(...this.coords);
-        this.ctx.font = "16px Arial";
-        this.ctx.fillStyle = "#ff871f"
+    draw(image){
+        super.draw(image);
     }
     attack(enemy, game){
-        super.attack(enemy, game);
+        debugger
+        if (!!enemy){
+            const enemyCenter = [enemy.coords[0] + (enemy.coords[2] / 2), enemy.coords[1] + (enemy.coords[3] / 2)];
+            const enemyXRange = [enemyCenter[0] - enemy.coords[2], enemyCenter[0] + enemy.coords[2]];
+            const enemyYRange = [enemyCenter[1] - enemy.coords[3], enemyCenter[1] + enemy.coords[3]];
+
+            const enemies = game.battlefield.enemies;
+            this.ctx.fillStyle = "red";
+            this.ctx.fillRect(enemyXRange[0], enemyYRange[0], (enemy.coords[0] + enemy.coords[2] - enemy.coords[2]), (enemy.coords[1] + enemy.coords[3] - enemy.coords[3]));
+            
+            super.attack(enemy, game);
+        }
     }
 }
 export default TowerSplash;

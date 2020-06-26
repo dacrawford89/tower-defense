@@ -7,7 +7,8 @@ class Timer {
         this.interval = setInterval(this.tick.bind(this), 1000);
     }
     render(){
-        document.body.prepend(this.timer);
+   
+        document.body.append(this.timer);
     }
     tick(){
         this.remaining -= 1;
@@ -15,7 +16,8 @@ class Timer {
     }
     clear(){
         clearInterval(this.interval);
-        this.timer.innerText = "";
+        const timer = document.querySelector('.timer');
+        if (!!timer) timer.parentNode.removeChild(timer);
     }
 }
 

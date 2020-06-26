@@ -1,18 +1,16 @@
 import Tower from './Tower'
 
 class TowerBasic extends Tower {
-    constructor(ctx, coords, type){
-        super(ctx, coords, type);
+    constructor(ctx, coords, type, id, score){
+        super(ctx, coords, type, id, score);
         this.damage = 1;
         this.speed = 100;
         this.cost = 100;
+        this.score = score;
     }
-    draw(){
-        this.ctx.strokeStyle = "#d4d9d2";
-        this.ctx.fillStyle = "#bdbfbb";
-        this.ctx.fillRect(...this.coords);
-        this.ctx.font = "16px Arial";
-        this.ctx.fillStyle = "#ff871f"
+    draw(image){
+        super.draw(image);
+
     }
     attack(enemy, game){
         super.attack(enemy, game);
