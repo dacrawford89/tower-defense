@@ -203,11 +203,15 @@ class Battlefield {
             towerModalWrapper.append(close);
             close.onclick = () => this.hideTowerModals();
 
+            const damage = document.createElement('div');
+            damage.classList.add('tower-damage');
+            damage.innerText = `Dmg: ${tower.damage}`;
+            towerModalWrapper.append(damage);
+
             const enemiesDefeated = document.createElement('div');
             enemiesDefeated.classList.add('enemies-defeated');
             enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated}`;
             towerModalWrapper.append(enemiesDefeated);
-
 
             const upgrade = document.createElement('div');
             upgrade.classList.add('upgrade-tower');
@@ -229,7 +233,10 @@ class Battlefield {
         if (this.game.resources >= cost){
             this.game.resources -= cost;
             const tower = this.towers[towerId];
+            debugger
             tower.damage *= 1.1;
+            const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${towerId} .tower-damage`);
+            towerDamageEle.innerText = `Dmg: ${tower.damage.toFixed(2)}`;
             tower.upgradeCost += 100;
         }
      }
