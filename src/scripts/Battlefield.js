@@ -22,7 +22,7 @@ class Battlefield {
         this.numTowers = 6;
         this.castle = "";
         this.currentLevel = 1;
-        this.numEnemies = 20;
+        this.numEnemies = 100;
         this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
@@ -320,7 +320,8 @@ class Battlefield {
         let enemyWidth = this.canvas.width * .15;
         let enemyHeight = this.canvas.height * .07;
         let health = currentLevel * 20;
-        let speed = this.canvas.height * .005;
+        let speed = .5;
+        // let speed = this.canvas.height * .005;
         for (let i = 0; i < this.numEnemies; i++){
             let maxX = Math.random() * this.canvas.width;
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
