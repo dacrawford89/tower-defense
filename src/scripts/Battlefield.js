@@ -26,6 +26,7 @@ class Battlefield {
         this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
+        this.nextTower = [];
 
         this.battlefieldGrass = new Image();
         this.battlefieldGrass.src = path.join(__dirname, images, "../images/grass.jpg");
@@ -143,33 +144,72 @@ class Battlefield {
             // let id;
             const towerIds = Object.keys(this.towers);
 
-
-            let id = this.nextTowerId || Object.keys(this.towers).length;
-            if (this.nextTowerId){
-                this.nextTowerId = undefined;
-            } 
-
-            let x = this.firstTowerCoords[0];
-            let y = this.firstTowerCoords[1];
-            let width = this.firstTowerCoords[2];
-            let height = this.firstTowerCoords[3];
-            let coords = this.firstTowerCoords;
+            let id;
+            let nextTowerCoords;
+            if (this.nextTower.length){
+                let nextTower = this.nextTower.shift();
+                id = nextTower.id;
+                nextTowerCoords = nextTower.coords;
+            } else {
+                id = 0;
+                nextTowerCoords = this.firstTowerCoords;
+            }
+            debugger
             switch (type) {
                 case 'Basic':
-                    tower = new TowerBasic(this.ctx, [x,y,width,height], type, id, this.game);
+                    tower = new TowerBasic(this.ctx, nextTowerCoords, type, id, this.game);
                     break;
                 case 'Power':
-                    tower = new TowerPower(this.ctx, [x,y,width,height], type, id, this.game);
+                    tower = new TowerPower(this.ctx, nextTowerCoords, type, id, this.game);
                     break
                 case 'Splash':
-                    tower = new TowerSplash(this.ctx, [x,y,width,height], type, id, this.game);
+                    tower = new TowerSplash(this.ctx, nextTowerCoords, type, id, this.game);
                     break
                 default:
                     break;
             }
             this.towers[id] = tower;
+            if (!this.nextTower.length) {
+                let next = nextTowerCoords;
+                let x = next[0] + this.firstTowerCoords[2] + this.canvas.width * .02;
+                let y = next[1];
+                let width = next[2];
+                let height = next[3];
+                let nextId = id + 1;
+                let nextCoords = [x, y, width, height];
+                this.nextTower.push({id: nextId, coords: nextCoords});
+            }
+            // let nextTower = (this.nextTower.length) ? this.nextTower.shift() : undefined;
+            // let previousTower = (towerIds.length) ? this.towers[towerIds[towerIds.length-1]] : undefined;
 
-            coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
+            // let id = (nextTower) ? nextTower.id : Object.keys(this.towers).length;
+
+            // let coords = (nextTower) ? nextTower.coords : this.firstTowerCoords;
+
+            // let x = this.firstTowerCoords[0];
+            // let y = this.firstTowerCoords[1];
+            // let width = this.firstTowerCoords[2];
+            // let height = this.firstTowerCoords[3];
+
+            // const previousTowerId = towerIds[towerIds.length-1];
+
+            // debugger
+            // switch (type) {
+            //     case 'Basic':
+            //         tower = new TowerBasic(this.ctx, [x,y,width,height], type, id, this.game);
+            //         break;
+            //     case 'Power':
+            //         tower = new TowerPower(this.ctx, [x,y,width,height], type, id, this.game);
+            //         break
+            //     case 'Splash':
+            //         tower = new TowerSplash(this.ctx, [x,y,width,height], type, id, this.game);
+            //         break
+            //     default:
+            //         break;
+            // }
+            // this.towers[id] = tower;
+
+
 
             this.addTowerModal(tower);
             this.addTowerStyleBox(tower);
@@ -240,13 +280,20 @@ class Battlefield {
             document.querySelector('.canvas-container').append(towerModalWrapper);
      }
      sellTower(towerId){
-        //  debugger
-          const tower = this.towers[towerId];
-
-          const refund = (tower.cost + (tower.upgradeCost - 100)) * .8;
-          this.game.resources += refund;
-          this.firstTowerCoords = tower.coords;
-          this.nextTowerId = towerId;
+         const tower = this.towers[towerId];
+         
+         const refund = (tower.cost + (tower.upgradeCost - 100)) * .8;
+         this.game.resources += refund;
+         
+         const towerObj = {
+             id: towerId,
+             coords: tower.coords,
+            };
+            
+            debugger
+          this.nextTower.unshift(towerObj);
+        //   this.firstTowerCoords = tower.coords;
+        //   this.nextTowerId = towerId;
 
         //   const towerBox = document.querySelector(`.tower-box.tower-${towerId}`);
         //   towerBox.parentNode.removeChild(towerBox);
