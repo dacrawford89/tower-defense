@@ -328,10 +328,10 @@ canvas {
   position: relative; }
 
 body {
-  background-color: #ccccff;
+  background-image: url(images/background.jpg);
   padding: 5vh 0;
   color: blue;
-  font-family: "Pangolin", cursive;
+  font-family: "Oswald", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -361,10 +361,16 @@ body {
   top: 0; }
 
 .instructions-wrapper {
+  color: white;
+  background: #656565;
+  background: radial-gradient(circle, #656565 0%, #2a2a2a 100%, #737373 100%);
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  font-size: 1.5vw;
   padding: 2vw;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: center; }
@@ -372,12 +378,13 @@ body {
     padding: 1vw;
     box-sizing: border-box; }
   .instructions-wrapper .title {
-    width: 100%;
-    background-color: #0ac9b6; }
+    width: 100%; }
   .instructions-wrapper > div:not(.start-button-wrapper) {
     width: 50%; }
     .instructions-wrapper > div:not(.start-button-wrapper) p {
       margin-bottom: 1vh; }
+  .instructions-wrapper .start-button-wrapper {
+    height: 10%; }
 
 .timer {
   position: absolute; }

@@ -96,21 +96,22 @@ class Battlefield {
                     
                     tower.enemiesDefeated++;
                     delete this.enemies[tower.target.id];
-                    this.refreshTowerModal(tower);
+                    debugger
                 }
                 tower.target = null;
             }
-
+            
             if (!tower.target){
                 tower.target = closestEnemies[randomIdx];
             }
             if (closestCoord >= this.canvas.height / 2){
                 tower.target = closestEnemy;
             }
-
+            
             if (!!tower.target && tower.target.currentHealth > 0){
                 tower.attack(tower.target, this.game)
             } 
+            this.refreshTowerModal(tower);
         })
 
         // Object.keys(this.enemies).forEach(key => {
@@ -216,9 +217,9 @@ class Battlefield {
         //  const towerModal = document.querySelector.
      }
      refreshTowerModal(tower){
-        const level = document.querySelector('.tower-level');
-        const damage = document.querySelector('.tower-damage');
-        const enemiesDefeated = document.querySelector('.enemies-defeated');
+        const level = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-level`);
+        const damage = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-damage`);
+        const enemiesDefeated = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .enemies-defeated`);
 
         level.innerText = `L: ${tower.towerLevel}`;
  

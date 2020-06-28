@@ -159,7 +159,6 @@ class Game {
     lose(requestId){
         
         window.cancelAnimationFrame(requestId);
-        this.clearTimer();
         this.stopResources();
         this.generateLoseMessage();
 
