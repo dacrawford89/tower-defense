@@ -96,9 +96,7 @@ class Battlefield {
                     
                     tower.enemiesDefeated++;
                     delete this.enemies[tower.target.id];
-                    const towerModal = document.querySelector(`.tower-${tower.id}`);
-                    const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
-                    enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
+                    this.refreshTowerModal(tower);
                 }
                 tower.target = null;
             }
@@ -227,7 +225,7 @@ class Battlefield {
         const damageMultiplier = (tower.damage * tower.towerLevel).toFixed(2);
         damage.innerText = `Dmg: ${damageMultiplier}`;
 
-        enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated}`;
+        enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
      }
      addTowerModal(tower){
         //  debugger
