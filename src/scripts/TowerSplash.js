@@ -65,7 +65,7 @@ class TowerSplash extends Tower {
             this.attackAnimation += this.speed;
 
             const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${this.id} .tower-damage`);
-            const damageMultiplier = parseFloat((this.damage * this.towerLevel).toFixed(2));
+            const damageMultiplier = parseFloat(this.damage * (((this.towerLevel - 1) / 10) + 1).toFixed(2));
             towerDamageEle.innerText = `Dmg: ${damageMultiplier}`;
     
             // this.ctx.drawImage(this.towerImage, ...this.coords);
