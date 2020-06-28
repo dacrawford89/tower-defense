@@ -22,7 +22,7 @@ class Battlefield {
         this.numTowers = 6;
         this.castle = "";
         this.currentLevel = 1;
-        this.numEnemies = 100;
+        this.numEnemies = 10;
         this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
@@ -154,7 +154,6 @@ class Battlefield {
                 id = 0;
                 nextTowerCoords = this.firstTowerCoords;
             }
-            debugger
             switch (type) {
                 case 'Basic':
                     tower = new TowerBasic(this.ctx, nextTowerCoords, type, id, this.game);
@@ -217,6 +216,18 @@ class Battlefield {
      }
      hideTowerModal(){
         //  const towerModal = document.querySelector.
+     }
+     refreshTowerModal(tower){
+        const level = document.querySelector('.tower-level');
+        const damage = document.querySelector('.tower-damage');
+        const enemiesDefeated = document.querySelector('.enemies-defeated');
+
+        level.innerText = `L: ${tower.towerLevel}`;
+ 
+        const damageMultiplier = (tower.damage * tower.towerLevel).toFixed(2);
+        damage.innerText = `Dmg: ${damageMultiplier}`;
+
+        enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated}`;
      }
      addTowerModal(tower){
         //  debugger
@@ -290,7 +301,6 @@ class Battlefield {
              coords: tower.coords,
             };
             
-            debugger
           this.nextTower.unshift(towerObj);
         //   this.firstTowerCoords = tower.coords;
         //   this.nextTowerId = towerId;
@@ -302,6 +312,7 @@ class Battlefield {
         //   towerModal.parentNode.removeChild(towerModal);
 
           delete this.towers[towerId];
+          this.hideTowerModals();
         //   tower.active = false;
      }
      upgradeTower(towerId, cost){
@@ -348,6 +359,8 @@ class Battlefield {
              const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
              const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
              const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+
+             this.refreshTowerModal(tower);
             //  if ((event.offsetX < towerX[1] && event.offsetX > towerX[0]) && (event.offsetY < towerY[0] && event.offsetY > towerY[1])){
              if (event.target.classList.contains('tower-box')){
                 this.hideTowerModals();
@@ -367,7 +380,7 @@ class Battlefield {
         let enemyWidth = this.canvas.width * .15;
         let enemyHeight = this.canvas.height * .07;
         let health = currentLevel * 20;
-        let speed = .5;
+        let speed = 1;
         // let speed = this.canvas.height * .005;
         for (let i = 0; i < this.numEnemies; i++){
             let maxX = Math.random() * this.canvas.width;
