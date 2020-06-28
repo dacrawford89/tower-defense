@@ -22,12 +22,12 @@ class TowerSplash extends Tower {
             // const enemyTotalRange = [enemyXRange[0], enemyYRange[0], enemy.coords[2] * 2, enemy.coords[3] * 2]
 
             const enemies = game.battlefield.enemies;
-            this.ctx.fillStyle = "red";
-            this.ctx.fillRect(...enemyTotalRange);
+            // this.ctx.fillStyle = "red";
+            // this.ctx.fillRect(...enemyTotalRange);
             const enemyXStart = enemyTotalRange[0];
             const enemyYStart = enemyTotalRange[1];
-            const enemyXWidth = enemyTotalRange[2];
-            const enemyYHeight = enemyTotalRange[3];
+            const enemyXEnd = enemyXStart + enemy.coords[2];
+            const enemyYEnd = enemyYStart + enemy.coords[3];
             
             
             const nearbyEnemies = Object.values(game.battlefield.enemies)
@@ -41,26 +41,51 @@ class TowerSplash extends Tower {
         
                     const otherEnemyTotalRange = [otherEnemyXRange[0], otherEnemyYRange[0], enemy.coords[2] * 2, enemy.coords[3] * 2];
         
-                    this.ctx.fillStyle = "red";
-                    this.ctx.fillRect(...otherEnemyTotalRange);
+                    // this.ctx.fillStyle = "red";
+                    // this.ctx.fillRect(...otherEnemyTotalRange);
 
                     const enemies = game.battlefield.enemies;
 
                     const otherEnemyXStart = otherEnemyTotalRange[0];
                     const otherEnemyYStart = otherEnemyTotalRange[1];
-                    const otherEnemyXWidth = otherEnemyTotalRange[2];
-                    const otherEnemyYHeight = otherEnemyTotalRange[3];
+                    const otherEnemyXEnd = otherEnemyXStart + enemy.coords[2];
+                    const otherEnemyYEnd = otherEnemyYStart + enemy.coords[3];
 
-                    if (enemyXStart <= otherEnemyXWidth && enemyYStart <= otherEnemyYHeight 
-                        &&
-
+                    if (
+                        ((otherEnemyXStart <= enemyXEnd && enemyYStart <= otherEnemyYEnd) ||
+                        (enemyXStart <= otherEnemyXEnd && enemyYStart <= otherEnemyYEnd) ||
+                        (otherEnemyXStart <= enemyXEnd && otherEnemyYStart <= enemyYEnd) ||
+                        (enemyXStart <= otherEnemyXEnd && otherEnemyYStart <= enemyYEnd)) &&
+                        (otherEnemyYStart >= 0 && otherEnemyYStart <= this.game.battlefield.canvas.height)
                         )
+                        {
+                            return enemy;
+                        }
                 });
-            super.attack(enemy, game);
-            nearbyEnemies.forEach(enemy => {
-                super.attack(enemy,game);
-                if (enemy.currentHealth <= 0) delete game.battlefield.enemies[enemy.id]
-            })
+
+            this.attackAnimation += this.speed;
+
+            const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${this.id} .tower-damage`);
+            const damageMultiplier = parseFloat((this.damage * this.towerLevel).toFixed(2));
+            towerDamageEle.innerText = `Dmg: ${damageMultiplier}`;
+    
+            // this.ctx.drawImage(this.towerImage, ...this.coords);
+            if (this.attackAnimation >= 500 && !!this.target){
+                this.target.currentHealth -= damageMultiplier;
+                this.game.score += damageMultiplier;
+
+                nearbyEnemies.forEach(enemy => {
+                    enemy.currentHealth -= damageMultiplier;
+                    this.game.score += damageMultiplier;
+                    if (enemy.currentHealth <= 0) delete game.battlefield.enemies[enemy.id]
+                })
+
+                this.attackAnimation = 0;
+            }
+            const currentScore = document.querySelector('.current-score');
+            currentScore.innerText = parseFloat(this.game.score.toFixed(0));
+
+
         }
     }
 }
