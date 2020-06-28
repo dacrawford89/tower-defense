@@ -22,10 +22,11 @@ class Battlefield {
         this.numTowers = 6;
         this.castle = "";
         this.currentLevel = 1;
-        this.numEnemies = 20;
+        this.numEnemies = 10;
         this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
+        this.nextTower = [];
 
         this.battlefieldGrass = new Image();
         this.battlefieldGrass.src = path.join(__dirname, images, "../images/grass.jpg");
@@ -95,23 +96,22 @@ class Battlefield {
                     
                     tower.enemiesDefeated++;
                     delete this.enemies[tower.target.id];
-                    const towerModal = document.querySelector(`.tower-${tower.id}`);
-                    const enemiesDefeated = towerModal.querySelector('.enemies-defeated');
-                    enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
+                    debugger
                 }
                 tower.target = null;
             }
-
+            
             if (!tower.target){
                 tower.target = closestEnemies[randomIdx];
             }
             if (closestCoord >= this.canvas.height / 2){
                 tower.target = closestEnemy;
             }
-
+            
             if (!!tower.target && tower.target.currentHealth > 0){
                 tower.attack(tower.target, this.game)
             } 
+            this.refreshTowerModal(tower);
         })
 
         // Object.keys(this.enemies).forEach(key => {
@@ -143,33 +143,71 @@ class Battlefield {
             // let id;
             const towerIds = Object.keys(this.towers);
 
-
-            let id = this.nextTowerId || Object.keys(this.towers).length;
-            if (this.nextTowerId){
-                this.nextTowerId = undefined;
-            } 
-
-            let x = this.firstTowerCoords[0];
-            let y = this.firstTowerCoords[1];
-            let width = this.firstTowerCoords[2];
-            let height = this.firstTowerCoords[3];
-            let coords = this.firstTowerCoords;
+            let id;
+            let nextTowerCoords;
+            if (this.nextTower.length){
+                let nextTower = this.nextTower.shift();
+                id = nextTower.id;
+                nextTowerCoords = nextTower.coords;
+            } else {
+                id = 0;
+                nextTowerCoords = this.firstTowerCoords;
+            }
             switch (type) {
                 case 'Basic':
-                    tower = new TowerBasic(this.ctx, [x,y,width,height], type, id, this.game);
+                    tower = new TowerBasic(this.ctx, nextTowerCoords, type, id, this.game);
                     break;
                 case 'Power':
-                    tower = new TowerPower(this.ctx, [x,y,width,height], type, id, this.game);
+                    tower = new TowerPower(this.ctx, nextTowerCoords, type, id, this.game);
                     break
                 case 'Splash':
-                    tower = new TowerSplash(this.ctx, [x,y,width,height], type, id, this.game);
+                    tower = new TowerSplash(this.ctx, nextTowerCoords, type, id, this.game);
                     break
                 default:
                     break;
             }
             this.towers[id] = tower;
+            if (!this.nextTower.length) {
+                let next = nextTowerCoords;
+                let x = next[0] + this.firstTowerCoords[2] + this.canvas.width * .02;
+                let y = next[1];
+                let width = next[2];
+                let height = next[3];
+                let nextId = id + 1;
+                let nextCoords = [x, y, width, height];
+                this.nextTower.push({id: nextId, coords: nextCoords});
+            }
+            // let nextTower = (this.nextTower.length) ? this.nextTower.shift() : undefined;
+            // let previousTower = (towerIds.length) ? this.towers[towerIds[towerIds.length-1]] : undefined;
 
-            coords[0] += this.firstTowerCoords[2] + (this.canvas.width * .02);
+            // let id = (nextTower) ? nextTower.id : Object.keys(this.towers).length;
+
+            // let coords = (nextTower) ? nextTower.coords : this.firstTowerCoords;
+
+            // let x = this.firstTowerCoords[0];
+            // let y = this.firstTowerCoords[1];
+            // let width = this.firstTowerCoords[2];
+            // let height = this.firstTowerCoords[3];
+
+            // const previousTowerId = towerIds[towerIds.length-1];
+
+            // debugger
+            // switch (type) {
+            //     case 'Basic':
+            //         tower = new TowerBasic(this.ctx, [x,y,width,height], type, id, this.game);
+            //         break;
+            //     case 'Power':
+            //         tower = new TowerPower(this.ctx, [x,y,width,height], type, id, this.game);
+            //         break
+            //     case 'Splash':
+            //         tower = new TowerSplash(this.ctx, [x,y,width,height], type, id, this.game);
+            //         break
+            //     default:
+            //         break;
+            // }
+            // this.towers[id] = tower;
+
+
 
             this.addTowerModal(tower);
             this.addTowerStyleBox(tower);
@@ -177,6 +215,18 @@ class Battlefield {
      }
      hideTowerModal(){
         //  const towerModal = document.querySelector.
+     }
+     refreshTowerModal(tower){
+        const level = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-level`);
+        const damage = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-damage`);
+        const enemiesDefeated = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .enemies-defeated`);
+
+        level.innerText = `L: ${tower.towerLevel}`;
+ 
+        const damageMultiplier = (tower.damage * tower.towerLevel).toFixed(2);
+        damage.innerText = `Dmg: ${damageMultiplier}`;
+
+        enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
      }
      addTowerModal(tower){
         //  debugger
@@ -240,13 +290,19 @@ class Battlefield {
             document.querySelector('.canvas-container').append(towerModalWrapper);
      }
      sellTower(towerId){
-        //  debugger
-          const tower = this.towers[towerId];
-
-          const refund = (tower.cost + (tower.upgradeCost - 100)) * .8;
-          this.game.resources += refund;
-          this.firstTowerCoords = tower.coords;
-          this.nextTowerId = towerId;
+         const tower = this.towers[towerId];
+         
+         const refund = (tower.cost + (tower.upgradeCost - 100)) * .8;
+         this.game.resources += refund;
+         
+         const towerObj = {
+             id: towerId,
+             coords: tower.coords,
+            };
+            
+          this.nextTower.unshift(towerObj);
+        //   this.firstTowerCoords = tower.coords;
+        //   this.nextTowerId = towerId;
 
         //   const towerBox = document.querySelector(`.tower-box.tower-${towerId}`);
         //   towerBox.parentNode.removeChild(towerBox);
@@ -255,6 +311,7 @@ class Battlefield {
         //   towerModal.parentNode.removeChild(towerModal);
 
           delete this.towers[towerId];
+          this.hideTowerModals();
         //   tower.active = false;
      }
      upgradeTower(towerId, cost){
@@ -301,6 +358,8 @@ class Battlefield {
              const towerY = [tower.coords[1], tower.coords[1] + tower.coords[3]];
              const towerXMid = tower.coords[0] + (tower.coords[2] / 2);
              const towerYMid = tower.coords[1] + (tower.coords[3] / 2);
+
+             this.refreshTowerModal(tower);
             //  if ((event.offsetX < towerX[1] && event.offsetX > towerX[0]) && (event.offsetY < towerY[0] && event.offsetY > towerY[1])){
              if (event.target.classList.contains('tower-box')){
                 this.hideTowerModals();
@@ -320,7 +379,8 @@ class Battlefield {
         let enemyWidth = this.canvas.width * .15;
         let enemyHeight = this.canvas.height * .07;
         let health = currentLevel * 20;
-        let speed = this.canvas.height * .005;
+        let speed = 1;
+        // let speed = this.canvas.height * .005;
         for (let i = 0; i < this.numEnemies; i++){
             let maxX = Math.random() * this.canvas.width;
             let maxY = -(Math.random() * this.canvas.height); // set so enemies spawn above
