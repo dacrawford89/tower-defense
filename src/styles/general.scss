@@ -41,6 +41,20 @@ body {
   top: 0;
 }
 
+.github-link {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 1vw;
+  background-color: $lightblue;
+  transition: .3s;
+}
+.github-link:hover {
+  background-color: white;
+  color: black;
+}
+
 .instructions-wrapper {
   color: white;
   background: rgb(101,101,101);
@@ -61,7 +75,10 @@ body {
   }
   .title {
     width: 100%;
-    // background-color: $lightblue;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
   > div:not(.start-button-wrapper) {
     width: 50%;
@@ -71,6 +88,19 @@ body {
   }
   .start-button-wrapper {
     height: 10%;
+    button {
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      box-shadow: 0px 0px 5px gray;
+      padding: 1vw;
+      transition: .3s;
+      &:hover {
+        color: $lightblue;
+        background-color: lightgray;
+        transform: scale(1.33); 
+      }
+    }
   }
 }
 
@@ -79,10 +109,18 @@ body {
 
 .timer {
   position: absolute;
+  padding: 3vw;
+  background-color: white;
+  border-radius: 10px;
+  opacity: .9;
 }
 
 .lose-message {
   position: absolute;
+  padding: 3vw;
+  background-color: white;
+  border-radius: 10px;
+  opacity: .9;
 }
 
 .tower-modal-wrapper {// height, width & positioning set by js in "addTowerModal"

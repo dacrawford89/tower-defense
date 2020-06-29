@@ -37,7 +37,6 @@ class RightBar {
         wrapper.append(currentLevel);
 
         this.wrapper.append(wrapper);
-
     }
     addHealth(){
         const wrapper = document.createElement('div');

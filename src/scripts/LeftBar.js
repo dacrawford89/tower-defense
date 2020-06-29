@@ -41,11 +41,11 @@ class LeftBar {
         for (let i = 0; i < this.towerTypes.length; i++){
             const tower = document.createElement('div');
             tower.classList.add(this.towerTypes[i].type);
-            const towerType = document.createElement('div');
+            const towerType = document.createElement('p');
             towerType.classList.add('tower-type');
             towerType.innerText = this.towerTypes[i].type;
             tower.append(towerType);
-            const towerCost = document.createElement('div');
+            const towerCost = document.createElement('p');
             towerCost.classList.add('tower-cost');
             towerCost.innerText = this.towerTypes[i].cost
             tower.append(towerCost);
@@ -53,8 +53,6 @@ class LeftBar {
 
             this.wrapper.append(wrapper);
         }
-    }
-    removeHandlers(){
     }
 }
 

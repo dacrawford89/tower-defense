@@ -15,9 +15,7 @@ class Enemy {
         this.enemyImage.src = path.join(__dirname, images, this.enemyImagePath);
         
     }
-
     draw(){
-        // 
         this.ctx.globalAlpha = (this.currentHealth / this.maxHealth);
         this.ctx.drawImage(this.enemyImage, ...this.coords) 
         this.ctx.globalAlpha = 1;

@@ -3,7 +3,7 @@ import Tower from './Tower'
 class TowerSplash extends Tower {
     constructor(ctx, coords, type, id, score){
         super(ctx, coords, type, id, score);
-        this.damage = 20;
+        this.damage = 1.5;
         this.speed = 5;
         this.cost = 300;
         this.score = score;
@@ -18,11 +18,8 @@ class TowerSplash extends Tower {
             const enemyYRange = [enemyCenter[1] - enemy.coords[3], enemyCenter[1] + enemy.coords[3]];
 
             const enemyTotalRange = [enemyXRange[0], enemyYRange[0], enemy.coords[2] * 2, enemy.coords[3] * 2];
-            // const enemyTotalRange = [enemyXRange[0], enemyYRange[0], enemy.coords[2] * 2, enemy.coords[3] * 2]
 
             const enemies = game.battlefield.enemies;
-            // this.ctx.fillStyle = "red";
-            // this.ctx.fillRect(...enemyTotalRange);
             const enemyXStart = enemyTotalRange[0];
             const enemyYStart = enemyTotalRange[1];
             const enemyXEnd = enemyXStart + enemy.coords[2];
@@ -31,18 +28,12 @@ class TowerSplash extends Tower {
             
             const nearbyEnemies = Object.values(game.battlefield.enemies)
                 .filter(enemy => {
-                    // const otherEnemyCenter = [enemy.coords[0] + (enemy.coords[2] / 2), enemy.coords[1] + (enemy.coords[3] / 2)]
-                    // const otherEnemyXRange = [otherEnemyCenter[0] - enemy.coords[2], otherEnemyCenter[0] + enemy.coords[2]];
-                    // const otherEnemyYRange = [otherEnemyCenter[1] - enemy.coords[3], enemyCenter[1] + enemy.coords[3]];
                     const otherEnemyCenter = [enemy.coords[0] + (enemy.coords[2] / 2), enemy.coords[1] + (enemy.coords[3] / 2)];
                     const otherEnemyXRange = [otherEnemyCenter[0] - enemy.coords[2], otherEnemyCenter[0] + enemy.coords[2]];
                     const otherEnemyYRange = [otherEnemyCenter[1] - enemy.coords[3], otherEnemyCenter[1] + enemy.coords[3]];
         
                     const otherEnemyTotalRange = [otherEnemyXRange[0], otherEnemyYRange[0], enemy.coords[2] * 2, enemy.coords[3] * 2];
         
-                    // this.ctx.fillStyle = "red";
-                    // this.ctx.fillRect(...otherEnemyTotalRange);
-
                     const enemies = game.battlefield.enemies;
 
                     const otherEnemyXStart = otherEnemyTotalRange[0];
@@ -68,7 +59,6 @@ class TowerSplash extends Tower {
             const damageMultiplier = parseFloat(this.damage * (((this.towerLevel - 1) / 10) + 1).toFixed(2));
             towerDamageEle.innerText = `Dmg: ${damageMultiplier}`;
     
-            // this.ctx.drawImage(this.towerImage, ...this.coords);
             if (this.attackAnimation >= 500 && !!this.target){
                 this.target.currentHealth -= damageMultiplier;
                 this.game.score += damageMultiplier;

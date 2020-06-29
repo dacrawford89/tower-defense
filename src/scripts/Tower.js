@@ -21,7 +21,6 @@ class Tower {
     clear(){
         this.ctx.clearRect(...this.coords);
     }
-
     draw(){
         let image;
         if (!this.active) return null
@@ -42,7 +41,6 @@ class Tower {
 
         this.checkEnemyHealth();
         if (this.enemiesDefeated % 10 == 0 && this.enemiesDefeated > 0) {
-            // debugger
             this.levelUp(); 
         }
         if (!!this.levelAnimation && this.levelAnimation > 0) {
@@ -64,30 +62,17 @@ class Tower {
         const tower = document.querySelector(`.tower-${this.id} .tower-level`);
         tower.innerText = `L: ${this.towerLevel}`;
     }
-
     checkEnemyHealth(){
         if (!!this.target && this.target.currentHealth > 0){ 
            this.faceEnemy();
            this.attack();
         } else if (!!this.target && this.target.currentHealth <= 0) {
-            this.defeatEnemy();
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
         } else {
             this.ctx.drawImage(this.towerImage, ...this.coords) // default tower facing direction
-
         }
     }
-
-    defeatEnemy(){
-        // if (this.target.currentHealth !== null) this.enemiesDefeated += 1;
-
-        // this.target.currentHealth = null;
-        // delete this.game.battlefield.enemies[this.target.id];
-        // this.target = undefined;
-    }
-
     faceEnemy(){
-        // this.ctx.clearRect(...this.coords);
         const towerXCenter = this.coords[0] + this.coords[2] / 2;
         const towerYCenter = this.coords[1] + this.coords[3] / 2;
         let towerCenter = [towerXCenter, towerYCenter];
@@ -117,7 +102,6 @@ class Tower {
         const damageMultiplier = parseFloat(this.damage * (((this.towerLevel - 1) / 10) + 1).toFixed(2));
         towerDamageEle.innerText = `Dmg: ${damageMultiplier}`;
 
-        // this.ctx.drawImage(this.towerImage, ...this.coords);
         if (this.attackAnimation >= 500 && !!this.target){
             this.target.currentHealth -= damageMultiplier;
             this.game.score += damageMultiplier;
