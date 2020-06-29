@@ -360,6 +360,19 @@ body {
   left: 0;
   top: 0; }
 
+.github-link {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 1vw;
+  background-color: #0ac9b6;
+  transition: .3s; }
+
+.github-link:hover {
+  background-color: white;
+  color: black; }
+
 .instructions-wrapper {
   color: white;
   background: #656565;
@@ -378,19 +391,42 @@ body {
     padding: 1vw;
     box-sizing: border-box; }
   .instructions-wrapper .title {
-    width: 100%; }
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center; }
   .instructions-wrapper > div:not(.start-button-wrapper) {
     width: 50%; }
     .instructions-wrapper > div:not(.start-button-wrapper) p {
       margin-bottom: 1vh; }
   .instructions-wrapper .start-button-wrapper {
     height: 10%; }
+    .instructions-wrapper .start-button-wrapper button {
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      box-shadow: 0px 0px 5px gray;
+      padding: 1vw;
+      transition: .3s; }
+      .instructions-wrapper .start-button-wrapper button:hover {
+        color: #0ac9b6;
+        background-color: lightgray;
+        transform: scale(1.33); }
 
 .timer {
-  position: absolute; }
+  position: absolute;
+  padding: 3vw;
+  background-color: white;
+  border-radius: 10px;
+  opacity: .9; }
 
 .lose-message {
-  position: absolute; }
+  position: absolute;
+  padding: 3vw;
+  background-color: white;
+  border-radius: 10px;
+  opacity: .9; }
 
 .tower-modal-wrapper {
   cursor: pointer;
@@ -451,6 +487,9 @@ body {
 .right-bar {
   margin-left: 1vw; }
 
+.upgrade-income {
+  transition: .3s; }
+
 .upgrade-income:hover {
   color: red;
   cursor: pointer; }
@@ -460,10 +499,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly; }
-
-.add-towers-wrapper > div:hover {
-  color: green; }
+  .add-towers-wrapper div {
+    transition: color .3s; }
+    .add-towers-wrapper div:hover {
+      color: green; }
 
 .resources-display {
+  padding: 1vw;
   background-color: #0ac9b6; }
 

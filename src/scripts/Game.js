@@ -6,8 +6,6 @@ import RightBar from './RightBar'
 import Timer from './Timer'
 import Battlefield from './Battlefield'
 import * as THREE from 'three';
-import * as d3 from 'd3'
-
 
 class Game {
     constructor(){
@@ -33,7 +31,6 @@ class Game {
         this.upgradeIncomeBind = this.upgradeIncome.bind(this);
 
         this.startGame = this.startGame.bind(this);
-
     }
     initialize(){
         this.battlefield.initialize();
@@ -49,11 +46,6 @@ class Game {
                     } 
                 });
         }
-
-        // 
-
-
-        
         document.querySelector('.upgrade-income').addEventListener('click', this.upgradeIncomeBind);
         this.rightBar.render();
         this.intro();
@@ -89,7 +81,6 @@ class Game {
         document.querySelector('.start-button').addEventListener('click', this.startGame);
     }
     generateInstructions(){
-        
         const instructionsWrapper = document.querySelector('.instructions-wrapper');
         this.canvasContainer.append(instructionsWrapper);
     }
@@ -112,7 +103,6 @@ class Game {
         wrapper.append(button);
 
         document.querySelector('.instructions-wrapper').append(wrapper);
-
     }
     newRound(remaining){
         this.level++;
@@ -120,7 +110,6 @@ class Game {
         this.startTimer(remaining);
     }
     upgradeIncome(){
-        
         if (this.resources >= this.updateResourceCost){
             this.resources -= this.updateResourceCost;
             this.updateResourceCost += 100;
@@ -140,15 +129,11 @@ class Game {
     stopResources(){
         clearInterval(this.resourceInterval);
     }
-    generateScore(){
-
-    }
     generateLevel(){
         const currentLevel = document.querySelector('.current-level');
         currentLevel.innerText = this.level;
     }
     startTimer(remaining){
-   
         this.timer = new Timer(remaining);
         this.timer.render();
     }
@@ -157,7 +142,6 @@ class Game {
         delete this.timer;
     }
     lose(requestId){
-        
         window.cancelAnimationFrame(requestId);
         this.stopResources();
         this.generateLoseMessage();
