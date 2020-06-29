@@ -22,7 +22,7 @@ class Battlefield {
         this.numTowers = 6;
         this.castle = "";
         this.currentLevel = 1;
-        this.numEnemies = 10;
+        this.numEnemies = 50;
         this.numTowers = 6;
         this.enemies = {};
         this.towers = {};
