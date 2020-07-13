@@ -507,7 +507,10 @@ body {
   margin-top: 1vh;
   visibility: hidden;
   width: 100%;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 .fa-coins {
   margin-right: .5vw;
@@ -541,9 +544,14 @@ body {
   box-sizing: border-box;
   border-radius: 5px; }
 
+.fa-arrow-circle-up {
+  margin-right: .5vw; }
+
 .resources-display {
+  display: flex;
   padding: 1vw;
-  background-color: #0ac9b6;
+  justify-content: center;
+  /* background-color: #0ac9b6; */
   border-radius: 5px; }
 
 .gray-radial-grad {

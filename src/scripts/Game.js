@@ -113,7 +113,7 @@ class Game {
         if (this.resources >= this.updateResourceCost){
             this.resources -= this.updateResourceCost;
             this.updateResourceCost += 100;
-            const resources = document.querySelector('.income-upgrade-cost');
+            const resources = document.querySelector('.upgrade-cost-amount');
             resources.innerText = this.updateResourceCost;
             clearInterval(this.resourceInterval);
             this.resourceRate += .01;

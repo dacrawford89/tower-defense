@@ -11,30 +11,38 @@ class LeftBar {
         document.body.prepend(this.wrapper);
     }
     initialize(){
-        this.addUpgradeIncome();
         this.addResourcesDisplay();
+        this.addUpgradeIncome();
         this.addTowerButtons();
     }
     addUpgradeIncome(){
         const wrapper = document.createElement('div');
+        const arrowUp = document.createElement('i');
+        arrowUp.classList.add('fas', 'fa-arrow-circle-up');
+        wrapper.append(arrowUp);
         wrapper.classList.add('upgrade-income');
-        wrapper.innerText = "Upgrade Income";
+        wrapper.innerHTML += "Boost Income";
         const upgradeCost = document.createElement('div');
         upgradeCost.classList.add('income-upgrade-cost');
         const coinImage = document.createElement('i');
         coinImage.classList.add('fas', 'fa-coins');
         upgradeCost.append(coinImage);
-        upgradeCost.innerHTML += this.updateResourceCost;
+        const upgradeCostAmount = document.createElement('p');
+        upgradeCostAmount.classList.add('upgrade-cost-amount');
+        upgradeCostAmount.innerHTML = this.updateResourceCost;
+        upgradeCost.append(upgradeCostAmount);
         wrapper.append(upgradeCost);
         this.wrapper.append(wrapper);
     }
     addResourcesDisplay(){
         const wrapper = document.createElement('div');
         wrapper.classList.add('resources-display');
+        const coinImage = document.createElement('i');
+        coinImage.classList.add('fas', 'fa-coins');
+        wrapper.append(coinImage);
         const currentResources = document.createElement('div');
         currentResources.classList.add('current-resources');
         currentResources.innerText = this.resources;
-        wrapper.innerText = `Resources:`;
         wrapper.append(currentResources);
         this.wrapper.append(wrapper);
     }
