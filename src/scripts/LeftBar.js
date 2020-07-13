@@ -20,7 +20,7 @@ class LeftBar {
         const arrowUp = document.createElement('i');
         arrowUp.classList.add('fas', 'fa-arrow-circle-up');
         wrapper.append(arrowUp);
-        wrapper.classList.add('upgrade-income');
+        wrapper.classList.add('upgrade-income', 'sidebar-title');
         wrapper.innerHTML += "Boost Income";
         const upgradeCost = document.createElement('div');
         upgradeCost.classList.add('income-upgrade-cost');
@@ -51,7 +51,7 @@ class LeftBar {
         wrapper.classList.add('add-towers-wrapper');
 
         const addTowersTitle = document.createElement('h2');
-        addTowersTitle.classList.add('add-towers-title')
+        addTowersTitle.classList.add('add-towers-title', 'sidebar-title')
         addTowersTitle.innerText = "Add Towers"
         wrapper.append(addTowersTitle);
         for (let i = 0; i < this.towerTypes.length; i++){

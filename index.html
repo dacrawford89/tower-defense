@@ -18,20 +18,27 @@
 
   <body>
     <script src="./dist/main.js"></script>
-    <div class ="instructions-wrapper">
+    <div id="instructions-wrapper" class="instructions-wrapper">
       <div class="my-info">
         <h1 class="title">Tower Defense by Douglas Crawford</h1>
         <a class="github-link" target="_blank" href="https://github.com/dacraw/tower-defense">Github</a>
       </div>
       <div class="instructions">
-        <h1 class="title">Instructions:</h1>
-        <div class="left">
-          <p>Upgrade your resource generation rate on the left.</p>
-          <p>Add towers.</p>
-        </div>
-        <div class="right">
-          <p>Score increases with damage dealt.</p>
-          <p>Don't let enemies reach your base!</p>
+        <h1 class="instructions-title">Instructions:</h1>
+        <div class="instructions-boxes">
+          <div class="left">
+            <p>The LEFT SIDEBAR is for viewing resources, increasing income and building towers.</p>
+            <p>Your resources are at the top of the left sidebar. They will generate automatically over time.</p>
+            <p>Increase income by clicking "Boost Income" in the left sidebar. The cost to upgrade resource generation will increase each time you do it. </p>
+            <p>Add towers by clicking the tower type in the left sidebar. The cost of the tower is listed there.</p>
+          </div>
+          <div class="right">
+            <p>The RIGHT SIDEBAR displays information about current score, level, health and number of enemies.</p>
+            <p>Score increases with damage dealt.</p>
+            <p>Advance to the next level by defeating all current enemies.</p>
+            <p>Health decreases by 1 each time an enemy reaches your base. When your health reaches 0, you lose.</p>
+            <p>Number of enemies for the current level is displayed in the right sidebar.</p>
+          </div>
         </div>
       </div>
     </div>

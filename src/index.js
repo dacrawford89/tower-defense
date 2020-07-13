@@ -36,7 +36,7 @@ const main = () => {
   function intro(){
     game.animateIntro();
     requestAnimationFrame( intro );
-    game.renderer.render( game.scene, game.camera );
+    // game.renderer.render( game.scene, game.camera );
   }
   intro(); // find why this is running when it shouldnt
 

@@ -51,29 +51,30 @@ class Game {
         this.intro();
     }
     animateIntro(){
-        this.cube.rotation.x += 0.01;
-        this.cube.rotation.y += 0.01;
+        // this.cube.rotation.x += 0.01;
+        // this.cube.rotation.y += 0.01;
     }
     intro(){
         this.canvasContainer = document.querySelector('.canvas-container');
 
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color('white');
-        this.camera = new THREE.PerspectiveCamera( 75, this.battlefield.canvas.width / this.battlefield.canvas.height, 0.1, 1000 );
+        // this.scene = new THREE.Scene();
+        // this.scene.background = new THREE.Color('white');
+        // this.camera = new THREE.PerspectiveCamera( 75, this.battlefield.canvas.width / this.battlefield.canvas.height, 0.1, 1000 );
        
-        this.renderer = new THREE.WebGLRenderer({alpha: true});
-        this.renderer.setClearColor( 0xFFFFFF, 0 );
-        this.renderer.domElement.id = "intro"
-        this.renderer.domElement.classList.add('intro');
-        this.renderer.setSize( this.battlefield.canvas.width, this.battlefield.canvas.height );
-        this.canvasContainer.appendChild( this.renderer.domElement );
-        this.renderer.render( this.scene, this.camera );
-        var geometry = new THREE.BoxGeometry();
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        this.cube = new THREE.Mesh( geometry, material );
-        this.scene.add( this.cube );
+        // this.renderer = new THREE.WebGLRenderer({alpha: true});
+        // this.renderer.setClearColor( 0xFFFFFF, 0 );
+        // const intro = document.createElement('div');
+        // intro.id = "intro"
+        // intro.classList.add('intro');
+        // this.renderer.setSize( this.battlefield.canvas.width, this.battlefield.canvas.height );
+        // this.canvasContainer.appendChild( this.renderer.domElement );
+        // this.renderer.render( this.scene, this.camera );
+        // var geometry = new THREE.BoxGeometry();
+        // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        // this.cube = new THREE.Mesh( geometry, material );
+        // this.scene.add( this.cube );
 
-        this.camera.position.z = 5;
+        // this.camera.position.z = 5;
 
         this.generateInstructions();
 
@@ -87,10 +88,10 @@ class Game {
     startGame(){
         this.resourceInterval = setInterval(this.generateResources.bind(this), 10 / this.resourceRate);
 
-        const intro = document.getElementById('intro');
-        intro.style.display = "none";
+        // const intro = document.getElementById('intro');
+        // intro.style.display = "none";
         
-        const instructions = document.querySelector('.instructions-wrapper');
+        const instructions = document.querySelector('#instructions-wrapper');
         instructions.style.display = "none";
     }
     addStartButton(){
