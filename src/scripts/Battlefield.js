@@ -35,20 +35,20 @@ class Battlefield {
 
      }
     initialize(){
-    this.createCanvas();
-    this.createCastle();
-    this.castleTile = new Image();
-    const castleTileImage = "castleTile.png";
-    this.castleTile.src = path.join(__dirname, images, castleTileImage);
+        this.createCanvas();
+        this.createCastle();
+        this.castleTile = new Image();
+        const castleTileImage = "castleTile.png";
+        this.castleTile.src = path.join(__dirname, images, castleTileImage);
     }
     render(){
-    this.drawBattlefield();
-    this.drawCastle();
-    this.drawTowers();
+        this.drawBattlefield();
+        this.drawCastle();
+        this.drawTowers();
     }
 
     clear(){
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     findClosestEnemies(){
         const enemiesArr = Object.values(this.enemies);
@@ -123,6 +123,7 @@ class Battlefield {
         this.castle.draw(this.castleTile);
     }
     createTower({type, cost}){
+        debugger
         let tower;
         const towerIds = Object.keys(this.towers);
         let id;
@@ -170,7 +171,6 @@ class Battlefield {
         const enemiesDefeated = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .enemies-defeated`);
 
         level.innerText = `L: ${tower.towerLevel}`;
-        debugger
         const damageMultiplier = Math.round((tower.damage * (((tower.towerLevel - 1) / 10) + 1)) * 1e2) / 1e2;
         damage.innerText = `Dmg: ${damageMultiplier}`;
 
@@ -215,8 +215,13 @@ class Battlefield {
 
         const upgrade = document.createElement('div');
         upgrade.classList.add('upgrade-tower');
-        upgrade.innerText = "Upgrade";
+        const currentUpgradeCost = document.createElement('span');
+        currentUpgradeCost.classList.add('current-upgrade-cost');
+        currentUpgradeCost.innerText = tower.upgradeCost;
+        upgrade.innerText = `Upgrade:`;
+        upgrade.append(currentUpgradeCost);
         towerModalWrapper.append(upgrade);
+        debugger
         upgrade.onclick = () => this.upgradeTower(tower.id, tower.upgradeCost);
 
         const sell = document.createElement('div');
@@ -244,12 +249,15 @@ class Battlefield {
         this.hideTowerModals();
     }
     upgradeTower(towerId, cost){
-        if (this.game.resources >= cost){
-            this.game.resources -= cost;
-            const tower = this.towers[towerId];
+        debugger
+        const tower = this.towers[towerId];
+        if (this.game.resources >= tower.upgradeCost){
+            this.game.resources -= tower.upgradeCost;
             tower.damage *= 1.1;
 
             tower.upgradeCost += 100;
+
+            document.querySelector(`.tower-${towerId} .current-upgrade-cost`).innerText = tower.upgradeCost;
         }
     }
     hideTowerModals(){
