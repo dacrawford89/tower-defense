@@ -31,6 +31,8 @@ class Game {
         this.upgradeIncomeBind = this.upgradeIncome.bind(this);
 
         this.startGame = this.startGame.bind(this);
+        this.showInstructions = this.showInstructions.bind(this);
+        this.hideInstructions = this.hideInstructions.bind(this);
     }
     initialize(){
         this.battlefield.initialize();
@@ -77,6 +79,9 @@ class Game {
         // this.camera.position.z = 5;
 
         this.generateInstructions();
+        this.addShowInstructionsButton();
+        document.querySelector('.show-instructions-button').addEventListener('click', this.showInstructions);
+        document.querySelector('.hide-instructions-button').addEventListener('click', this.hideInstructions);
 
         this.addStartButton();
         document.querySelector('.start-button').addEventListener('click', this.startGame);
@@ -93,6 +98,19 @@ class Game {
         
         const instructions = document.querySelector('#instructions-wrapper');
         instructions.style.display = "none";
+    }
+    addShowInstructionsButton(){
+        const button = document.createElement('button');
+        button.classList.add('show-instructions-button');
+
+        button.innerText = "How To Play";
+        document.querySelector('.instructions-wrapper').append(button);
+    }
+    showInstructions(){
+        document.querySelector('.instructions').style.display = "flex";
+    }
+    hideInstructions(){
+        document.querySelector('.instructions').style.display = "none";
     }
     addStartButton(){
         const wrapper = document.createElement('div');
