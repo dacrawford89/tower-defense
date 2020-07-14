@@ -36,7 +36,7 @@ const main = () => {
   function intro(){
     game.animateIntro();
     requestAnimationFrame( intro );
-    game.renderer.render( game.scene, game.camera );
+    // game.renderer.render( game.scene, game.camera );
   }
   intro(); // find why this is running when it shouldnt
 
@@ -57,7 +57,7 @@ const main = () => {
       
       let timer = game.timer;
       if (!timer && !Object.keys(bf.enemies).length && game.health > 0){
-        game.newRound(20);
+        game.newRound(10);
       }  else if (!!timer && timer.remaining < 0){
         game.clearTimer();
         

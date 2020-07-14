@@ -2,6 +2,9 @@
    v2.0-modified | 20110126
    License: none (public domain)
 */
+html {
+  font-size: 1vw; }
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -18,9 +21,9 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+  flex-direction: inherit; }
 
 /* make sure to set some focus styles for accessibility */
 :focus {
@@ -360,18 +363,21 @@ body {
   left: 0;
   top: 0; }
 
-.github-link {
+.my-info h1 {
+  margin-bottom: 2vh; }
+
+.my-info a {
   color: white;
   text-decoration: none;
   display: flex;
   align-items: center;
   padding: 1vw;
   background-color: #0ac9b6;
-  transition: .3s; }
-
-.github-link:hover {
-  background-color: white;
-  color: black; }
+  transition: .3s;
+  margin-bottom: 2vh; }
+  .my-info a:hover {
+    background-color: white;
+    color: black; }
 
 .instructions-wrapper {
   color: white;
@@ -382,11 +388,14 @@ body {
   top: 0;
   left: 0;
   font-size: 1.5vw;
-  padding: 2vw;
+  padding: 1vw;
   box-sizing: border-box;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; }
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+  align-items: center; }
   .instructions-wrapper > * {
     padding: 1vw;
     box-sizing: border-box; }
@@ -396,23 +405,60 @@ body {
     align-items: center;
     text-align: center;
     justify-content: center; }
-  .instructions-wrapper > div:not(.start-button-wrapper) {
+  .instructions-wrapper button {
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 5px gray;
+    padding: 1vw;
+    transition: .3s; }
+    .instructions-wrapper button:hover {
+      color: #0ac9b6;
+      background-color: lightgray;
+      transform: scale(1.33); }
+
+.instructions {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Pangolin", cursive;
+  display: none;
+  position: absolute;
+  background-color: lightgray;
+  color: darkslategray;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+  justify-content: space-between; }
+  .instructions p {
+    margin-bottom: 2vh; }
+
+.good-luck {
+  align-self: center;
+  font-size: 2em; }
+
+.game-summary {
+  margin-bottom: 2vh; }
+
+.hide-instructions-button {
+  cursor: pointer;
+  font-size: 2em;
+  align-self: flex-end;
+  color: red;
+  margin-bottom: 2vh; }
+  .hide-instructions-button:hover {
+    color: blue; }
+
+.instructions-boxes {
+  display: flex;
+  flex-direction: row; }
+  .instructions-boxes .left {
+    margin-right: 2vw; }
+  .instructions-boxes .left, .instructions-boxes .right {
     width: 50%; }
-    .instructions-wrapper > div:not(.start-button-wrapper) p {
-      margin-bottom: 1vh; }
-  .instructions-wrapper .start-button-wrapper {
-    height: 10%; }
-    .instructions-wrapper .start-button-wrapper button {
-      border-radius: 10px;
-      outline: none;
-      border: none;
-      box-shadow: 0px 0px 5px gray;
-      padding: 1vw;
-      transition: .3s; }
-      .instructions-wrapper .start-button-wrapper button:hover {
-        color: #0ac9b6;
-        background-color: lightgray;
-        transform: scale(1.33); }
+    .instructions-boxes .left h1, .instructions-boxes .right h1 {
+      font-size: 1.5em;
+      font-weight: bold; }
 
 .timer {
   position: absolute;
@@ -469,16 +515,17 @@ body {
   height: 50vh;
   width: 13vw;
   background-color: #0ac9b6;
-  border-radius: 25px;
+  border-radius: 2px;
   text-align: center;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background: #020024;
   background: radial-gradient(circle, #020024 0%, #313160 56%, #20798b 100%);
   box-shadow: 0px 0px 10px grey;
-  font-size: 2vw;
+  font-size: 1vmax;
+  box-sizing: border-box;
   padding: 1vw; }
 
 .left-bar {
@@ -488,23 +535,80 @@ body {
   margin-left: 1vw; }
 
 .upgrade-income {
-  transition: .3s; }
+  transition: all .3s ease;
+  position: relative;
+  border-radius: 5px;
+  padding: 1vw;
+  box-sizing: border-box;
+  background: none; }
 
 .upgrade-income:hover {
-  color: red;
-  cursor: pointer; }
+  color: darkslategray;
+  cursor: pointer;
+  background: lightgray; }
+  .upgrade-income:hover .income-upgrade-cost {
+    visibility: visible; }
+
+.income-upgrade-cost {
+  margin-top: 1vh;
+  visibility: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+
+.fa-coins {
+  margin-right: .5vw;
+  color: goldenrod; }
 
 .add-towers-wrapper {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; }
-  .add-towers-wrapper div {
-    transition: color .3s; }
-    .add-towers-wrapper div:hover {
-      color: green; }
+  justify-content: space-evenly;
+  transition: all .3s ease-in-out; }
+
+.add-tower-div {
+  position: relative;
+  box-sizing: border-box;
+  font-size: 100%;
+  border-radius: 5px;
+  transition: all .3s ease-in-out;
+  padding: 1vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .add-tower-div:hover {
+    color: darkslategray;
+    background: lightgray; }
+
+.add-towers-title {
+  cursor: default;
+  margin-bottom: 1vh; }
+
+.tower-cost {
+  padding: .5vw;
+  box-sizing: border-box;
+  border-radius: 5px; }
+
+.fa-arrow-circle-up {
+  margin-right: .5vw; }
 
 .resources-display {
+  display: flex;
+  flex-direction: row;
   padding: 1vw;
-  background-color: #0ac9b6; }
+  justify-content: center;
+  /* background-color: #0ac9b6; */
+  border-radius: 5px; }
+
+.gray-radial-grad {
+  background: #656565;
+  background: radial-gradient(circle, #656565 0%, #2a2a2a 100%, #737373 100%); }
+
+.flex-columns {
+  display: flex;
+  flex-direction: column; }
 

@@ -2,17 +2,19 @@
   height: 50vh;
   width: 13vw;
   background-color: $lightblue;
-  border-radius: 25px;
+  border-radius: 2px;
   text-align: center;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background: rgb(2,0,36);
   background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(49,49,96,1) 56%, rgba(32,121,139,1) 100%);
   box-shadow: 0px 0px 10px grey;
-  font-size: 2vw;
+  font-size: 1vmax;
+  box-sizing: border-box;
   padding: 1vw;
+
   // height: 30%;
 }
 
@@ -20,19 +22,47 @@
 
 .left-bar {
   margin-right: 1vw;
+  // font-size: 1vw;
+
 }
 .right-bar {
   margin-left: 1vw;
 }
 
 .upgrade-income {
-  transition: .3s;
+  transition: all .3s ease;
   // background-color: green;
+  position: relative;
+  border-radius: 5px;
+  padding: 1vw;
+  box-sizing: border-box;
+  background: none;
 }
 
 .upgrade-income:hover {
-  color: red;
+  color: darkslategray;
   cursor: pointer;
+  .income-upgrade-cost {
+    visibility: visible;
+  }
+
+  background: lightgray;
+}
+
+.income-upgrade-cost {
+  margin-top: 1vh;
+  visibility: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-coins {
+  margin-right: .5vw;
+  color: goldenrod;
 }
 
 .add-towers-wrapper {
@@ -40,17 +70,50 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  div {
-    transition: color .3s;
-    &:hover {
-      color: green;
-    }
-  }
+  transition: all .3s ease-in-out;
 
 }
 
+.add-tower-div {
+  position: relative;
+  box-sizing: border-box;
+  font-size: 100%;
+  border-radius: 5px;
+  transition: all .3s ease-in-out;
+  padding: 1vh;
+  &:hover {
+    color: darkslategray;
+    background: lightgray;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.add-towers-title {
+  cursor: default;
+  margin-bottom: 1vh;
+}
+
+.tower-cost {
+  padding: .5vw;
+  box-sizing: border-box;
+  border-radius: 5px;
+
+}
+.fa-arrow-circle-up {
+  margin-right: .5vw;
+}
 .resources-display {
+  display: flex;
+  flex-direction: row;
   padding: 1vw;
-  background-color: $lightblue;
+  justify-content: center;
+  /* background-color: #0ac9b6; */
+  border-radius: 5px;
+}
+
+.gray-radial-grad {
+  background: #656565;
+  background: radial-gradient(circle, #656565 0%, #2a2a2a 100%, #737373 100%);
 }

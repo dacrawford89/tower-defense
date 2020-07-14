@@ -39,20 +39,31 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-}
 
+}
+.my-info {
+  h1 {
+    margin-bottom: 2vh;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1vw;
+    background-color: $lightblue;
+    transition: .3s;
+    margin-bottom: 2vh;
+    &:hover {
+      background-color: white;
+      color: black;
+
+    }
+  }
+}
 .github-link {
-  color: white;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  padding: 1vw;
-  background-color: $lightblue;
-  transition: .3s;
 }
 .github-link:hover {
-  background-color: white;
-  color: black;
 }
 
 .instructions-wrapper {
@@ -64,11 +75,14 @@ body {
   top: 0;
   left: 0;
   font-size: 1.5vw;
-  padding: 2vw;
+  padding: 1vw;
   box-sizing: border-box;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
+  overflow: auto;
+  align-items: center;
   > * {
     padding: 1vw;
     box-sizing: border-box;
@@ -80,32 +94,84 @@ body {
     text-align: center;
     justify-content: center;
   }
-  > div:not(.start-button-wrapper) {
-    width: 50%;
-    p {
-      margin-bottom: 1vh;
-    }
+  button {
+
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        box-shadow: 0px 0px 5px gray;
+        padding: 1vw;
+        transition: .3s;
+        &:hover {
+          color: $lightblue;
+          background-color: lightgray;
+          transform: scale(1.33); 
+        }
+
   }
-  .start-button-wrapper {
-    height: 10%;
-    button {
-      border-radius: 10px;
-      outline: none;
-      border: none;
-      box-shadow: 0px 0px 5px gray;
-      padding: 1vw;
-      transition: .3s;
-      &:hover {
-        color: $lightblue;
-        background-color: lightgray;
-        transform: scale(1.33); 
-      }
-    }
+
+}
+
+.instructions {
+  text-align: center;
+  font-size: 16px;
+  font-family: $pangolin;
+  display: none;
+  position: absolute;
+  background-color: lightgray;
+  color: darkslategray;
+  top:0;
+  left:0;
+  height:100%;
+  overflow: auto;
+  justify-content: space-between;
+  
+  p {
+    margin-bottom: 2vh;
   }
 }
 
-.castle-tile {
+.good-luck {
+  align-self: center;
+  font-size: 2em;
 }
+.game-summary {
+  margin-bottom: 2vh;
+}
+.hide-instructions-button {
+  cursor: pointer;
+  font-size: 2em;
+  // position: absolute;
+  // top: 1vh;
+  // right: 1vw;
+  align-self: flex-end;
+  color: red;
+  margin-bottom: 2vh;
+  &:hover {
+    // background-color: darkslategray;
+    color: blue;
+  }
+}
+
+
+.instructions-boxes {
+  display: flex;
+
+
+  flex-direction: row;
+  .left {
+    margin-right: 2vw;
+  }
+  .left, .right {
+    width: 50%;
+    h1 {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+  }
+}
+
 
 .timer {
   position: absolute;

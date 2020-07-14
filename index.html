@@ -7,26 +7,45 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta property="og:title" content="Tower Defense">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dc-tower-defense.herokuapp.com/#/">
     <meta property="og:image" content="https://user-images.githubusercontent.com/59629330/86250449-964b1d80-bb7e-11ea-9496-ba798aa6850e.png" />
+
+    <script src="https://kit.fontawesome.com/282e12fcd3.js" crossorigin="anonymous"></script>
+
     <title>Document</title>
   </head>
 
   <body>
     <script src="./dist/main.js"></script>
-    <div class ="instructions-wrapper">
-      <h1 class="title">Tower Defense by Douglas Crawford</h1>
-      <a class="github-link" target="_blank" href="https://github.com/dacraw/tower-defense">Github</a>
-      <h1 class="title">Instructions:</h1>
-      <div class="left">
-        <p>Upgrade your resource generation rate on the left.</p>
-        <p>Add towers.</p>
+    <div id="instructions-wrapper" class="instructions-wrapper">
+      <div class="my-info">
+        <h1 class="title">Tower Defense by Douglas Crawford</h1>
+        <a class="github-link" target="_blank" href="https://github.com/dacraw/tower-defense">Github</a>
+        <a class="linkedin-link" target="_blank" href="https://www.linkedin.com/in/doug-a-crawford/">LinkedIn</a>
       </div>
-      <div class="right">
-        <p>Score increases with damage dealt.</p>
-        <p>Don't let enemies reach your base!</p>
+      <div class="instructions">
+        <i class="far fa-window-close hide-instructions-button"></i>
+        <!-- <h1 class="instructions-title">Instructions:</h1> -->
+          <p class="game-summary">Tower Defense is a game where you must survive by building towers that automatically attack incoming enemies. You get a 10 second break in between levels, and may build and/or upgrade towers anytime after starting the game. Resources generate automatically, and resource generation should be upgraded in order to afford more upgrades. Once you build a tower, you may click on it on the battlefield to view its stats, upgrade it or sell it. Towers deal more damage as they level up.</p>
+        <div class="instructions-boxes">
+          <div class="left">
+            <h1>LEFT SIDEBAR</h1>
+            <p>Your current resources are at the top of the left sidebar.</p>
+            <p>Increase income by clicking "Boost Income" in the left sidebar. The cost to upgrade resource generation will increase each time you do it. </p>
+            <p>Add towers by clicking the tower type in the left sidebar. The cost of the tower is listed there.</p>
+          </div>
+          <div class="right">
+            <h1>RIGHT SIDEBAR</h1>
+            <p>Score increases with damage dealt.</p>
+            <p>Advance to the next level by defeating all current enemies. Enemies become stronger with each new level.</p>
+            <p>Health decreases by 1 each time an enemy reaches your base. When your health reaches 0, you lose.</p>
+            <p>Number of enemies for the current level is displayed in the right sidebar.</p>
+          </div>
+        </div>
+        <h1 class="good-luck">Good luck!</h1>
       </div>
     </div>
   </body>
