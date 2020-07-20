@@ -5,6 +5,7 @@ class LeftBar {
         this.resources = resources;
         this.towerTypes = towerTypes;
         this.updateResourceCost = upgradeCost;
+        this.addHelpIconHandler = this.addHelpIconHandler.bind(this);
     }
     render(){
         this.initialize();
@@ -14,6 +15,20 @@ class LeftBar {
         this.addResourcesDisplay();
         this.addUpgradeIncome();
         this.addTowerButtons();
+        // window.addEventListener('DOMContentLoaded', this.addHelpIconHandler);
+        
+    }
+    addHelpIconHandler(element){
+        // debugger
+        element.addEventListener('click', (e) => {
+            // debugger
+            const help = e.currentTarget.firstChild;
+            if (help.style.display !== "block") {
+                help.style.display = "block"
+            } else {
+                help.style.display = ""
+            }
+        })
     }
     addUpgradeIncome(){
         const wrapper = document.createElement('div');
@@ -43,7 +58,16 @@ class LeftBar {
         const currentResources = document.createElement('div');
         currentResources.classList.add('current-resources');
         currentResources.innerText = this.resources;
+
+        const helpIcon = document.createElement('i');
+        helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
+        this.addHelpIconHandler(helpIcon)
+        const help = document.createElement('div');
+        help.classList.add('current-resources-help');
+        help.innerText = "These are your current resources, and generate automatically. 'Boost Income' below to increase generation rate."
+        helpIcon.append(help);
         wrapper.append(currentResources);
+        wrapper.append(helpIcon);
         this.wrapper.append(wrapper);
     }
     addTowerButtons(){
