@@ -100,7 +100,6 @@ class LeftBar {
             towerType.classList.add('tower-type');
             towerType.innerText = this.towerTypes[i].type;
             let help;
-            debugger
             switch (this.towerTypes[i].type) {
                 case 'Basic':
                     help = this.createHelpBox('Basic towers attack fast but have low damage.')

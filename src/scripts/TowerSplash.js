@@ -68,7 +68,6 @@ class TowerSplash extends Tower {
                     this.game.score += damageMultiplier;
                     if (enemy.currentHealth <= 0){
                         delete game.battlefield.enemies[enemy.id];
-                        debugger
                         this.enemiesDefeated++;
                         this.game.battlefield.refreshTowerModal(this);
                     } 

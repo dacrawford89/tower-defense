@@ -123,7 +123,6 @@ class Battlefield {
         this.castle.draw(this.castleTile);
     }
     createTower({type, cost}){
-        debugger
         let tower;
         const towerIds = Object.keys(this.towers);
         let id;
@@ -166,15 +165,15 @@ class Battlefield {
         document.querySelector('.canvas-container').addEventListener('click', this.showTowerModal(tower).bind(this));
     }
     refreshTowerModal(tower){
-        const level = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-level`);
-        const damage = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-damage`);
-        const enemiesDefeated = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .enemies-defeated`);
+        const level = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-level strong`);
+        const damage = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .tower-damage strong`);
+        const enemiesDefeated = document.querySelector(`.tower-modal-wrapper.tower-${tower.id} .enemies-defeated strong`);
 
-        level.innerText = `L: ${tower.towerLevel}`;
+        level.innerText = `${tower.towerLevel}`;
         const damageMultiplier = Math.round((tower.damage * (((tower.towerLevel - 1) / 10) + 1)) * 1e2) / 1e2;
-        damage.innerText = `Dmg: ${damageMultiplier}`;
-
-        enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
+        debugger
+        damage.innerText = `${damageMultiplier}`;
+        enemiesDefeated.innerText = `${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
     }
     addTowerModal(tower){
         const modalX = [this.castleCoords[0], this.castleCoords[0] + this.castleCoords[2]];
@@ -186,14 +185,14 @@ class Battlefield {
         towerModalWrapper.style.left = `${modalX[0]}px`;
         towerModalWrapper.style.top = `${modalY[0]}px`;
 
-        const id = document.createElement('div');
-        id.classList.add('tower-id');
-        id.innerText = `Id: ${tower.id}`;
-        towerModalWrapper.append(id);
+        // const id = document.createElement('div');
+        // id.classList.add('tower-id');
+        // id.innerText = `Id: ${tower.id}`;
+        // towerModalWrapper.append(id);
 
         const level = document.createElement('div');
         level.classList.add('tower-level');
-        level.innerText = `L: ${tower.towerLevel}`;
+        level.innerHTML = `Level: <strong>${tower.towerLevel}</strong>`;
         towerModalWrapper.append(level);
 
         const close = document.createElement('div');
@@ -205,12 +204,12 @@ class Battlefield {
         const damage = document.createElement('div');
         damage.classList.add('tower-damage');
         const damageMultiplier = (tower.damage * tower.towerLevel).toFixed(2);
-        damage.innerText = `Dmg: ${damageMultiplier}`;
+        damage.innerHTML = `Damage: <strong>${damageMultiplier}</strong>`;
         towerModalWrapper.append(damage);
 
         const enemiesDefeated = document.createElement('div');
         enemiesDefeated.classList.add('enemies-defeated');
-        enemiesDefeated.innerText = `Defeated: ${tower.enemiesDefeated}`;
+        enemiesDefeated.innerHTML = `Defeated: <strong>${tower.enemiesDefeated}</strong>`;
         towerModalWrapper.append(enemiesDefeated);
 
         const upgrade = document.createElement('div');
@@ -221,7 +220,6 @@ class Battlefield {
         upgrade.innerText = `Upgrade:`;
         upgrade.append(currentUpgradeCost);
         towerModalWrapper.append(upgrade);
-        debugger
         upgrade.onclick = () => this.upgradeTower(tower.id, tower.upgradeCost);
 
         const sell = document.createElement('div');
@@ -249,7 +247,6 @@ class Battlefield {
         this.hideTowerModals();
     }
     upgradeTower(towerId, cost){
-        debugger
         const tower = this.towers[towerId];
         if (this.game.resources >= tower.upgradeCost){
             this.game.resources -= tower.upgradeCost;

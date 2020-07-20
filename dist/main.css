@@ -492,8 +492,8 @@ body {
   .tower-modal-wrapper .tower-id {
     width: 33.33%; }
   .tower-modal-wrapper .tower-level {
-    width: 33.33%;
-    text-align: center; }
+    width: 50%;
+    text-align: left; }
   .tower-modal-wrapper .close-modal {
     height: 15px;
     width: 33.33%;
