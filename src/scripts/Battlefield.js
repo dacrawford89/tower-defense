@@ -182,7 +182,7 @@ class Battlefield {
         towerModalWrapper.classList.add(`tower-modal-wrapper`);
         towerModalWrapper.classList.add(`tower-${tower.id}`);
         towerModalWrapper.style.left = `0`;
-        towerModalWrapper.style.bottom = "10vh";
+        towerModalWrapper.style.bottom = "13vh";
 
         // const id = document.createElement('div');
         // id.classList.add('tower-id');
@@ -242,6 +242,14 @@ class Battlefield {
         sell.innerText = "Sell";
         twoCol.append(sell);
         sell.onclick = () => this.sellTower(tower.id);
+
+        const arrowDown = document.createElement('i');
+        arrowDown.classList.add('arrow', 'down');
+        arrowDown.style.position = "absolute";
+        const arrowWidth = tower.coords[0] + (tower.coords[2] / 2) - 3;
+        arrowDown.style.left = `${arrowWidth}px`;
+        arrowDown.style.bottom = `.5vh`;
+        towerModalWrapper.append(arrowDown);
 
 
         document.querySelector('.canvas-container').append(towerModalWrapper);
