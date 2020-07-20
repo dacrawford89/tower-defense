@@ -28,6 +28,17 @@ class LeftBar {
                 help.style.display = "block"
         })
     }
+    createHelpBox(message){
+        debugger
+        const helpIcon = document.createElement('i');
+        helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
+        this.addHelpIconHandler(helpIcon)
+        const help = document.createElement('div');
+        help.classList.add('help');
+        help.innerText = message;
+        helpIcon.append(help)
+        return helpIcon;      
+    }
     addUpgradeIncome(){
         const wrapper = document.createElement('div');
         const arrowUp = document.createElement('i');
@@ -44,15 +55,9 @@ class LeftBar {
         upgradeCostAmount.classList.add('upgrade-cost-amount');
         upgradeCostAmount.innerHTML = this.updateResourceCost;
 
-        const helpIcon = document.createElement('i');
-        helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
-        this.addHelpIconHandler(helpIcon)
-        const help = document.createElement('div');
-        help.classList.add('help');
-        help.innerText = "Use this to increase your resource generation rate by 10%. Cost increases with each round"
-        helpIcon.append(help);
+        const help = this.createHelpBox('Use this to increase your resource generation rate by 10%. Cost increases with each round');
 
-        wrapper.append(helpIcon);
+        wrapper.append(help);
         upgradeCost.append(upgradeCostAmount);
         wrapper.append(upgradeCost);
         this.wrapper.append(wrapper);
@@ -67,15 +72,10 @@ class LeftBar {
         currentResources.classList.add('current-resources');
         currentResources.innerText = this.resources;
 
-        const helpIcon = document.createElement('i');
-        helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
-        this.addHelpIconHandler(helpIcon)
-        const help = document.createElement('div');
-        help.classList.add('help');
-        help.innerText = "These are your current resources, and generate automatically. 'Boost Income' below to increase generation rate."
-        helpIcon.append(help);
+        const help = this.createHelpBox("These are your current resources, and generate automatically. 'Boost Income' below to increase generation rate.")
+
         wrapper.append(currentResources);
-        wrapper.append(helpIcon);
+        wrapper.append(help);
         this.wrapper.append(wrapper);
     }
     addTowerButtons(){
