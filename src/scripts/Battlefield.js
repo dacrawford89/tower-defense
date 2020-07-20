@@ -181,24 +181,33 @@ class Battlefield {
         const towerModalWrapper = document.createElement('div');
         towerModalWrapper.classList.add(`tower-modal-wrapper`);
         towerModalWrapper.classList.add(`tower-${tower.id}`);
-        towerModalWrapper.style.left = `${modalX[0]}px`;
-        towerModalWrapper.style.top = `${modalY[0]}px`;
+        towerModalWrapper.style.left = `0`;
+        towerModalWrapper.style.bottom = "10vh";
 
         // const id = document.createElement('div');
         // id.classList.add('tower-id');
         // id.innerText = `Id: ${tower.id}`;
         // towerModalWrapper.append(id);
+        let twoCol = document.createElement('div');
+        twoCol.classList.add('two-col');
+
+        const towerType = document.createElement('div');
+        towerType.classList.add('tower-type-modal');
+        towerType.innerHTML = `${tower.type} Tower`;
+        twoCol.append(towerType);
 
         const level = document.createElement('div');
         level.classList.add('tower-level');
         level.innerHTML = `Level: <strong>${tower.towerLevel}</strong>`;
-        towerModalWrapper.append(level);
+        twoCol.append(level);
 
         const close = document.createElement('div');
         close.classList.add('close-modal');
         close.innerText = "X";
-        towerModalWrapper.append(close);
+        twoCol.append(close);
         close.onclick = () => this.hideTowerModals();
+
+        towerModalWrapper.append(twoCol);
 
         const damage = document.createElement('div');
         damage.classList.add('tower-damage');
@@ -211,21 +220,29 @@ class Battlefield {
         enemiesDefeated.innerHTML = `Defeated: <strong>${tower.enemiesDefeated}</strong>`;
         towerModalWrapper.append(enemiesDefeated);
 
+        twoCol = document.createElement('div');
+        twoCol.classList.add('two-col');
+
         const upgrade = document.createElement('div');
         upgrade.classList.add('upgrade-tower');
         const currentUpgradeCost = document.createElement('span');
         currentUpgradeCost.classList.add('current-upgrade-cost');
         currentUpgradeCost.innerText = tower.upgradeCost;
         upgrade.innerText = `Upgrade:`;
+        const coinImage = document.createElement('i');
+        coinImage.classList.add('fas', 'fa-coins');
+        upgrade.append(coinImage);
         upgrade.append(currentUpgradeCost);
-        towerModalWrapper.append(upgrade);
+        towerModalWrapper.append(twoCol);
         upgrade.onclick = () => this.upgradeTower(tower.id, tower.upgradeCost);
-
+        twoCol.append(upgrade);
+        
         const sell = document.createElement('div');
         sell.classList.add('sell-tower');
         sell.innerText = "Sell";
-        towerModalWrapper.append(sell);
+        twoCol.append(sell);
         sell.onclick = () => this.sellTower(tower.id);
+
 
         document.querySelector('.canvas-container').append(towerModalWrapper);
     }
