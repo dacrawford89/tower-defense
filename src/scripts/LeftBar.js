@@ -29,13 +29,12 @@ class LeftBar {
         })
     }
     createHelpBox(message){
-        debugger
         const helpIcon = document.createElement('i');
         helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
         this.addHelpIconHandler(helpIcon)
         const help = document.createElement('div');
         help.classList.add('help');
-        help.innerText = message;
+        help.innerHTML = message;
         helpIcon.append(help)
         return helpIcon;      
     }
@@ -85,6 +84,8 @@ class LeftBar {
         const addTowersTitle = document.createElement('h2');
         addTowersTitle.classList.add('add-towers-title', 'sidebar-title')
         addTowersTitle.innerText = "Add Towers"
+        const help = this.createHelpBox('Create towers by clicking one below. Their cost is next to their name. ')
+        addTowersTitle.append(help);
         wrapper.append(addTowersTitle);
         for (let i = 0; i < this.towerTypes.length; i++){
             const tower = document.createElement('div');
@@ -92,6 +93,22 @@ class LeftBar {
             const towerType = document.createElement('p');
             towerType.classList.add('tower-type');
             towerType.innerText = this.towerTypes[i].type;
+            let help;
+            debugger
+            switch (this.towerTypes[i].type) {
+                case 'Basic':
+                    help = this.createHelpBox('Basic towers attack fast but have low damage.')
+                    break;
+                case 'Power':
+                    help = this.createHelpBox('Power towers have high damage but slow attack.')
+                    break;
+                case 'Splash':
+                    help = this.createHelpBox('Splash towers hit all enemies on canvas at the time of attack, but have low damage and attack speed.')
+                    break;
+                default:
+                    break;
+            }
+            towerType.append(help);
             tower.append(towerType);
             const towerCost = document.createElement('p');
             towerCost.classList.add('tower-cost');
@@ -100,6 +117,7 @@ class LeftBar {
             towerCost.prepend(coinImage);
             towerCost.innerHTML += this.towerTypes[i].cost;
             tower.append(towerCost);
+
             wrapper.append(tower);
 
             this.wrapper.append(wrapper);
