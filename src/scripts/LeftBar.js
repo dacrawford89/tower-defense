@@ -15,19 +15,17 @@ class LeftBar {
         this.addResourcesDisplay();
         this.addUpgradeIncome();
         this.addTowerButtons();
-        // window.addEventListener('DOMContentLoaded', this.addHelpIconHandler);
+        window.addEventListener('click', () => document.querySelectorAll('.help').forEach(element => element.style.display = ""));
         
     }
     addHelpIconHandler(element){
         // debugger
         element.addEventListener('click', (e) => {
-            // debugger
+            e.stopPropagation();
+            const helpBoxes = document.querySelectorAll('.help')
+            helpBoxes.forEach(box => box.style.display = "")
             const help = e.currentTarget.firstChild;
-            if (help.style.display !== "block") {
                 help.style.display = "block"
-            } else {
-                help.style.display = ""
-            }
         })
     }
     addUpgradeIncome(){
@@ -45,6 +43,16 @@ class LeftBar {
         const upgradeCostAmount = document.createElement('p');
         upgradeCostAmount.classList.add('upgrade-cost-amount');
         upgradeCostAmount.innerHTML = this.updateResourceCost;
+
+        const helpIcon = document.createElement('i');
+        helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
+        this.addHelpIconHandler(helpIcon)
+        const help = document.createElement('div');
+        help.classList.add('help');
+        help.innerText = "Use this to increase your resource generation rate by 10%. Cost increases with each round"
+        helpIcon.append(help);
+
+        wrapper.append(helpIcon);
         upgradeCost.append(upgradeCostAmount);
         wrapper.append(upgradeCost);
         this.wrapper.append(wrapper);
@@ -63,7 +71,7 @@ class LeftBar {
         helpIcon.classList.add('fas', 'fa-question-circle','help-icon');
         this.addHelpIconHandler(helpIcon)
         const help = document.createElement('div');
-        help.classList.add('current-resources-help');
+        help.classList.add('help');
         help.innerText = "These are your current resources, and generate automatically. 'Boost Income' below to increase generation rate."
         helpIcon.append(help);
         wrapper.append(currentResources);
