@@ -15,17 +15,23 @@ class LeftBar {
         this.addResourcesDisplay();
         this.addUpgradeIncome();
         this.addTowerButtons();
-        window.addEventListener('click', () => document.querySelectorAll('.help').forEach(element => element.style.display = ""));
         
     }
     addHelpIconHandler(element){
         // debugger
-        element.addEventListener('click', (e) => {
+        element.addEventListener('mouseenter', (e) => {
             e.stopPropagation();
             const helpBoxes = document.querySelectorAll('.help')
             helpBoxes.forEach(box => box.style.display = "")
             const help = e.currentTarget.firstChild;
                 help.style.display = "block"
+        })
+        element.addEventListener('mouseleave', (e) => {
+            e.stopPropagation();
+            const helpBoxes = document.querySelectorAll('.help')
+            helpBoxes.forEach(box => box.style.display = "")
+            const help = e.currentTarget.firstChild;
+                help.style.display = ""
         })
     }
     createHelpBox(message){

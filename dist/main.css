@@ -609,12 +609,15 @@ body {
   background: radial-gradient(circle, #656565 0%, #2a2a2a 100%, #737373 100%); }
 
 .help-icon {
-  position: relative;
+  position: absolute;
   margin-left: 1vw;
   cursor: pointer; }
 
 .help-icon:hover {
   color: green; }
+
+.resources-display .help-icon {
+  margin-left: 2vw; }
 
 .help {
   color: black;

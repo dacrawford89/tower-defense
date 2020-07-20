@@ -17,13 +17,20 @@ class RightBar {
     }
     addHelpIconHandler(element){
         // debugger
-        element.addEventListener('click', (e) => {
+        element.addEventListener('mouseenter', (e) => {
             e.stopPropagation();
             const helpBoxes = document.querySelectorAll('.help')
             helpBoxes.forEach(box => box.style.display = "")
             const help = e.currentTarget.firstChild;
                 help.style.display = "block"
-        })
+        });
+        element.addEventListener('mouseleave', (e) => {
+            e.stopPropagation();
+            const helpBoxes = document.querySelectorAll('.help')
+            helpBoxes.forEach(box => box.style.display = "")
+            const help = e.currentTarget.firstChild;
+                help.style.display = ""
+        });
     }
     createHelpBox(message){
         const helpIcon = document.createElement('i');
