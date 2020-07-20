@@ -171,7 +171,6 @@ class Battlefield {
 
         level.innerText = `${tower.towerLevel}`;
         const damageMultiplier = Math.round((tower.damage * (((tower.towerLevel - 1) / 10) + 1)) * 1e2) / 1e2;
-        debugger
         damage.innerText = `${damageMultiplier}`;
         enemiesDefeated.innerText = `${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
     }

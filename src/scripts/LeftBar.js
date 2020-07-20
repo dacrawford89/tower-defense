@@ -70,6 +70,8 @@ class LeftBar {
     addResourcesDisplay(){
         const wrapper = document.createElement('div');
         wrapper.classList.add('resources-display');
+        const help = this.createHelpBox("These are your current resources, and generate automatically. 'Boost Income' below to increase generation rate.")
+        wrapper.append(help);
         const coinImage = document.createElement('i');
         coinImage.classList.add('fas', 'fa-coins');
         wrapper.append(coinImage);
@@ -77,10 +79,7 @@ class LeftBar {
         currentResources.classList.add('current-resources');
         currentResources.innerText = this.resources;
 
-        const help = this.createHelpBox("These are your current resources, and generate automatically. 'Boost Income' below to increase generation rate.")
-
         wrapper.append(currentResources);
-        wrapper.append(help);
         this.wrapper.append(wrapper);
     }
     addTowerButtons(){
