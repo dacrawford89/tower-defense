@@ -59,8 +59,8 @@ class Tower {
         this.towerLevel++;
         this.levelAnimation = 1;
         
-        const tower = document.querySelector(`.tower-${this.id} .tower-level`);
-        tower.innerText = `L: ${this.towerLevel}`;
+        const tower = document.querySelector(`.tower-${this.id} .tower-level strong`);
+        tower.innerText = `${this.towerLevel}`;
     }
     checkEnemyHealth(){
         if (!!this.target && this.target.currentHealth > 0){ 
@@ -98,9 +98,9 @@ class Tower {
         if (!this.active) return null;
         this.attackAnimation += this.speed;
 
-        const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${this.id} .tower-damage`);
+        const towerDamageEle = document.querySelector(`.tower-modal-wrapper.tower-${this.id} .tower-damage strong`);
         const damageMultiplier = parseFloat(this.damage * (((this.towerLevel - 1) / 10) + 1).toFixed(2));
-        towerDamageEle.innerText = `Dmg: ${damageMultiplier}`;
+        towerDamageEle.innerText = `${damageMultiplier}`;
 
         if (this.attackAnimation >= 500 && !!this.target){
             this.target.currentHealth -= damageMultiplier;

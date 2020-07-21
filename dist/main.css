@@ -475,7 +475,6 @@ body {
   opacity: .9; }
 
 .tower-modal-wrapper {
-  cursor: pointer;
   position: absolute;
   z-index: 10;
   display: none;
@@ -489,27 +488,58 @@ body {
   font-size: .75em;
   justify-content: space-between;
   margin: 0 auto; }
+  .tower-modal-wrapper .tower-type-modal {
+    font-weight: bold; }
+  .tower-modal-wrapper .two-col {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center; }
+  .tower-modal-wrapper > * {
+    padding: .2vw;
+    border-radius: 5px; }
+  .tower-modal-wrapper .close-modal, .tower-modal-wrapper .sell-tower, .tower-modal-wrapper .upgrade-tower {
+    cursor: pointer;
+    background-color: lightblue;
+    padding: .5vw;
+    border-radius: 5px; }
   .tower-modal-wrapper .tower-id {
     width: 33.33%; }
   .tower-modal-wrapper .tower-level {
-    width: 33.33%;
-    text-align: center; }
+    text-align: left; }
   .tower-modal-wrapper .close-modal {
     height: 15px;
-    width: 33.33%;
     text-align: right; }
+    .tower-modal-wrapper .close-modal:hover {
+      background-color: red; }
   .tower-modal-wrapper .enemies-defeated {
     width: 100%; }
   .tower-modal-wrapper .upgrade-tower {
+    display: flex;
     height: 15px;
-    width: 50%; }
+    border-radius: 5px; }
+  .tower-modal-wrapper .upgrade-tower i {
+    margin-left: 1vw; }
+  .tower-modal-wrapper .upgrade-tower:hover {
+    background-color: red; }
   .tower-modal-wrapper .sell-tower {
     height: 15px;
-    width: 50%;
     text-align: right; }
+    .tower-modal-wrapper .sell-tower:hover {
+      background-color: red; }
 
 .tower-box {
   cursor: pointer; }
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px; }
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); }
 
 .left-bar, .right-bar {
   height: 50vh;
@@ -598,6 +628,7 @@ body {
 
 .resources-display {
   display: flex;
+  position: relative;
   flex-direction: row;
   padding: 1vw;
   justify-content: center;
@@ -607,6 +638,40 @@ body {
 .gray-radial-grad {
   background: #656565;
   background: radial-gradient(circle, #656565 0%, #2a2a2a 100%, #737373 100%); }
+
+.help-icon {
+  position: absolute;
+  margin-left: 1vw;
+  cursor: pointer; }
+
+.help-icon:hover {
+  color: green; }
+
+.resources-display .help-icon {
+  margin-right: 1vw;
+  position: relative; }
+
+.help {
+  color: black;
+  position: absolute;
+  width: 8vw;
+  z-index: 10;
+  display: none;
+  top: 0;
+  margin-left: 2vw;
+  padding: 1vw; }
+
+.help::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: .9;
+  border-radius: 5px; }
 
 .flex-columns {
   display: flex;

@@ -106,6 +106,7 @@
 }
 .resources-display {
   display: flex;
+  position: relative;
   flex-direction: row;
   padding: 1vw;
   justify-content: center;
@@ -116,4 +117,41 @@
 .gray-radial-grad {
   background: #656565;
   background: radial-gradient(circle, #656565 0%, #2a2a2a 100%, #737373 100%);
+}
+
+.help-icon {
+  position: absolute;
+  margin-left: 1vw;
+
+  cursor: pointer;
+}
+.help-icon:hover {
+  color: green;
+}
+.resources-display .help-icon {
+  margin-right: 1vw;
+  position: relative;
+}
+
+.help {
+  color: black;
+  position: absolute;
+  width:8vw;
+  z-index: 10;
+  display: none;
+  top: 0;
+  margin-left: 2vw;
+    padding: 1vw;
+}
+.help::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: .9;
+  border-radius: 5px;
 }
