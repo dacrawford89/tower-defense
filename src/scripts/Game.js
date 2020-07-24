@@ -50,40 +50,18 @@ class Game {
         }
         document.querySelector('.upgrade-income').addEventListener('click', this.upgradeIncomeBind);
         this.rightBar.render();
-        this.intro();
     }
-    animateIntro(){
-        // this.cube.rotation.x += 0.01;
-        // this.cube.rotation.y += 0.01;
-    }
+
     intro(){
         this.canvasContainer = document.querySelector('.canvas-container');
-
-        // this.scene = new THREE.Scene();
-        // this.scene.background = new THREE.Color('white');
-        // this.camera = new THREE.PerspectiveCamera( 75, this.battlefield.canvas.width / this.battlefield.canvas.height, 0.1, 1000 );
-       
-        // this.renderer = new THREE.WebGLRenderer({alpha: true});
-        // this.renderer.setClearColor( 0xFFFFFF, 0 );
-        // const intro = document.createElement('div');
-        // intro.id = "intro"
-        // intro.classList.add('intro');
-        // this.renderer.setSize( this.battlefield.canvas.width, this.battlefield.canvas.height );
-        // this.canvasContainer.appendChild( this.renderer.domElement );
-        // this.renderer.render( this.scene, this.camera );
-        // var geometry = new THREE.BoxGeometry();
-        // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        // this.cube = new THREE.Mesh( geometry, material );
-        // this.scene.add( this.cube );
-
-        // this.camera.position.z = 5;
 
         this.generateInstructions();
         this.addShowInstructionsButton();
         document.querySelector('.show-instructions-button').addEventListener('click', this.showInstructions);
         document.querySelector('.hide-instructions-button').addEventListener('click', this.hideInstructions);
 
-        this.addStartButton();
+        const container = document.querySelector('.instructions-wrapper');
+        this.addStartButton(container);
         document.querySelector('.start-button').addEventListener('click', this.startGame);
     }
     generateInstructions(){
@@ -97,7 +75,7 @@ class Game {
         // intro.style.display = "none";
         
         const instructions = document.querySelector('#instructions-wrapper');
-        instructions.style.display = "none";
+        if (instructions) instructions.style.display = "none";
     }
     addShowInstructionsButton(){
         const button = document.createElement('button');
@@ -112,16 +90,18 @@ class Game {
     hideInstructions(){
         document.querySelector('.instructions').style.display = "none";
     }
-    addStartButton(){
+    addStartButton(container, startGameFX){
         const wrapper = document.createElement('div');
         wrapper.classList.add('start-button-wrapper');
 
         const button = document.createElement('button');
+        button.addEventListener('click',this.startGame);
         button.classList.add('start-button');
         button.innerText = "START";
         wrapper.append(button);
 
-        document.querySelector('.instructions-wrapper').append(wrapper);
+        // button.addEventListener('click', () => this.startGame());
+        container.append(wrapper);
     }
     newRound(remaining){
         this.level++;
@@ -160,18 +140,19 @@ class Game {
         this.timer.clear();
         delete this.timer;
     }
-    lose(requestId){
-        window.cancelAnimationFrame(requestId);
+    lose(){
         this.stopResources();
         this.generateLoseMessage();
 
         document.querySelector('.upgrade-income').removeEventListener('click', this.upgradeIncomeBind);
+
     }
-    generateLoseMessage(){
+    generateLoseMessage(startGameFx){
         if (!document.querySelector('.lose-message')){
             const wrapper = document.createElement('div');
             wrapper.classList.add('lose-message');
             wrapper.innerText = "You Lose";
+            this.addStartButton(wrapper);
             document.body.append(wrapper);
         }
     }
