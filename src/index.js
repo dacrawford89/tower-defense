@@ -4,44 +4,33 @@ import LeftBar from './scripts/LeftBar'
 import Timer from "./scripts/Timer";
 import './styles/index.scss'
 
-// const testObj = {
-//   key1: "hi",
-//   key2: {
-//     key3: "Hello",
-//   },
-// };
-
-// const greeting = testObj?.key2?.key3 || testObj.key1;
-// window.addEventListener("DOMContentLoaded", () => {
-//   document.body.classList.add("center");
-//   const card = document.createElement("div");
-//   card.classList.add("card", "center");
-//   card.innerHTML = `<h2>${greeting} World!</h2>`;
-//   document.body.append(card);
-//   const imgCard = document.createElement("div");
-//   imgCard.classList.add("card", "center", "image-card");
-//   document.body.appendChild(imgCard);
-// });
 
 
 const main = () => {
-
   // initial load
-  const game = new Game();
+  let game = new Game();
   game.initialize();
+  game.intro();
+
+  const newGame = () => {
+    const body = document.querySelector('body');
+    while (body.firstChild){
+        body.removeChild(body.firstChild);
+    }
+    game = new Game();
+    game.initialize();
+    game.startGame();
+    startGame();
+  }
 
   let requestId;
   
   document.querySelector('.start-button').addEventListener('click', () => startGame());
-  function intro(){
-    game.animateIntro();
-    requestAnimationFrame( intro );
-    // game.renderer.render( game.scene, game.camera );
-  }
-  intro(); // find why this is running when it shouldnt
+
 
   const startGame = () => {
-    
+
+    game.startGame = newGame;
     const bf = game.battlefield;
 
     let animating = true;
@@ -51,7 +40,7 @@ const main = () => {
       
       if (game.health <= 0){
         // game.lose(requestId);
-        game.lose();
+        game.lose(newGame);
         return;
       }
       
@@ -62,8 +51,6 @@ const main = () => {
         game.clearTimer();
         
         if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
-
-        if (game.health <= 0) game.lose();
 
       }
       bf.animateField(game);

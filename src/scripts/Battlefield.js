@@ -6,7 +6,8 @@ import TowerSplash from './TowerSplash'
 import * as d3 from 'd3'
 import * as THREE from 'three'
 const path = require("path");
-const images = './dist/images/';
+const images = './src/images/';
+
 
 class Battlefield {
     constructor(game){
@@ -27,9 +28,9 @@ class Battlefield {
         this.enemies = {};
         this.towers = {};
         this.nextTower = [];
-
         this.battlefieldGrass = new Image();
-        this.battlefieldGrass.src = path.join(__dirname, images, "../images/grass.jpg");
+        this.battlefieldGrass.src = "src/images/grass.jpg";
+        // this.battlefieldGrass.src = path.join(__dirname, images, "grass.jpg");
 
         this.game = game;
 
@@ -39,7 +40,8 @@ class Battlefield {
         this.createCastle();
         this.castleTile = new Image();
         const castleTileImage = "castleTile.png";
-        this.castleTile.src = path.join(__dirname, images, castleTileImage);
+        this.castleTile.src = `src/images/${castleTileImage}`;
+        // this.castleTile.src = path.join(__dirname, images, castleTileImage);
     }
     render(){
         this.drawBattlefield();
@@ -171,7 +173,6 @@ class Battlefield {
 
         level.innerText = `${tower.towerLevel}`;
         const damageMultiplier = Math.round((tower.damage * (((tower.towerLevel - 1) / 10) + 1)) * 1e2) / 1e2;
-        debugger
         damage.innerText = `${damageMultiplier}`;
         enemiesDefeated.innerText = `${tower.enemiesDefeated + ((tower.towerLevel - 1) * 10)}`;
     }

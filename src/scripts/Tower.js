@@ -26,13 +26,16 @@ class Tower {
         if (!this.active) return null
         switch (this.type) {
             case 'Basic':
-                image = path.join(__dirname, images, this.basicTowerImage);
+                image = `src/images/${this.basicTowerImage}`;
+                // image = path.join(__dirname, images, this.basicTowerImage);
                 break;
             case 'Power':
-                image = path.join(__dirname, images, this.powerTowerImage);
+                image = `src/images/${this.powerTowerImage}`;
+                // image = path.join(__dirname, images, this.powerTowerImage);
                 break;
-            case 'Splash':
-                image = path.join(__dirname, images, this.splashTowerImage);
+                case 'Splash':
+                    image = `src/images/${this.splashTowerImage}`;
+                // image = path.join(__dirname, images, this.splashTowerImage);
                 break;
             default:
                 break;

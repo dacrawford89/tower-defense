@@ -12,7 +12,8 @@ class Enemy {
         this.id = id;
         this.enemyImage = new Image();
         this.enemyImagePath = "troll.png";
-        this.enemyImage.src = path.join(__dirname, images, this.enemyImagePath);
+        this.enemyImage.src = `src/images/${this.enemyImagePath}`;
+        // this.enemyImage.src = path.join(__dirname, images, this.enemyImagePath);
         
     }
     draw(){
