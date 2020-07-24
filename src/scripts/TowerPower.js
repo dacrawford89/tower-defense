@@ -7,6 +7,7 @@ class TowerPower extends Tower {
         this.speed = 7;
         this.cost = 200;
         this.score = score;
+        this.soundEffect = new Audio('src/sounds/blast1.wav');
     }
     draw(image){
         super.draw(image);

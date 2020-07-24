@@ -28,6 +28,7 @@ class Battlefield {
         this.enemies = {};
         this.towers = {};
         this.nextTower = [];
+        this.defeatedEnemySound = new Audio('src/sounds/enemyDefeatedSound.wav');
         this.battlefieldGrass = new Image();
         this.battlefieldGrass.src = "src/images/grass.jpg";
         // this.battlefieldGrass.src = path.join(__dirname, images, "grass.jpg");
@@ -89,6 +90,9 @@ class Battlefield {
             if (!!tower.target && tower.target.currentHealth <= 0){
                 if (!!this.enemies[tower.target.id]){
                     tower.enemiesDefeated++;
+                    this.defeatedEnemySound.pause();
+                    this.defeatedEnemySound.currentTime = 0;
+                    this.defeatedEnemySound.play();
                     delete this.enemies[tower.target.id];
                 }
                 tower.target = null;
