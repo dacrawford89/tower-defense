@@ -46,7 +46,7 @@ const main = () => {
       
       let timer = game.timer;
       if (!timer && !Object.keys(bf.enemies).length && game.health > 0){
-        game.newRound(10);
+        game.newRound(0);
       }  else if (!!timer && timer.remaining < 0){
         game.clearTimer();
         
