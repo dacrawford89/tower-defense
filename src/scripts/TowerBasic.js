@@ -7,6 +7,7 @@ class TowerBasic extends Tower {
         this.speed = 100;
         this.cost = 100;
         this.score = score;
+        this.soundEffect = new Audio('src/sounds/basicTowerBlast.wav');
     }
     draw(image){
         super.draw(image);

@@ -109,6 +109,9 @@ class Tower {
             this.target.currentHealth -= damageMultiplier;
             this.game.score += damageMultiplier;
             this.attackAnimation = 0;
+            this.soundEffect.pause();
+            this.soundEffect.currentTime = 0;
+            this.soundEffect.play();
         }
         const currentScore = document.querySelector('.current-score');
         currentScore.innerText = parseFloat(this.game.score.toFixed(0));

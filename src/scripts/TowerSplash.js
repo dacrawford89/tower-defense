@@ -7,6 +7,7 @@ class TowerSplash extends Tower {
         this.speed = 5;
         this.cost = 300;
         this.score = score;
+        this.soundEffect = new Audio('src/sounds/blast2.wav');
     }
     draw(image){
         super.draw(image);
@@ -62,6 +63,10 @@ class TowerSplash extends Tower {
             if (this.attackAnimation >= 500 && !!this.target){
                 this.target.currentHealth -= damageMultiplier;
                 this.game.score += damageMultiplier;
+                this.soundEffect.pause();
+                this.soundEffect.currentTime = 0;
+                this.soundEffect.play();
+
 
                 nearbyEnemies.forEach(enemy => {
                     enemy.currentHealth -= damageMultiplier;
