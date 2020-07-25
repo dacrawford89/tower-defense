@@ -46,14 +46,14 @@ const main = () => {
       
       let timer = game.timer;
       if (!timer && !Object.keys(bf.enemies).length && game.health > 0){
-        game.newRound(0);
+        game.newRound(10);
       }  else if (!!timer && timer.remaining < 0){
         game.clearTimer();
         
         if (!Object.keys(bf.enemies).length) bf.createEnemies(game.level);
 
-      }
-      bf.animateField(game);
+        }
+        bf.animateField(game);
         requestId = window.requestAnimationFrame(animation);
       }
       requestId = window.requestAnimationFrame(animation);
