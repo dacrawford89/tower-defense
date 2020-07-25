@@ -12,11 +12,21 @@ Defend your base against enemy invaders!
 ### note: this project has no backend server running.
 
 # Features
-- How to play Instructions displayed on splash page -- player may hover over "?" to view information about a particular UI element.
-- Build towers that automatically target and attack invaders -- smart targeting system that focuses all towers to attack the closest enemy invader that crosses the battlefield's halfway point. Towers level up for every 10 enemies defeated -- each tower level increases its base damage by 10%. 
-- Generate resources automatically and increase their generation rate.
-- Click on towers after creating to view that tower's enemies defeated, current level, current damage. Clicking on towers also allows for upgrades and selling.
-- View current game score, level, and enemies spawned.
+- Implement left and right sidebars using Javascript to create HTML elements and various classes to track changing stats, allowing the user to view information such as current level and upgrade their resource generation.
+
+![image](https://user-images.githubusercontent.com/59629330/88467169-22acdf80-cea2-11ea-87bc-7fa6f6d3c4d6.png)
+![image](https://user-images.githubusercontent.com/59629330/88467175-30626500-cea2-11ea-9d47-ab0916baae83.png)
+
+- Incorporated help icons around the game interface using HTML/CSS hover effects to toggle help display, allowing users to hover over help icons to view more information about a particular UI element.
+
+![image](https://user-images.githubusercontent.com/59629330/88467197-7ae3e180-cea2-11ea-90f5-994bc0052f36.png)
+
+- Designed towers so that they store their own stats through an instance of their `Tower` class, allowing towers to level up and display their own stats in a modal when clicked. 
+
+![image](https://user-images.githubusercontent.com/59629330/88467241-f8a7ed00-cea2-11ea-829c-9baf5742966d.png)
+
+- Built resource generation system using `setInterval()` and `addEventListener('click',...)` and an instance of `Game` to store resource information, allowing resources to generate automatically, passively and be upgradeable.
+
 
 # Explanation of Game Loop
 Within `index.js` is the main game loop. 
