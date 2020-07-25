@@ -76,7 +76,8 @@ class Battlefield {
         const towerIds = towers.map(tower => tower.id)
         const randomIds = this.randomTowerList(towerIds);
         
-        randomIds.forEach(towerId => {
+        // randomIds.forEach(towerId => {
+        towerIds.forEach(towerId => {
             const closestEnemies = this.findClosestEnemies();
             const randomIdx = Math.floor(Math.random() * closestEnemies.length);
             const closestCoord = Math.max(...closestEnemies.map(enemy => enemy.coords[1]));
