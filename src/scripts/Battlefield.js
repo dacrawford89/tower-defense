@@ -4,7 +4,6 @@ import TowerBasic from './TowerBasic'
 import TowerPower from './TowerPower'
 import TowerSplash from './TowerSplash'
 import * as d3 from 'd3'
-import * as THREE from 'three'
 const path = require("path");
 const images = './src/images/';
 
@@ -21,7 +20,6 @@ class Battlefield {
         this.castleCoords = [this.canvas.width * .03, this.canvas.height * .92, this.canvas.width * .94, this.canvas.height * .07];
         this.firstTowerCoords = [this.castleCoords[0] + (this.canvas.width * .02), this.castleCoords[1] + this.castleCoords[3] * .7, this.canvas.width * .133, this.canvas.height * -.09];
         this.numTowers = 6;
-        this.castle = "";
         this.currentLevel = 1;
         this.numEnemies = 50;
         this.numTowers = 6;
@@ -39,9 +37,7 @@ class Battlefield {
     initialize(){
         this.createCanvas();
         this.createCastle();
-        this.castleTile = new Image();
-        const castleTileImage = "castleTile.png";
-        this.castleTile.src = `src/images/${castleTileImage}`;
+
         // this.castleTile.src = path.join(__dirname, images, castleTileImage);
     }
     render(){
@@ -126,7 +122,7 @@ class Battlefield {
         this.castle = new Castle(this.ctx, this.castleCoords, 100);
     }
     drawCastle(){
-        this.castle.draw(this.castleTile);
+        this.castle.draw();
     }
     createTower({type, cost}){
         let tower;

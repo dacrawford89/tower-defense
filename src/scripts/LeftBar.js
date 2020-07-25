@@ -60,7 +60,7 @@ class LeftBar {
         upgradeCostAmount.classList.add('upgrade-cost-amount');
         upgradeCostAmount.innerHTML = this.updateResourceCost;
 
-        const help = this.createHelpBox('Use this to increase your resource generation rate by 10%. Cost increases with each round');
+        const help = this.createHelpBox('Use this to increase your resource generation rate by 10%. Cost increases each time you upgrade.');
 
         wrapper.append(help);
         upgradeCost.append(upgradeCostAmount);
