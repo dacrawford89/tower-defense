@@ -58,25 +58,11 @@ class Battlefield {
         
         return closestEnemies;
     }
-    randomTowerList(towers){
-        const randomIds = [];
-        while (towers.length){
-            const randomIdx = Math.floor(Math.random() * towers.length);
-            randomIds.push(towers[randomIdx]);
-            const beg = towers.slice(0, randomIdx);
-            const fin = towers.slice(randomIdx + 1, towers.length);
-            towers = beg.concat(fin);
-        }
-        return randomIds;
-    }
+
     attackEnemies(game){
-        const remainingEnemies = Object.keys(this.enemies).length;
-        const towerKeys = Object.keys(this.towers);
         const towers = Object.values(this.towers);
         const towerIds = towers.map(tower => tower.id)
-        const randomIds = this.randomTowerList(towerIds);
         
-        // randomIds.forEach(towerId => {
         towerIds.forEach(towerId => {
             const closestEnemies = this.findClosestEnemies();
             const randomIdx = Math.floor(Math.random() * closestEnemies.length);
@@ -125,9 +111,8 @@ class Battlefield {
     drawCastle(){
         this.castle.draw();
     }
-    createTower({type, cost}){
+    createTower({type}){
         let tower;
-        const towerIds = Object.keys(this.towers);
         let id;
         let nextTowerCoords;
         if (this.nextTower.length){
@@ -273,7 +258,7 @@ class Battlefield {
         delete this.towers[towerId];
         this.hideTowerModals();
     }
-    upgradeTower(towerId, cost){
+    upgradeTower(towerId){
         const tower = this.towers[towerId];
         if (this.game.resources >= tower.upgradeCost){
             this.game.resources -= tower.upgradeCost;
